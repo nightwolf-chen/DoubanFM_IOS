@@ -19,6 +19,7 @@
 		30E80E141931D5BE001E334B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E80DFC1931D5BE001E334B /* UIKit.framework */; };
 		30E80E1C1931D5BE001E334B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30E80E1A1931D5BE001E334B /* InfoPlist.strings */; };
 		30E80E1E1931D5BE001E334B /* DoubanFMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E80E1D1931D5BE001E334B /* DoubanFMTests.m */; };
+		30E80E2F1931D7A9001E334B /* FMHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E80E2E1931D7A9001E334B /* FMHttpClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,9 @@
 		30E80E191931D5BE001E334B /* DoubanFMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DoubanFMTests-Info.plist"; sourceTree = "<group>"; };
 		30E80E1B1931D5BE001E334B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30E80E1D1931D5BE001E334B /* DoubanFMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoubanFMTests.m; sourceTree = "<group>"; };
+		30E80E2D1931D7A9001E334B /* FMHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMHttpClient.h; path = network/FMHttpClient.h; sourceTree = "<group>"; };
+		30E80E2E1931D7A9001E334B /* FMHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMHttpClient.m; path = network/FMHttpClient.m; sourceTree = "<group>"; };
+		30E80E301931F19B001E334B /* FMHttpClientDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMHttpClientDelegate.h; path = network/FMHttpClientDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,11 @@
 		30E80DFE1931D5BE001E334B /* DoubanFM */ = {
 			isa = PBXGroup;
 			children = (
+				30E80E2C1931D6C4001E334B /* user */,
+				30E80E2B1931D6BE001E334B /* song */,
+				30E80E2A1931D6B8001E334B /* channel */,
+				30E80E291931D63B001E334B /* util */,
+				30E80E271931D61A001E334B /* network */,
 				30E80E071931D5BE001E334B /* FMAppDelegate.h */,
 				30E80E081931D5BE001E334B /* FMAppDelegate.m */,
 				30E80E0A1931D5BE001E334B /* Images.xcassets */,
@@ -142,6 +151,44 @@
 				30E80E1A1931D5BE001E334B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30E80E271931D61A001E334B /* network */ = {
+			isa = PBXGroup;
+			children = (
+				30E80E2D1931D7A9001E334B /* FMHttpClient.h */,
+				30E80E2E1931D7A9001E334B /* FMHttpClient.m */,
+				30E80E301931F19B001E334B /* FMHttpClientDelegate.h */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
+		30E80E291931D63B001E334B /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		30E80E2A1931D6B8001E334B /* channel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = channel;
+			sourceTree = "<group>";
+		};
+		30E80E2B1931D6BE001E334B /* song */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = song;
+			sourceTree = "<group>";
+		};
+		30E80E2C1931D6C4001E334B /* user */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = user;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +289,7 @@
 			files = (
 				30E80E051931D5BE001E334B /* main.m in Sources */,
 				30E80E091931D5BE001E334B /* FMAppDelegate.m in Sources */,
+				30E80E2F1931D7A9001E334B /* FMHttpClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoubanFM/DoubanFM-Prefix.pch";
 				INFOPLIST_FILE = "DoubanFM/DoubanFM-Info.plist";
@@ -371,6 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoubanFM/DoubanFM-Prefix.pch";
 				INFOPLIST_FILE = "DoubanFM/DoubanFM-Info.plist";

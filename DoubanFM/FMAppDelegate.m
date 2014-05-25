@@ -7,15 +7,29 @@
 //
 
 #import "FMAppDelegate.h"
+#import "network/FMHttpClient.h"
+
+FMHttpClient *client = nil;
 
 @implementation FMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    NSDictionary *value = @{
+                            @"app_name" : @"radio_desktop_win",
+                            @"version" : @"100",
+                            @"email" : @"466202783@qq.com",
+                            @"password" : @"a13827970772b"
+                            };
+    
+    client = [[FMHttpClient alloc] init];
+    [client doPost:@"http://www.douban.com/j/app/login" parameters:value];
+
     return YES;
 }
 
