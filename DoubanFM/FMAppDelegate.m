@@ -7,7 +7,10 @@
 //
 
 #import "FMAppDelegate.h"
-#import "network/FMHttpClient.h"
+#import "FMHttpClient.h"
+#import "FMUser.h"
+#import "FMApiRequestUser.h"
+#import "FMApiRequestChannel.h"
 
 FMHttpClient *client = nil;
 
@@ -20,16 +23,28 @@ FMHttpClient *client = nil;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    NSDictionary *value = @{
-                            @"app_name" : @"radio_desktop_win",
-                            @"version" : @"100",
-                            @"email" : @"466202783@qq.com",
-                            @"password" : @"a13827970772b"
-                            };
+//    NSDictionary *value = @{
+//                            @"app_name" : @"radio_desktop_win",
+//                            @"version" : @"100",
+//                            @"email" : @"466202783@qq.com",
+//                            @"password" : @"a13827970772b"
+//                            };
     
-    client = [[FMHttpClient alloc] init];
-    [client doPost:@"http://www.douban.com/j/app/login" parameters:value];
-
+//    client = [[FMHttpClient alloc] init];
+//    [client doPost:@"http://www.douban.com/j/app/login" parameters:value];
+//    
+//    FMUser *user = [[FMUser alloc] init];
+//    user.email = @"466202783@qq.com";
+//    user.password = @"a13827970772b";
+//    
+//    FMApiRequestUser *userRequest = [[FMApiRequestUser alloc] initWithDelegate:self user:user];
+//    [userRequest sendRequest];
+//    [userRequest autorelease];
+    
+    FMApiRequestChannel *channelRequest = [[FMApiRequestChannel alloc] initWithDelegate:self];
+    [channelRequest sendRequest];
+    //[channelRequest autorelease];
+    
     return YES;
 }
 

@@ -50,30 +50,15 @@
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
    if([requestType isEqual:@"POST"]){
-        
-        NSString *bodyData = @"";
-        BOOL firstP = true;
        
-       for (NSString *key in values.keyEnumerator) {
-            
-            if (firstP) {
-                firstP = false;
-            }else{
-                bodyData = [bodyData stringByAppendingString:@"&"];
-            }
-            
-            NSString *tmp = [NSString stringWithFormat:@"%@=%@",key,[values objectForKey:key]];
-            bodyData = [bodyData stringByAppendingString:tmp];
-            
-        }
-        
-        
-        [request setHTTPBody:[NSData dataWithBytes:[bodyData UTF8String]
-                                                length:strlen([bodyData UTF8String])]];
+       NSString *bodyData = [self dicToValueString:values];
+       [request setHTTPBody:[NSData dataWithBytes:[bodyData UTF8String]
+                                           length:strlen([bodyData UTF8String])]];
         
     }
     
     _data = [[NSMutableData alloc] init];
+    
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
     
@@ -84,7 +69,9 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"finished,%@", [NSString stringWithUTF8String:[_data bytes]]);
+//    NSLog(@"finished,%@", [NSString stringWithUTF8String:[_data bytes]]);
+    
+    [self.delegate client:self didFinishLoadingData:[[_data copy] autorelease]];
     
     [_data release];
     _data = nil;
@@ -98,6 +85,7 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"error %@",error);
+    [self.delegate client:self didFailWithError:error];
 }
 
 #pragma mark - NSObject
@@ -110,6 +98,29 @@
         [_data release];
         _data = nil;
     }
+}
+
+#pragma mark - helper
+
+- (NSString *)dicToValueString:(NSDictionary *)values
+{
+    NSString *bodyData = @"";
+    BOOL firstP = true;
+    
+    for (NSString *key in values.keyEnumerator) {
+        
+        if (firstP) {
+            firstP = false;
+        }else{
+            bodyData = [bodyData stringByAppendingString:@"&"];
+        }
+        
+        NSString *tmp = [NSString stringWithFormat:@"%@=%@",key,[values objectForKey:key]];
+        bodyData = [bodyData stringByAppendingString:tmp];
+        
+    }
+    
+    return bodyData;
 }
 
 @end

@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30C9EB7E1932EFD200AFFA38 /* FMApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */; };
+		30C9EB831932F2BE00AFFA38 /* FMApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB821932F2BE00AFFA38 /* FMApiResponse.m */; };
+		30C9EB861932FFD500AFFA38 /* FMApiResponseSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB851932FFD500AFFA38 /* FMApiResponseSong.m */; };
+		30C9EB891932FFED00AFFA38 /* FMApiResponseUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB881932FFED00AFFA38 /* FMApiResponseUser.m */; };
+		30C9EB8C1933000800AFFA38 /* FMApiResponseChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB8B1933000800AFFA38 /* FMApiResponseChannel.m */; };
+		30C9EB8F1933019300AFFA38 /* FMApiRequestSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB8E1933019300AFFA38 /* FMApiRequestSong.m */; };
+		30C9EB92193301AB00AFFA38 /* FMApiRequestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */; };
+		30C9EB95193301C900AFFA38 /* FMApiRequestChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB94193301C900AFFA38 /* FMApiRequestChannel.m */; };
+		30C9EB991933036E00AFFA38 /* FMEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB981933036E00AFFA38 /* FMEntity.m */; };
+		30C9EB9C1933038300AFFA38 /* FMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB9B1933038300AFFA38 /* FMUser.m */; };
+		30C9EB9F193303B400AFFA38 /* FMSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB9E193303B400AFFA38 /* FMSong.m */; };
+		30C9EBA2193303C500AFFA38 /* FMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EBA1193303C500AFFA38 /* FMChannel.m */; };
 		30E80DF91931D5BE001E334B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E80DF81931D5BE001E334B /* Foundation.framework */; };
 		30E80DFB1931D5BE001E334B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E80DFA1931D5BE001E334B /* CoreGraphics.framework */; };
 		30E80DFD1931D5BE001E334B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E80DFC1931D5BE001E334B /* UIKit.framework */; };
@@ -33,6 +45,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30C9EB7C1932EFD200AFFA38 /* FMApiRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequest.h; path = request/FMApiRequest.h; sourceTree = "<group>"; };
+		30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequest.m; path = request/FMApiRequest.m; sourceTree = "<group>"; };
+		30C9EB7F1932F28500AFFA38 /* FMApiRequestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMApiRequestDelegate.h; path = request/FMApiRequestDelegate.h; sourceTree = "<group>"; };
+		30C9EB811932F2BE00AFFA38 /* FMApiResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponse.h; path = response/FMApiResponse.h; sourceTree = "<group>"; };
+		30C9EB821932F2BE00AFFA38 /* FMApiResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponse.m; path = response/FMApiResponse.m; sourceTree = "<group>"; };
+		30C9EB841932FFD500AFFA38 /* FMApiResponseSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponseSong.h; path = response/FMApiResponseSong.h; sourceTree = "<group>"; };
+		30C9EB851932FFD500AFFA38 /* FMApiResponseSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponseSong.m; path = response/FMApiResponseSong.m; sourceTree = "<group>"; };
+		30C9EB871932FFED00AFFA38 /* FMApiResponseUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponseUser.h; path = response/FMApiResponseUser.h; sourceTree = "<group>"; };
+		30C9EB881932FFED00AFFA38 /* FMApiResponseUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponseUser.m; path = response/FMApiResponseUser.m; sourceTree = "<group>"; };
+		30C9EB8A1933000800AFFA38 /* FMApiResponseChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponseChannel.h; path = response/FMApiResponseChannel.h; sourceTree = "<group>"; };
+		30C9EB8B1933000800AFFA38 /* FMApiResponseChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponseChannel.m; path = response/FMApiResponseChannel.m; sourceTree = "<group>"; };
+		30C9EB8D1933019300AFFA38 /* FMApiRequestSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestSong.h; path = request/FMApiRequestSong.h; sourceTree = "<group>"; };
+		30C9EB8E1933019300AFFA38 /* FMApiRequestSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestSong.m; path = request/FMApiRequestSong.m; sourceTree = "<group>"; };
+		30C9EB90193301AB00AFFA38 /* FMApiRequestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestUser.h; path = request/FMApiRequestUser.h; sourceTree = "<group>"; };
+		30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestUser.m; path = request/FMApiRequestUser.m; sourceTree = "<group>"; };
+		30C9EB93193301C900AFFA38 /* FMApiRequestChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestChannel.h; path = request/FMApiRequestChannel.h; sourceTree = "<group>"; };
+		30C9EB94193301C900AFFA38 /* FMApiRequestChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestChannel.m; path = request/FMApiRequestChannel.m; sourceTree = "<group>"; };
+		30C9EB971933036E00AFFA38 /* FMEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMEntity.h; path = entities/FMEntity.h; sourceTree = "<group>"; };
+		30C9EB981933036E00AFFA38 /* FMEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMEntity.m; path = entities/FMEntity.m; sourceTree = "<group>"; };
+		30C9EB9A1933038300AFFA38 /* FMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMUser.h; path = entities/FMUser.h; sourceTree = "<group>"; };
+		30C9EB9B1933038300AFFA38 /* FMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMUser.m; path = entities/FMUser.m; sourceTree = "<group>"; };
+		30C9EB9D193303B400AFFA38 /* FMSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMSong.h; path = entities/FMSong.h; sourceTree = "<group>"; };
+		30C9EB9E193303B400AFFA38 /* FMSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMSong.m; path = entities/FMSong.m; sourceTree = "<group>"; };
+		30C9EBA0193303C500AFFA38 /* FMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMChannel.h; sourceTree = "<group>"; };
+		30C9EBA1193303C500AFFA38 /* FMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMChannel.m; sourceTree = "<group>"; };
 		30E80DF51931D5BE001E334B /* DoubanFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoubanFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E80DF81931D5BE001E334B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30E80DFA1931D5BE001E334B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,6 +115,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30C9EB7B1932EFA400AFFA38 /* request */ = {
+			isa = PBXGroup;
+			children = (
+				30C9EB7C1932EFD200AFFA38 /* FMApiRequest.h */,
+				30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */,
+				30C9EB7F1932F28500AFFA38 /* FMApiRequestDelegate.h */,
+				30C9EB8D1933019300AFFA38 /* FMApiRequestSong.h */,
+				30C9EB8E1933019300AFFA38 /* FMApiRequestSong.m */,
+				30C9EB90193301AB00AFFA38 /* FMApiRequestUser.h */,
+				30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */,
+				30C9EB93193301C900AFFA38 /* FMApiRequestChannel.h */,
+				30C9EB94193301C900AFFA38 /* FMApiRequestChannel.m */,
+			);
+			name = request;
+			sourceTree = "<group>";
+		};
+		30C9EB801932F2A000AFFA38 /* response */ = {
+			isa = PBXGroup;
+			children = (
+				30C9EB811932F2BE00AFFA38 /* FMApiResponse.h */,
+				30C9EB821932F2BE00AFFA38 /* FMApiResponse.m */,
+				30C9EB841932FFD500AFFA38 /* FMApiResponseSong.h */,
+				30C9EB851932FFD500AFFA38 /* FMApiResponseSong.m */,
+				30C9EB871932FFED00AFFA38 /* FMApiResponseUser.h */,
+				30C9EB881932FFED00AFFA38 /* FMApiResponseUser.m */,
+				30C9EB8A1933000800AFFA38 /* FMApiResponseChannel.h */,
+				30C9EB8B1933000800AFFA38 /* FMApiResponseChannel.m */,
+			);
+			name = response;
+			sourceTree = "<group>";
+		};
+		30C9EB961933032A00AFFA38 /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				30C9EB971933036E00AFFA38 /* FMEntity.h */,
+				30C9EB981933036E00AFFA38 /* FMEntity.m */,
+				30C9EB9A1933038300AFFA38 /* FMUser.h */,
+				30C9EB9B1933038300AFFA38 /* FMUser.m */,
+				30C9EB9D193303B400AFFA38 /* FMSong.h */,
+				30C9EB9E193303B400AFFA38 /* FMSong.m */,
+				30C9EBA0193303C500AFFA38 /* FMChannel.h */,
+				30C9EBA1193303C500AFFA38 /* FMChannel.m */,
+			);
+			name = entities;
+			sourceTree = "<group>";
+		};
 		30E80DEC1931D5BE001E334B = {
 			isa = PBXGroup;
 			children = (
@@ -111,9 +194,9 @@
 		30E80DFE1931D5BE001E334B /* DoubanFM */ = {
 			isa = PBXGroup;
 			children = (
-				30E80E2C1931D6C4001E334B /* user */,
-				30E80E2B1931D6BE001E334B /* song */,
-				30E80E2A1931D6B8001E334B /* channel */,
+				30C9EB961933032A00AFFA38 /* entities */,
+				30C9EB801932F2A000AFFA38 /* response */,
+				30C9EB7B1932EFA400AFFA38 /* request */,
 				30E80E291931D63B001E334B /* util */,
 				30E80E271931D61A001E334B /* network */,
 				30E80E071931D5BE001E334B /* FMAppDelegate.h */,
@@ -168,27 +251,6 @@
 			children = (
 			);
 			name = util;
-			sourceTree = "<group>";
-		};
-		30E80E2A1931D6B8001E334B /* channel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = channel;
-			sourceTree = "<group>";
-		};
-		30E80E2B1931D6BE001E334B /* song */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = song;
-			sourceTree = "<group>";
-		};
-		30E80E2C1931D6C4001E334B /* user */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = user;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,9 +349,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30C9EB831932F2BE00AFFA38 /* FMApiResponse.m in Sources */,
 				30E80E051931D5BE001E334B /* main.m in Sources */,
 				30E80E091931D5BE001E334B /* FMAppDelegate.m in Sources */,
+				30C9EB861932FFD500AFFA38 /* FMApiResponseSong.m in Sources */,
+				30C9EB9C1933038300AFFA38 /* FMUser.m in Sources */,
 				30E80E2F1931D7A9001E334B /* FMHttpClient.m in Sources */,
+				30C9EB891932FFED00AFFA38 /* FMApiResponseUser.m in Sources */,
+				30C9EB9F193303B400AFFA38 /* FMSong.m in Sources */,
+				30C9EBA2193303C500AFFA38 /* FMChannel.m in Sources */,
+				30C9EB95193301C900AFFA38 /* FMApiRequestChannel.m in Sources */,
+				30C9EB92193301AB00AFFA38 /* FMApiRequestUser.m in Sources */,
+				30C9EB8F1933019300AFFA38 /* FMApiRequestSong.m in Sources */,
+				30C9EB991933036E00AFFA38 /* FMEntity.m in Sources */,
+				30C9EB8C1933000800AFFA38 /* FMApiResponseChannel.m in Sources */,
+				30C9EB7E1932EFD200AFFA38 /* FMApiRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +562,7 @@
 				30E80E231931D5BE001E334B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		30E80E241931D5BE001E334B /* Build configuration list for PBXNativeTarget "DoubanFMTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +571,7 @@
 				30E80E261931D5BE001E334B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
