@@ -51,7 +51,7 @@
     
    if([requestType isEqual:@"POST"]){
        
-       NSString *bodyData = [self dicToValueString:values];
+       NSString *bodyData = [FMHttpClient dicToURLParameterString:values];
        [request setHTTPBody:[NSData dataWithBytes:[bodyData UTF8String]
                                            length:strlen([bodyData UTF8String])]];
         
@@ -102,7 +102,7 @@
 
 #pragma mark - helper
 
-- (NSString *)dicToValueString:(NSDictionary *)values
++ (NSString *)dicToURLParameterString:(NSDictionary *)values
 {
     NSString *bodyData = @"";
     BOOL firstP = true;

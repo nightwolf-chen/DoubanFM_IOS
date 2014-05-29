@@ -19,5 +19,5 @@
 
 - (BOOL)doGet:(NSString *)urlStr;
 
-
++ (NSString *)dicToURLParameterString:(NSDictionary *)values;
 @end

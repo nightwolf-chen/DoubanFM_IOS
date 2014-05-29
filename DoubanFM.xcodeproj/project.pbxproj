@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */; };
 		30C9EB7E1932EFD200AFFA38 /* FMApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */; };
 		30C9EB831932F2BE00AFFA38 /* FMApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB821932F2BE00AFFA38 /* FMApiResponse.m */; };
 		30C9EB861932FFD500AFFA38 /* FMApiResponseSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB851932FFD500AFFA38 /* FMApiResponseSong.m */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30B8CD5C19371E7A002AD29A /* FMApiRequestSongInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestSongInfo.h; path = request/FMApiRequestSongInfo.h; sourceTree = "<group>"; };
+		30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestSongInfo.m; path = request/FMApiRequestSongInfo.m; sourceTree = "<group>"; };
 		30C9EB7C1932EFD200AFFA38 /* FMApiRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequest.h; path = request/FMApiRequest.h; sourceTree = "<group>"; };
 		30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequest.m; path = request/FMApiRequest.m; sourceTree = "<group>"; };
 		30C9EB7F1932F28500AFFA38 /* FMApiRequestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMApiRequestDelegate.h; path = request/FMApiRequestDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 				30C9EB7F1932F28500AFFA38 /* FMApiRequestDelegate.h */,
 				30C9EB8D1933019300AFFA38 /* FMApiRequestSong.h */,
 				30C9EB8E1933019300AFFA38 /* FMApiRequestSong.m */,
+				30B8CD5C19371E7A002AD29A /* FMApiRequestSongInfo.h */,
+				30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */,
 				30C9EB90193301AB00AFFA38 /* FMApiRequestUser.h */,
 				30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */,
 				30C9EB93193301C900AFFA38 /* FMApiRequestChannel.h */,
@@ -359,6 +364,7 @@
 				30C9EB9F193303B400AFFA38 /* FMSong.m in Sources */,
 				30C9EBA2193303C500AFFA38 /* FMChannel.m in Sources */,
 				30C9EB95193301C900AFFA38 /* FMApiRequestChannel.m in Sources */,
+				30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */,
 				30C9EB92193301AB00AFFA38 /* FMApiRequestUser.m in Sources */,
 				30C9EB8F1933019300AFFA38 /* FMApiRequestSong.m in Sources */,
 				30C9EB991933036E00AFFA38 /* FMEntity.m in Sources */,

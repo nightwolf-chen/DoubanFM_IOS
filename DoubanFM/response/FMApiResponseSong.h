@@ -10,4 +10,8 @@
 
 @interface FMApiResponseSong : FMApiResponse
 
+@property (nonatomic,retain) NSArray *songs;
+@property (nonatomic,assign) BOOL isSuccess;
+@property (nonatomic,assign) int versionMax;
+
 @end

@@ -8,6 +8,10 @@
 
 #import "FMApiRequest.h"
 
+@class FMApiRequestSongInfo;
+
 @interface FMApiRequestSong : FMApiRequest
+
+- (id)initWithDelegate:(id)delegate info:(FMApiRequestSongInfo *)info;
 
 @end

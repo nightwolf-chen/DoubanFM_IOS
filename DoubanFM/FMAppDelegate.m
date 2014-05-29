@@ -11,6 +11,8 @@
 #import "FMUser.h"
 #import "FMApiRequestUser.h"
 #import "FMApiRequestChannel.h"
+#import "FMApiRequestSongInfo.h"
+#import "FMApiRequestSong.h"
 
 FMHttpClient *client = nil;
 
@@ -41,9 +43,29 @@ FMHttpClient *client = nil;
 //    [userRequest sendRequest];
 //    [userRequest autorelease];
     
-    FMApiRequestChannel *channelRequest = [[FMApiRequestChannel alloc] initWithDelegate:self];
-    [channelRequest sendRequest];
-    //[channelRequest autorelease];
+//    FMApiRequestChannel *channelRequest = [[FMApiRequestChannel alloc] initWithDelegate:self];
+//    [channelRequest sendRequest];
+//    [channelRequest autorelease];
+    
+//    NSString *songId = @"10086";
+    NSString *channelId = @"10086";
+    
+//    FMUser *user = [[FMUser alloc] init];
+//    user.token = @"10000";
+//    user.expire = @"10000";
+//    user.userid = @"10086";
+    
+    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
+                                                                   song:nil
+                                                                channel:channelId];
+//    info.user = user;
+    
+    FMApiRequestSong *songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+    
+    [songRequest sendRequest];
+    
+//    [user release];
+    [info release];
     
     return YES;
 }
