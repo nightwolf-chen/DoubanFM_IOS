@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanFM/request/FMApiRequestSong.m"
-            timestampString = "423053113.898814"
+            filePath = "DoubanFM/player/FMUIPlayer.m"
+            timestampString = "424520542.364051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "-client:didFinishLoadingData:"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "-start"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

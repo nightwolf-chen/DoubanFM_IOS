@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FMApiRequestDelegate.h"
 
 @interface FMAppDelegate : UIResponder <UIApplicationDelegate>
 

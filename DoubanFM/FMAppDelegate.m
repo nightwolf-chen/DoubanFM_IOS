@@ -13,8 +13,12 @@
 #import "FMApiRequestChannel.h"
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestSong.h"
+#import "FMPlayer.h"
+#import "FMApiResponseSong.h"
+#import "FMSong.h"
+#import "FMRootViewController.h"
 
-FMHttpClient *client = nil;
+
 
 @implementation FMAppDelegate
 
@@ -48,24 +52,32 @@ FMHttpClient *client = nil;
 //    [channelRequest autorelease];
     
 //    NSString *songId = @"10086";
-    NSString *channelId = @"10086";
+//    NSString *channelId = @"10086";
     
 //    FMUser *user = [[FMUser alloc] init];
 //    user.token = @"10000";
 //    user.expire = @"10000";
 //    user.userid = @"10086";
     
-    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
-                                                                   song:nil
-                                                                channel:channelId];
+//    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
+//                                                                   song:nil
+//                                                                channel:channelId];
 //    info.user = user;
     
-    FMApiRequestSong *songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+//    FMApiRequestSong *songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+//    
+//    [songRequest sendRequest];
+//    
+//     player = [[FMPlayer alloc] init];
+//    
+//    
+    FMRootViewController *rootController = [[FMRootViewController alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = rootController;
     
-    [songRequest sendRequest];
-    
+    [rootController release];
+//
 //    [user release];
-    [info release];
+//    [info release];
     
     return YES;
 }
@@ -96,5 +108,6 @@ FMHttpClient *client = nil;
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end
