@@ -8,6 +8,8 @@
 
 #import "FMPlayer.h"
 
+extern const NSString *FMUIPLayerNeedsNewSongsNotification;
+
 @class FMSong;
 
 @interface FMUIPlayer : FMPlayer

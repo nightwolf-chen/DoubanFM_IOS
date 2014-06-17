@@ -54,6 +54,7 @@ FMUIPlayer *player = nil;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Dispose of any resources that can be recreated.
 }
 
@@ -70,6 +71,12 @@ FMUIPlayer *player = nil;
 }
 - (IBAction)nextClicked:(id)sender {
     [player next];
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

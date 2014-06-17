@@ -10,6 +10,8 @@
 #import "FMSong.h"
 #import <AVFoundation/AVFoundation.h>
 
+const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSongsNotification__";
+
 @interface FMUIPlayer ()
 {
     AVPlayerItem *_playingItem;
@@ -42,6 +44,7 @@
     }else{
         //No songs available!
         NSLog(@"No songs!");
+        [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)FMUIPLayerNeedsNewSongsNotification object:nil];
     }
 }
 
@@ -50,7 +53,7 @@
     
     NSURL *url = [NSURL URLWithString:song.songUrl];
     
-    _playingItem= [[AVPlayerItem playerItemWithURL:url] retain];
+    _playingItem = [[AVPlayerItem playerItemWithURL:url] retain];
     
     [self.player replaceCurrentItemWithPlayerItem:_playingItem];
     
