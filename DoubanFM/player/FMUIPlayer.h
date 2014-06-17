@@ -7,6 +7,7 @@
 //
 
 #import "FMPlayer.h"
+#import "FMUIPlayerDelegate.h"
 
 extern const NSString *FMUIPLayerNeedsNewSongsNotification;
 
@@ -15,8 +16,9 @@ extern const NSString *FMUIPLayerNeedsNewSongsNotification;
 @interface FMUIPlayer : FMPlayer
 
 @property (nonatomic,retain) NSMutableArray *songQueue;
+@property (nonatomic,retain) id<FMUIPlayerDelegate> delegate;
 
-- (id)initWithSongs:(NSArray *)songs;
+- (id)initWithSongs:(NSArray *)songs delegate:(id)delegate;
 
 - (void)start;
 - (void)next;

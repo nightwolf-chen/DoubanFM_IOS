@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FMApiRequestDelegate.h"
+#import "FMUIPlayer.h"
 
-@interface FMRootViewController : UIViewController<FMApiRequestDelegate>
+@interface FMRootViewController : UIViewController<FMApiRequestDelegate,FMUIPlayerDelegate>
+@property (retain, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end

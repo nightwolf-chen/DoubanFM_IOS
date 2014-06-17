@@ -66,15 +66,23 @@ FMUIPlayer *player = nil;
 - (void)didRecieveResponse:(FMApiResponse *)response
 {
     FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
-    player = [[FMUIPlayer alloc] initWithSongs:songResponse.songs];
+    player = [[FMUIPlayer alloc] initWithSongs:songResponse.songs delegate:self];
     [player start];
 }
+
+- (void)player:(FMUIPlayer *)player currentTime:(double)time
+{
+    NSString *timeString = [NSString stringWithFormat:@"%f",time];
+    [self.timeLabel setText:timeString];
+}
+
 - (IBAction)nextClicked:(id)sender {
     [player next];
 }
 
 - (void)dealloc
 {
+    [_timeLabel release];
     [super dealloc];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

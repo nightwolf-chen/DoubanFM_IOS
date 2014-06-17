@@ -13,9 +13,6 @@
 const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSongsNotification__";
 
 @interface FMUIPlayer ()
-{
-    AVPlayerItem *_playingItem;
-}
 
 - (void)play:(FMSong *)song;
 - (void)playerItemDidReachEnd:(NSNotification *)notiication;
@@ -24,14 +21,25 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 
 @implementation FMUIPlayer
 
-- (id)initWithSongs:(NSArray *)songs
+- (id)initWithSongs:(NSArray *)songs delegate:(id)delegate
 {
     self = [super init];
     
     if (self) {
         _songQueue = [[NSMutableArray alloc] initWithArray:songs];
+        _delegate = delegate;
     }
     
+    [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,1)
+                                              queue:dispatch_get_main_queue()
+                                         usingBlock:^(CMTime time){
+                                        
+                                        [self.delegate player:self
+                                                  currentTime:CMTimeGetSeconds(self.player.currentTime)];
+                                        
+                                         }];
+
+
     return self;
 }
 
@@ -53,14 +61,14 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
     
     NSURL *url = [NSURL URLWithString:song.songUrl];
     
-    _playingItem = [[AVPlayerItem playerItemWithURL:url] retain];
+    AVPlayerItem *item = [[AVPlayerItem playerItemWithURL:url] retain];
     
-    [self.player replaceCurrentItemWithPlayerItem:_playingItem];
+    [self.player replaceCurrentItemWithPlayerItem:item];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:_playingItem];
+                                               object:item];
     
     [self.player play];
     
@@ -70,7 +78,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
-                                                  object:_playingItem];
+                                                  object:self.player.currentItem];
     [self.songQueue removeLastObject];
     [self start];
 }
@@ -84,5 +92,6 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 {
     return [self.songQueue lastObject];
 }
+
 
 @end

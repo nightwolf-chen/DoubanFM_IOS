@@ -56,6 +56,7 @@
 		30395755194D9E6E00D76121 /* FMRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMRootViewController.h; path = ui/FMRootViewController.h; sourceTree = "<group>"; };
 		30395756194D9E6E00D76121 /* FMRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMRootViewController.m; path = ui/FMRootViewController.m; sourceTree = "<group>"; };
 		30395757194D9E6E00D76121 /* FMRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMRootViewController.xib; path = ui/FMRootViewController.xib; sourceTree = "<group>"; };
+		30B0F1DF19500CA000AA0763 /* FMUIPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMUIPlayerDelegate.h; path = player/FMUIPlayerDelegate.h; sourceTree = "<group>"; };
 		30B8CD5C19371E7A002AD29A /* FMApiRequestSongInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestSongInfo.h; path = request/FMApiRequestSongInfo.h; sourceTree = "<group>"; };
 		30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestSongInfo.m; path = request/FMApiRequestSongInfo.m; sourceTree = "<group>"; };
 		30C9EB7C1932EFD200AFFA38 /* FMApiRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequest.h; path = request/FMApiRequest.h; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 				30D9B6F919387DA40074BE50 /* FMPlayer.m */,
 				30395751194D9BFC00D76121 /* FMUIPlayer.h */,
 				30395752194D9BFC00D76121 /* FMUIPlayer.m */,
+				30B0F1DF19500CA000AA0763 /* FMUIPlayerDelegate.h */,
 			);
 			name = player;
 			sourceTree = "<group>";
