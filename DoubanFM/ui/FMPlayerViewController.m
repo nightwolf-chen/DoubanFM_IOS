@@ -5,7 +5,7 @@
 //  Created by nirvawolf on 15/6/14.
 //  Copyright (c) 2014 nirvawolf. All rights reserved.
 //
-
+#import <AVFoundation/AVFoundation.h>
 #import "FMPlayerViewController.h"
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestSong.h"
@@ -13,7 +13,7 @@
 #import "FMApiResponseSong.h"
 #import "FMSong.h"
 #import "FMUIPlayer.h"
-#import <AVFoundation/AVFoundation.h>
+#import "../util/FMMacros.h"
 
 @interface FMPlayerViewController ()
 {
@@ -30,20 +30,17 @@
     if (self) {
         // Custom initialization
         self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory
-                                                                 tag:UITabBarSystemItemHistory] autorelease];
+                                                                      tag:UITabBarSystemItemHistory] autorelease];
         
         _player = [[FMUIPlayer alloc] initWithSongs:nil delegate:self];
         
-        NSString *channelId = @"10086";
-        
-        FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
+        //Default channel setting.
+        _channelId = @"10086";
+        FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
                                                                        song:nil
-                                                                    channel:channelId];
+                                                                    channel:_channelId] autorelease];
         
         _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
-        
-        [info release];
-
     }
     return self;
 }
@@ -51,7 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_songRequest sendRequest];
+    [self loadSongsFromServer];
     // Do any additional setup after loading the view from its nib.
     
 }
@@ -87,16 +84,38 @@
 
 - (void)playerNeedsMoreSongs:(FMUIPlayer *)player
 {
-    [_songRequest sendRequest];
+    [self loadSongsFromServer];
 }
 
 - (void)dealloc
 {
     [_timeLabel release];
     [_songRequest release];
-    [super dealloc];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [_songProgressSlider release];
+    [_songInfoLabel release];
+    [_songImgView release];
+    [super dealloc];
 }
 
+- (void)setChannelId:(NSString *)channelId
+{
+    SAFE_DELETE(_channelId);
+    _channelId = [channelId copy];
+    
+    FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
+                                                                   song:nil
+                                                                channel:_channelId] autorelease];
+    SAFE_DELETE(_songRequest);
+    _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+    
+    [self loadSongsFromServer];
+}
+
+- (void)loadSongsFromServer
+{
+    [_songRequest sendRequest];
+}
 
 @end
