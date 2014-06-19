@@ -53,6 +53,8 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
         //No songs available!
         NSLog(@"No songs!");
         [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)FMUIPLayerNeedsNewSongsNotification object:nil];
+        [self.delegate playerNeedsMoreSongs:self];
+    
     }
 }
 

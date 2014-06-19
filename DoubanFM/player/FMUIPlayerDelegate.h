@@ -14,6 +14,6 @@
 
 @required
 - (void)player:(FMUIPlayer *)player currentTime:(double)time;
-
+- (void)playerNeedsMoreSongs:(FMUIPlayer *)player;
 
 @end

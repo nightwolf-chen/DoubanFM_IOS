@@ -16,7 +16,8 @@
 #import "FMPlayer.h"
 #import "FMApiResponseSong.h"
 #import "FMSong.h"
-#import "FMRootViewController.h"
+#import "FMPlayerViewController.h"
+#import "ui/FMTabbarViewController.h"
 
 
 
@@ -71,7 +72,8 @@
 //     player = [[FMPlayer alloc] init];
 //    
 //    
-    FMRootViewController *rootController = [[FMRootViewController alloc] initWithNibName:nil bundle:nil];
+    FMTabbarViewController *rootController = [[FMTabbarViewController alloc] initWithNibName:nil
+                                                                                      bundle:nil];
     self.window.rootViewController = rootController;
     
     [rootController release];

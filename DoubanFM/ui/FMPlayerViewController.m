@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 nirvawolf. All rights reserved.
 //
 
-#import "FMRootViewController.h"
+#import "FMPlayerViewController.h"
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestSong.h"
 #import "FMPlayer.h"
@@ -15,20 +15,35 @@
 #import "FMUIPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface FMRootViewController ()
+@interface FMPlayerViewController ()
+{
+    FMApiRequestSong *_songRequest;
+}
 
 @end
 
-FMHttpClient *client = nil;
-FMUIPlayer *player = nil;
-
-@implementation FMRootViewController
+@implementation FMPlayerViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory
+                                                                 tag:UITabBarSystemItemHistory] autorelease];
+        
+        _player = [[FMUIPlayer alloc] initWithSongs:nil delegate:self];
+        
+        NSString *channelId = @"10086";
+        
+        FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
+                                                                       song:nil
+                                                                    channel:channelId];
+        
+        _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+        
+        [info release];
+
     }
     return self;
 }
@@ -36,19 +51,9 @@ FMUIPlayer *player = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_songRequest sendRequest];
     // Do any additional setup after loading the view from its nib.
     
-    NSString *channelId = @"10086";
-    
-    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
-                                                                   song:nil
-                                                                channel:channelId];
-    
-    FMApiRequestSong *songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
-    
-    [songRequest sendRequest];
-    
-    [info release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,14 +65,14 @@ FMUIPlayer *player = nil;
 
 - (void)didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"No network connection!");
 }
 
 - (void)didRecieveResponse:(FMApiResponse *)response
 {
     FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
-    player = [[FMUIPlayer alloc] initWithSongs:songResponse.songs delegate:self];
-    [player start];
+    _player.songQueue = [NSMutableArray arrayWithArray:songResponse.songs];
+    [_player start];
 }
 
 - (void)player:(FMUIPlayer *)player currentTime:(double)time
@@ -77,14 +82,21 @@ FMUIPlayer *player = nil;
 }
 
 - (IBAction)nextClicked:(id)sender {
-    [player next];
+    [_player next];
+}
+
+- (void)playerNeedsMoreSongs:(FMUIPlayer *)player
+{
+    [_songRequest sendRequest];
 }
 
 - (void)dealloc
 {
     [_timeLabel release];
+    [_songRequest release];
     [super dealloc];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 
 @end
