@@ -13,7 +13,7 @@
 @protocol FMUIPlayerDelegate <NSObject>
 
 @required
-- (void)player:(FMUIPlayer *)player currentTime:(double)time;
+- (void)player:(FMUIPlayer *)player currentTime:(double)time totalTime:(double)duration;
 - (void)playerNeedsMoreSongs:(FMUIPlayer *)player;
-
+- (void)playerIsLoadingSong:(FMUIPlayer *)player;
 @end

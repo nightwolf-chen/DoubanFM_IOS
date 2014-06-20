@@ -14,6 +14,7 @@
 		303C5AB41952C2FD00932C66 /* FMTabbarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 303C5AB21952C2FD00932C66 /* FMTabbarViewController.xib */; };
 		303C5AB81952C34A00932C66 /* FMChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 303C5AB61952C34900932C66 /* FMChannelViewController.m */; };
 		303C5AB91952C34A00932C66 /* FMChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 303C5AB71952C34A00932C66 /* FMChannelViewController.xib */; };
+		304B4B631954695F00B24834 /* FMTimeFormateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 304B4B621954695F00B24834 /* FMTimeFormateHelper.m */; };
 		30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */; };
 		30C9EB7E1932EFD200AFFA38 /* FMApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */; };
 		30C9EB831932F2BE00AFFA38 /* FMApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB821932F2BE00AFFA38 /* FMApiResponse.m */; };
@@ -67,6 +68,8 @@
 		303C5AB61952C34900932C66 /* FMChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMChannelViewController.m; path = ui/FMChannelViewController.m; sourceTree = "<group>"; };
 		303C5AB71952C34A00932C66 /* FMChannelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMChannelViewController.xib; path = ui/FMChannelViewController.xib; sourceTree = "<group>"; };
 		303C5ABD1952D14000932C66 /* FMMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMMacros.h; path = util/FMMacros.h; sourceTree = "<group>"; };
+		304B4B611954695F00B24834 /* FMTimeFormateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMTimeFormateHelper.h; path = util/FMTimeFormateHelper.h; sourceTree = "<group>"; };
+		304B4B621954695F00B24834 /* FMTimeFormateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMTimeFormateHelper.m; path = util/FMTimeFormateHelper.m; sourceTree = "<group>"; };
 		30B0F1DF19500CA000AA0763 /* FMUIPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMUIPlayerDelegate.h; path = player/FMUIPlayerDelegate.h; sourceTree = "<group>"; };
 		30B8CD5C19371E7A002AD29A /* FMApiRequestSongInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestSongInfo.h; path = request/FMApiRequestSongInfo.h; sourceTree = "<group>"; };
 		30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestSongInfo.m; path = request/FMApiRequestSongInfo.m; sourceTree = "<group>"; };
@@ -312,6 +315,8 @@
 			isa = PBXGroup;
 			children = (
 				303C5ABD1952D14000932C66 /* FMMacros.h */,
+				304B4B611954695F00B24834 /* FMTimeFormateHelper.h */,
+				304B4B621954695F00B24834 /* FMTimeFormateHelper.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				30C9EB891932FFED00AFFA38 /* FMApiResponseUser.m in Sources */,
 				30C9EB9F193303B400AFFA38 /* FMSong.m in Sources */,
 				30C9EBA2193303C500AFFA38 /* FMChannel.m in Sources */,
+				304B4B631954695F00B24834 /* FMTimeFormateHelper.m in Sources */,
 				30C9EB95193301C900AFFA38 /* FMApiRequestChannel.m in Sources */,
 				30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */,
 				30C9EB92193301AB00AFFA38 /* FMApiRequestUser.m in Sources */,

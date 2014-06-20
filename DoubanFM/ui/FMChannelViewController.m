@@ -7,8 +7,14 @@
 //
 
 #import "FMChannelViewController.h"
+#import "FMApiRequestChannel.h"
 
 @interface FMChannelViewController ()
+{
+    UITableView *_tableView;
+    NSMutableArray *_channels;
+}
+@property (retain, nonatomic) FMApiRequestChannel *channelRequest;
 
 @end
 
@@ -21,6 +27,16 @@
         // Custom initialization
         self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured
                                                                         tag:UITabBarSystemItemFeatured] autorelease];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+       
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        
+        _channelRequest = [[FMApiRequestChannel alloc] init];
+        [_channelRequest sendRequest];
+        
+        _channels = [[NSMutableArray alloc] init];
+       
     }
     return self;
 }
@@ -37,4 +53,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - request delegate
+
+- (void)didRecieveResponse:(FMApiResponse *)response
+{
+    
+}
+
+- (void)didFailWithError:(NSError *)error
+{
+    
+}
+
+#pragma mark - UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _channels.count;
+}
 @end

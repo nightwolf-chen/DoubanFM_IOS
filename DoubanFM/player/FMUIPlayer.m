@@ -35,7 +35,8 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
                                          usingBlock:^(CMTime time){
                                         
                                         [self.delegate player:self
-                                                  currentTime:CMTimeGetSeconds(self.player.currentTime)];
+                                                  currentTime:CMTimeGetSeconds(self.player.currentTime)
+                                                    totalTime:CMTimeGetSeconds([self.player.currentItem duration])];
                                         
                                          }];
 
@@ -73,6 +74,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
                                                object:item];
     
     [self.player play];
+    [self.delegate playerIsLoadingSong:self];
     
 }
 

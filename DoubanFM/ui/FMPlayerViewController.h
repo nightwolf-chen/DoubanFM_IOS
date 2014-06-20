@@ -13,7 +13,9 @@
 
 @interface FMPlayerViewController : UIViewController<FMApiRequestDelegate,FMUIPlayerDelegate>
 
+@property (retain, nonatomic) IBOutlet UILabel *durationLabel;
 
+@property (retain, nonatomic) IBOutlet UILabel *artistLabel;
 
 @property (retain, nonatomic) IBOutlet UIImageView *songImgView;
 @property (retain, nonatomic) IBOutlet UILabel *songInfoLabel;
