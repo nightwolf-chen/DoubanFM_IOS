@@ -7,18 +7,19 @@
 //
 
 #import "FMApiRequestSongInfo.h"
+#import "FMSong.h"
 
 char typeString[SongRequestTypeCount] = "bersunp";
 
 @implementation FMApiRequestSongInfo
 
-- (id)initWith:(SongRequestType)type song:(NSString *)songId channel:(NSString *)channelId
+- (id)initWith:(SongRequestType)type song:(FMSong *)song channel:(NSString *)channelId
 {
     self = [super init];
     
     if (self) {
         _type = type;
-        _songId = [songId copy];
+        _songId = [song.sid copy];
         _channelId = [channelId copy];
     }
     

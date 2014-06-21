@@ -9,6 +9,7 @@
 #import "FMTabbarViewController.h"
 #import "FMChannelViewController.h"
 #import "FMPlayerViewController.h"
+#import "FMUserCenterController.h"
 
 @interface FMTabbarViewController ()
 
@@ -27,12 +28,16 @@
         FMPlayerViewController *playerContr = [[FMPlayerViewController alloc] initWithNibName:nibNameOrNil
                                                                                        bundle:nibBundleOrNil];
         
-        NSArray *controllers = @[playerContr,channelContr];
+        
+        FMUserCenterController *usrController = [[FMUserCenterController alloc] initWithNibName:nibNameOrNil
+                                                                                         bundle:nibBundleOrNil];
+        NSArray *controllers = @[playerContr,channelContr,usrController];
         
         self.viewControllers = controllers;
         
         [channelContr release];
         [playerContr release];
+        [usrController release];
         
     }
     return self;

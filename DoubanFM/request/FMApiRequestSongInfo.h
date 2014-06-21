@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class  FMUser;
+@class FMUser;
+@class FMSong;
 
 typedef enum{
     SongRequestTypeBYE=0,
@@ -29,7 +30,7 @@ typedef enum{
 @property (nonatomic,copy) NSString *channelId;
 @property (nonatomic,assign) SongRequestType type;
 
-- (id)initWith:(SongRequestType)type song:(NSString *)songId channel:(NSString *)channelId;
+- (id)initWith:(SongRequestType)type song:(FMSong *)song channel:(NSString *)channelId;
 
 + (NSString *)typeString:(SongRequestType)type;
 

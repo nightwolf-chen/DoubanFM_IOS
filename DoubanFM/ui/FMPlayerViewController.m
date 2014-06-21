@@ -12,9 +12,12 @@
 #import "FMPlayer.h"
 #import "FMApiResponseSong.h"
 #import "FMSong.h"
+#import "FMChannel.h"
 #import "FMUIPlayer.h"
 #import "../util/FMMacros.h"
 #import "FMTimeFormateHelper.h"
+#import "FMNotifications.h"
+#import "FMUserCenter.h"
 
 @interface FMPlayerViewController ()
 {
@@ -38,12 +41,13 @@
         _player = [[FMUIPlayer alloc] initWithSongs:nil delegate:self];
         
         //Default channel setting.
-        _channelId = @"10086";
-        FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
-                                                                       song:nil
-                                                                    channel:_channelId] autorelease];
+        _channelId = @"1";
         
-        _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+//        FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
+//                                                                       song:nil
+//                                                                    channel:_channelId] autorelease];
+//        
+//        _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
         
         //Set up a activity view with blue color
         _actIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -53,12 +57,18 @@
         [self.view addSubview:_actIndicator];
         [self.view bringSubviewToFront:_actIndicator];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector
+             (didRecieveChannelChangedNotification:) name:FMUIPlayerChannelChangedNotification object:nil];
+        
+    
+        
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
+    _channelInfoLabel.text = @"华语";
     [super viewDidLoad];
     [self loadSongsFromServer];
     // Do any additional setup after loading the view from its nib.
@@ -142,25 +152,48 @@
     SAFE_DELETE(_channelId);
     _channelId = [channelId copy];
     
-    FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
-                                                                   song:nil
-                                                                channel:_channelId] autorelease];
-    SAFE_DELETE(_songRequest);
-    _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
-    
     [self loadSongsFromServer];
 }
 
 - (void)loadSongsFromServer
 {
+    SAFE_DELETE(_songRequest);
+    
+    FMApiRequestSongInfo *info = [self generateCurrentInfoByType:SongRequestTypeNEW];
+    _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+
     [_songRequest sendRequest];
     [_actIndicator startAnimating];
+}
+
+- (FMApiRequestSongInfo *)generateCurrentInfoByType:(SongRequestType)type
+{
+    FMSong *cSong = [self.player getPlayingSong];
+    FMUser *cUser = nil;
+    if ([[FMUserCenter sharedCenter] isLogin]) {
+        cUser = [[FMUserCenter sharedCenter] user];
+    }
+    FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:type
+                                                                    song:cSong
+                                                                 channel:_channelId] autorelease];
+    info.user = cUser;
+    
+    return info;
 }
 
 - (IBAction)nextClicked:(id)sender {
     [_player next];
 }
 
+#pragma mark - Notification handler
+
+- (void)didRecieveChannelChangedNotification:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    FMChannel *channel = [info objectForKey:@"channel"];
+    self.channelId = [NSString stringWithFormat:@"%d",channel.channelId];
+    self.channelInfoLabel.text = channel.nameCN;
+}
 
 - (void)dealloc
 {
@@ -175,6 +208,10 @@
     [_artistLabel release];
     
     [_durationLabel release];
+    [_channelInfoLabel release];
+    [_player release];
+    [_channelId release];
+    
     [super dealloc];
 }
 

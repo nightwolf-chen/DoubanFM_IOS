@@ -16,19 +16,25 @@
     self = [super init];
     
     if (self) {
-        _user = [[FMUser alloc] init];
         
-        NSDictionary *jsonData = [self paserJsonData:data];
-        
-        if ( [[jsonData objectForKey:@"r"] intValue] == 0) {
+        if (data) {
+    
+            _user = [[FMUser alloc] init];
             
-            _isSuccess = YES;
+            NSDictionary *jsonData = [self paserJsonData:data];
             
-            _user.email = [jsonData objectForKey:@"email"];
-            _user.expire = [jsonData objectForKey:@"expire"];
-            _user.token = [jsonData objectForKey:@"token"];
-            _user.userid = [jsonData objectForKey:@"user_id"];
-            _user.username = [jsonData objectForKey:@"user_name"];
+            if ( [[jsonData objectForKey:@"r"] intValue] == 0) {
+                
+                _isSuccess = YES;
+                _user.email = [jsonData objectForKey:@"email"];
+                _user.expire = [jsonData objectForKey:@"expire"];
+                _user.token = [jsonData objectForKey:@"token"];
+                _user.userid = [jsonData objectForKey:@"user_id"];
+                _user.username = [jsonData objectForKey:@"user_name"];
+                
+            }else{
+                _isSuccess = NO;
+            }
             
         }else{
             _isSuccess = NO;

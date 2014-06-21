@@ -16,8 +16,11 @@
     self = [super init];
     
     if (self) {
-        _channels = [self paserJsonDataForChannels:data];
-        _categories = [[NSDictionary alloc] init];
+        
+        if (data) {
+            _channels = [self paserJsonDataForChannels:data];
+            _categories = [[NSDictionary alloc] init];
+        }
     }
     
     return self;
