@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMApiRequestDelegate.h"
 #import "FMUIPlayer.h"
 
 
-@interface FMPlayerViewController : UIViewController<FMApiRequestDelegate,FMUIPlayerDelegate>
+@interface FMPlayerViewController : UIViewController<FMUIPlayerDelegate>
 
 
 @property (retain, nonatomic) IBOutlet UILabel *channelInfoLabel;

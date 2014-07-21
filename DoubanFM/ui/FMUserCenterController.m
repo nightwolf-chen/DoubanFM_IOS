@@ -13,10 +13,12 @@
 #import "../util/FMMacros.h"
 #import "FMUserCenter.h"
 #import "FMNotifications.h"
+#import "FMRequestExecutor.h"
+#import "FMApiResponse.h"
 
 @interface FMUserCenterController ()
 
-@property (retain ,nonatomic) FMApiRequestUser *userRequest;
+@property (retain ,nonatomic) FMRequestExecutor *requestExecutor;
 
 @end
 
@@ -27,8 +29,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore
-                                                                     tag:UITabBarSystemItemMore];
+        self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore
+                                                                     tag:UITabBarSystemItemMore] autorelease];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didrecieveLoginSuccess:)
@@ -67,14 +69,33 @@
         return;
     }
     
-    SAFE_DELETE(_userRequest);
+    SAFE_DELETE(_requestExecutor);
     
     FMUser *user = [[FMUser alloc] init];
     user.email = self.emailTextField.text;
     user.password = self.passwordTextField.text;
     
-    _userRequest = [[FMApiRequestUser alloc] initWithDelegate:self user:user];
-    [_userRequest sendRequest];
+    FMApiRequest *request = [[FMApiRequestUser alloc] initWithDelegate:self user:user];
+    _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request complete:^(FMApiResponse *response){
+    
+            FMApiResponseUser *userResp = (FMApiResponseUser *)response;
+            if (userResp.isSuccess) {
+                [[FMUserCenter sharedCenter] setIsLogin:userResp.isSuccess];
+                [[FMUserCenter sharedCenter] setUser:userResp.user];
+                [[NSNotificationCenter defaultCenter] postNotificationName:FMUSerLoginSuccessNotification
+                                                                    object:self];
+            }else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:FMUserLoginFailedNotification
+                                                                    object:self];
+                self.loginInfoLabel.text = @"登录失败请重试";
+            }
+
+    }];
+    
+    [request release];
+    [user release];
+    
+    [_requestExecutor execute];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -85,28 +106,6 @@
     }
     
     return NO;
-}
-#pragma mark - Request delegate
-
-- (void)didRecieveResponse:(FMApiResponse *)response
-{
-    FMApiResponseUser *userResp = (FMApiResponseUser *)response;
-    
-    if (userResp.isSuccess) {
-        [[FMUserCenter sharedCenter] setIsLogin:userResp.isSuccess];
-        [[FMUserCenter sharedCenter] setUser:userResp.user];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FMUSerLoginSuccessNotification
-                                                            object:self];
-    }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:FMUserLoginFailedNotification
-                                                            object:self];
-        self.loginInfoLabel.text = @"登录失败请重试";
-    }
-}
-
-- (void)didFailWithError:(NSError *)error
-{
-    NSLog(@"Error trying to login!");
 }
 
 - (void)hideKeybord
@@ -136,7 +135,7 @@
 - (void)dealloc {
     [_emailTextField release];
     [_passwordTextField release];
-    SAFE_DELETE(_userRequest);
+    SAFE_DELETE(_requestExecutor);
     [_loginButton release];
     [_loginInfoLabel release];
     [super dealloc];

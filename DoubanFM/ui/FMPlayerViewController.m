@@ -11,6 +11,7 @@
 #import "FMApiRequestSong.h"
 #import "FMPlayer.h"
 #import "FMApiResponseSong.h"
+#import "FMApiResponse.h"
 #import "FMSong.h"
 #import "FMChannel.h"
 #import "FMUIPlayer.h"
@@ -18,10 +19,11 @@
 #import "FMTimeFormateHelper.h"
 #import "FMNotifications.h"
 #import "FMUserCenter.h"
+#import "FMRequestExecutor.h"
 
 @interface FMPlayerViewController ()
 {
-    FMApiRequestSong *_songRequest;
+    FMRequestExecutor *_requestExecutor;
 }
 
 @property (retain, nonatomic) UIActivityIndicatorView *actIndicator;
@@ -43,12 +45,6 @@
         //Default channel setting.
         _channelId = @"1";
         
-//        FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
-//                                                                       song:nil
-//                                                                    channel:_channelId] autorelease];
-//        
-//        _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
-        
         //Set up a activity view with blue color
         _actIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _actIndicator.center = CGPointMake(self.view.frame.size.width/2.0,
@@ -60,19 +56,32 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector
              (didRecieveChannelChangedNotification:) name:FMUIPlayerChannelChangedNotification object:nil];
         
-    
         
+        FMApiRequestSongInfo *info = [self generateCurrentInfoByType:SongRequestTypeNEW];
+        FMApiRequest *request = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+        
+        _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request
+                                                             complete:^(FMApiResponse *response){
+            
+                [_actIndicator stopAnimating];
+                FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
+                _player.songQueue = [NSMutableArray arrayWithArray:songResponse.songs];
+                [_player start];
+            
+        }];
+        
+        [_requestExecutor execute];
+        
+        [request release];
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    _channelInfoLabel.text = @"华语";
     [super viewDidLoad];
-    [self loadSongsFromServer];
-    // Do any additional setup after loading the view from its nib.
-    
+    _channelInfoLabel.text = @"华语";
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,22 +89,6 @@
     [super didReceiveMemoryWarning];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark -Request delegate
-
-- (void)didFailWithError:(NSError *)error
-{
-    [_actIndicator stopAnimating];
-    NSLog(@"No network connection!");
-}
-
-- (void)didRecieveResponse:(FMApiResponse *)response
-{
-    [_actIndicator stopAnimating];
-    FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
-    _player.songQueue = [NSMutableArray arrayWithArray:songResponse.songs];
-    [_player start];
 }
 
 #pragma mark - FMUIPlayer delegate
@@ -157,12 +150,7 @@
 
 - (void)loadSongsFromServer
 {
-    SAFE_DELETE(_songRequest);
-    
-    FMApiRequestSongInfo *info = [self generateCurrentInfoByType:SongRequestTypeNEW];
-    _songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
-
-    [_songRequest sendRequest];
+    [_requestExecutor execute];
     [_actIndicator startAnimating];
 }
 
@@ -200,7 +188,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [_timeLabel release];
-    [_songRequest release];
+    [_requestExecutor release];
     [_songProgressSlider release];
     [_songInfoLabel release];
     [_songImgView release];

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMApiRequestUser.h"
 
-@interface FMUserCenterController : UIViewController<UITextFieldDelegate,FMApiRequestDelegate>
+@interface FMUserCenterController : UIViewController<UITextFieldDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *emailTextField;
 @property (retain, nonatomic) IBOutlet UITextField *passwordTextField;

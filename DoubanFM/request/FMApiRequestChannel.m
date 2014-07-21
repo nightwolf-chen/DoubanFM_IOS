@@ -10,6 +10,7 @@
 #import "FMChannel.h"
 #import "FMApiResponseChannel.h"
 #import "FMHttpClient.h"
+#import "FMRequestType.h"
 
 @implementation FMApiRequestChannel
 
@@ -20,6 +21,7 @@
     
     if (self) {
         self.requestURL = [NSString stringWithFormat:@"%@:%@/j/app/radio/channels",self.protocool,self.domaimName];
+        self.requestType = FMRequestTypeChannel;
     }
     
     return self;
