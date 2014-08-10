@@ -14,24 +14,31 @@
 
 @implementation FMApiRequestUser
 
-- (id)initWithDelegate:(id)delegate user:(FMUser *)user
+- (id)init:(FMUser *)user completion:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock
 {
-    self = [super initWithDelegate:delegate];
+    self = [super initWithComplete:completeBlock errBlock:errBlock];
     
     if (self) {
-        _user = user;
+        _user = [user retain];
         _isLogin = NO;
-        self.requestURL = [NSString stringWithFormat:@"%@:%@/j/app/login",self.protocool,self.domaimName];
-        self.requestType = FMRequestTypeUser;
     }
     
     return self;
 }
 
-- (void)client:(FMHttpClient *)client didFinishLoadingData:(NSData *)data
+- (NSString *)getRequestURL
 {
-    FMApiResponse *userResponse = [[[FMApiResponseUser alloc] initWithData:data] autorelease];
-    [self.delegate didRecieveResponse: userResponse];
+    return [NSString stringWithFormat:@"%@:%@/j/app/login",self.protocool,self.domaimName];
+}
+
+- (FMRequestType)getRequestType
+{
+    return FMRequestTypeUser;
+}
+
+- (FMApiResponse *)parseData:(NSData *)data
+{
+    return [[[FMApiResponseUser alloc] initWithData:data] autorelease];
 }
 
 - (void)sendRequest

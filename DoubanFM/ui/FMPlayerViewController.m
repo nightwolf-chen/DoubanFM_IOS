@@ -19,11 +19,9 @@
 #import "FMTimeFormateHelper.h"
 #import "FMNotifications.h"
 #import "FMUserCenter.h"
-#import "FMRequestExecutor.h"
 
 @interface FMPlayerViewController ()
 {
-    FMRequestExecutor *_requestExecutor;
 }
 
 @property (retain, nonatomic) UIActivityIndicatorView *actIndicator;
@@ -55,24 +53,26 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector
              (didRecieveChannelChangedNotification:) name:FMUIPlayerChannelChangedNotification object:nil];
+       
+        void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
+            [_actIndicator stopAnimating];
+            FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
+            _player.songQueue = [NSMutableArray arrayWithArray:songResponse.songs];
+            [_player start];
+        };
+        
+        void (^erroBlock)(NSError *) = ^(NSError *err){
+            [_actIndicator stopAnimating];
+            NSLog(@"erroR!");
+        };
         
         
         FMApiRequestSongInfo *info = [self generateCurrentInfoByType:SongRequestTypeNEW];
-        FMApiRequest *request = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
+        FMApiRequest *request = [[FMApiRequestSong alloc] init:info
+                                                    completion:completeBlock
+                                                      errBlock:erroBlock];
         
-        _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request
-                                                             complete:^(FMApiResponse *response){
-            
-                [_actIndicator stopAnimating];
-                FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
-                _player.songQueue = [NSMutableArray arrayWithArray:songResponse.songs];
-                [_player start];
-            
-        }];
-        
-        [_requestExecutor execute];
-        
-        [request release];
+        [request sendRequest];
     }
     return self;
 }
@@ -150,7 +150,6 @@
 
 - (void)loadSongsFromServer
 {
-    [_requestExecutor execute];
     [_actIndicator startAnimating];
 }
 
@@ -188,7 +187,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [_timeLabel release];
-    [_requestExecutor release];
     [_songProgressSlider release];
     [_songInfoLabel release];
     [_songImgView release];

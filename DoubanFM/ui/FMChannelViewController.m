@@ -12,7 +12,6 @@
 #import "FMChannelCell.h"
 #import "FMNotifications.h"
 #import "FMApiResponse.h"
-#import "FMRequestExecutor.h"
 
 static NSString *cellIdentifier = @"channelCell";
 
@@ -21,7 +20,6 @@ static NSString *cellIdentifier = @"channelCell";
     UITableView *_tableView;
     NSMutableArray *_channels;
 }
-@property (retain, nonatomic) FMRequestExecutor *requestExecutor;
 
 @end
 
@@ -42,15 +40,19 @@ static NSString *cellIdentifier = @"channelCell";
         [self.view addSubview:_tableView];
         _channels = [[NSMutableArray alloc] init];
 
-
-        FMApiRequest *request = [[FMApiRequestChannel alloc] initWithDelegate:self];
-        _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request complete:^(FMApiResponse *response){
-                FMApiResponseChannel *channelRespones = (FMApiResponseChannel *)response;
-                _channels = [[NSMutableArray alloc] initWithArray:channelRespones.channels];
-                [_tableView reloadData];
-        }];
+        void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
+            FMApiResponseChannel *channelRespones = (FMApiResponseChannel *)response;
+            _channels = [[NSMutableArray alloc] initWithArray:channelRespones.channels];
+            [_tableView reloadData];
+        };
         
-        [_requestExecutor execute];
+        void (^erroBlock)(NSError *) = ^(NSError *err){
+            NSLog(@"erroR!");
+        };
+        
+        FMApiRequest *request = [[FMApiRequestChannel alloc] initWithComplete:completeBlock errBlock:erroBlock];
+        [request sendRequest];
+
     }
     return self;
 }
@@ -113,7 +115,6 @@ static NSString *cellIdentifier = @"channelCell";
 - (void)dealloc
 {
     [_tableView release];
-    [_requestExecutor release];
     [_channels release];
     
     [super dealloc];

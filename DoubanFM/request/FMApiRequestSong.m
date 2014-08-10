@@ -16,17 +16,32 @@
 
 @implementation FMApiRequestSong
 
-- (id)initWithDelegate:(id)delegate info:(FMApiRequestSongInfo *)info
+- (id)init:(FMApiRequestSongInfo *)info completion:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock
 {
-    self = [super initWithDelegate:delegate];
+    self = [super initWithComplete:completeBlock errBlock:errBlock];
     
     if (self) {
-        self.requestURL = [NSString stringWithFormat:@"%@:%@/j/app/radio/people?app_name=radio_desktop_win&version=100",self.protocool,self.domaimName];
         [self addInfo:info];
-        self.requestType = FMRequestTypeSong;
     }
     
     return self;
+}
+
+#pragma mark - override
+
+- (NSString *)getRequestURL
+{
+    return [NSString stringWithFormat:@"%@:%@/j/app/radio/people?app_name=radio_desktop_win&version=100",self.protocool,self.domaimName];
+}
+
+- (FMRequestType)getRequestType
+{
+    return FMRequestTypeSong;
+}
+
+- (FMApiResponse *)parseData:(NSData *)data
+{
+    return [[[FMApiResponseSong alloc] initWithData:data] autorelease];
 }
 
 #pragma mark - helpers
@@ -63,18 +78,6 @@
     [self.httpClient doGet:self.requestURL];
 }
 
-#pragma mark - delegate
-
-- (void)client:(FMHttpClient *)client didFailWithError:(NSError *)error
-{
-    [self.delegate didFailWithError:error];
-}
-
-- (void)client:(FMHttpClient *)client didFinishLoadingData:(NSData *)data
-{
-    FMApiResponseSong *response = [[[FMApiResponseSong alloc] initWithData:data] autorelease];
-    [self.delegate didRecieveResponse:response];
-}
 
 @end
 

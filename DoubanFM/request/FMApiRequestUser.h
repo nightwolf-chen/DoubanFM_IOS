@@ -15,6 +15,8 @@
 @property (nonatomic,retain,readonly) FMUser *user;
 @property (nonatomic,assign,readonly) BOOL isLogin;
 
-- (id)initWithDelegate:(id)delegate user:(FMUser *)user;
+- (id)init:(FMUser *)user
+completion:(void (^)(FMApiResponse *)) completeBlock
+  errBlock:(void (^)(NSError *)) errBlock;
 
 @end

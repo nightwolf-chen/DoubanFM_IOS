@@ -13,12 +13,10 @@
 #import "../util/FMMacros.h"
 #import "FMUserCenter.h"
 #import "FMNotifications.h"
-#import "FMRequestExecutor.h"
 #import "FMApiResponse.h"
 
 @interface FMUserCenterController ()
 
-@property (retain ,nonatomic) FMRequestExecutor *requestExecutor;
 
 @end
 
@@ -69,33 +67,36 @@
         return;
     }
     
-    SAFE_DELETE(_requestExecutor);
     
     FMUser *user = [[FMUser alloc] init];
     user.email = self.emailTextField.text;
     user.password = self.passwordTextField.text;
+   
+    void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
+        FMApiResponseUser *userResp = (FMApiResponseUser *)response;
+        if (userResp.isSuccess) {
+            [[FMUserCenter sharedCenter] setIsLogin:userResp.isSuccess];
+            [[FMUserCenter sharedCenter] setUser:userResp.user];
+            [[NSNotificationCenter defaultCenter] postNotificationName:FMUSerLoginSuccessNotification
+                                                                object:self];
+        }else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:FMUserLoginFailedNotification
+                                                                object:self];
+            self.loginInfoLabel.text = @"登录失败请重试";
+        }
+    };
     
-    FMApiRequest *request = [[FMApiRequestUser alloc] initWithDelegate:self user:user];
-    _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request complete:^(FMApiResponse *response){
+    void (^erroBlock)(NSError *) = ^(NSError *err){
+        NSLog(@"erroR!");
+    };
     
-            FMApiResponseUser *userResp = (FMApiResponseUser *)response;
-            if (userResp.isSuccess) {
-                [[FMUserCenter sharedCenter] setIsLogin:userResp.isSuccess];
-                [[FMUserCenter sharedCenter] setUser:userResp.user];
-                [[NSNotificationCenter defaultCenter] postNotificationName:FMUSerLoginSuccessNotification
-                                                                    object:self];
-            }else{
-                [[NSNotificationCenter defaultCenter] postNotificationName:FMUserLoginFailedNotification
-                                                                    object:self];
-                self.loginInfoLabel.text = @"登录失败请重试";
-            }
-
-    }];
+    FMApiRequest *request = [[FMApiRequestUser alloc] init:user
+                                                completion:completeBlock
+                                                  errBlock:erroBlock];
+    [request sendRequest];
     
-    [request release];
     [user release];
     
-    [_requestExecutor execute];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -135,7 +136,6 @@
 - (void)dealloc {
     [_emailTextField release];
     [_passwordTextField release];
-    SAFE_DELETE(_requestExecutor);
     [_loginButton release];
     [_loginInfoLabel release];
     [super dealloc];

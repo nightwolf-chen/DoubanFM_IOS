@@ -12,6 +12,8 @@
 
 @interface FMApiRequestSong : FMApiRequest
 
-- (id)initWithDelegate:(id)delegate info:(FMApiRequestSongInfo *)info;
+- (id)init:(FMApiRequestSongInfo *)info
+completion:(void (^)(FMApiResponse *)) completeBlock
+  errBlock:(void (^)(NSError *)) errBlock;
 
 @end

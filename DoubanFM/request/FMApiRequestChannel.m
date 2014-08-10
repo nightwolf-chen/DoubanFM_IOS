@@ -14,23 +14,19 @@
 
 @implementation FMApiRequestChannel
 
-
-- (id)initWithDelegate:(id)delegate
+- (NSString *)getRequestURL
 {
-    self = [super initWithDelegate:delegate];
-    
-    if (self) {
-        self.requestURL = [NSString stringWithFormat:@"%@:%@/j/app/radio/channels",self.protocool,self.domaimName];
-        self.requestType = FMRequestTypeChannel;
-    }
-    
-    return self;
+    return  [NSString stringWithFormat:@"%@:%@/j/app/radio/channels",self.protocool,self.domaimName];
 }
 
-- (void)client:(FMHttpClient *)client didFinishLoadingData:(NSData *)data
+- (FMRequestType)getRequestType
 {
-    FMApiResponse *userResponse = [[[FMApiResponseChannel alloc] initWithData:data] autorelease];
-    [self.delegate didRecieveResponse: userResponse];
+    return FMRequestTypeChannel;
+}
+
+- (FMApiResponse *)parseData:(NSData *)data
+{
+    return [[[FMApiResponseChannel alloc] initWithData:data] autorelease];
 }
 
 - (void)sendRequest

@@ -12,7 +12,7 @@
 
 - (id)initWithData:(NSData *)data
 {
-    NSAssert(NO, @"Overide this method for custom action.");
+    NSAssert(NO, @"This is a abstract method!");
     return nil;
 }
 

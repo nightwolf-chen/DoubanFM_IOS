@@ -11,16 +11,35 @@
 
 @implementation FMApiRequest
 
-- (id)initWithDelegate:(id)delegate
+- (void)dealloc
+{
+    Block_release(_completeBlock);
+    Block_release(_errBlock);
+    [_domaimName release];
+    [_protocool release];
+    [_httpClient release];
+    
+    [super dealloc];
+}
+
+- (id)init
+{
+    NSAssert(NO, @"Try use initWithComplete");
+    return nil;
+}
+
+- (id)initWithComplete:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock
 {
     self = [super init];
     
-    if(self)
-    {
+    if(self){
         _domaimName = @"www.douban.com";
         _protocool = @"http";
         _httpClient = [[FMHttpClient alloc] initWithDelegate:self];
-        _delegate = [delegate retain];
+        _completeBlock = Block_copy(completeBlock);
+        _errBlock = Block_copy(errBlock);
+        _requestURL = [[self getRequestURL] retain];
+        _requestType = [self getRequestType];
     }
     
     return self;
@@ -33,13 +52,32 @@
     NSAssert(NO, @"Overide this method for custom action.");
 }
 
+- (FMApiResponse *)parseData:(NSData *)data
+{
+    NSAssert(NO, @"This is a abstract method!");
+    return nil;
+}
+
+- (NSString *)getRequestURL
+{
+    NSAssert(NO, @"This is a abstract method!");
+    return nil;
+}
+
+- (FMRequestType)getRequestType
+{
+    NSAssert(NO, @"This is a abstract method!");
+    return FMRequestTypeSong;
+}
+
 - (void)client:(FMHttpClient *)client didFinishLoadingData:(NSData *)data
 {
-    NSAssert(NO, @"Overide this method for custom action.");
+    FMApiResponse *response = [self parseData:data];
+    _completeBlock(response);
 }
 
 - (void)client:(FMHttpClient *)client didFailWithError:(NSError *)error
 {
-    [self.delegate didFailWithError:error];
+    _errBlock(error);
 }
 @end
