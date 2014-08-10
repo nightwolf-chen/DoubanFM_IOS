@@ -9,6 +9,6 @@
 #import "FMNotifications.h"
 
 
-NSString * const FMUIPlayerChannelChangedNotification = @"__FMUIPlayerChannelChanged__";
-NSString *const FMUserLoginFailedNotification = @"__FMUserLoginFailedNotification__";
-NSString *const FMUSerLoginSuccessNotification = @"__FMUSerLoginSuccessNotification__";
+NSString *const FMUIPlayerChannelChangedNotification = @"__FMUIPlayerChannelChanged__";
+NSString *const FMUserLoginFailedNotification        = @"__FMUserLoginFailedNotification__";
+NSString *const FMUSerLoginSuccessNotification       = @"__FMUSerLoginSuccessNotification__";

@@ -11,7 +11,7 @@
 @implementation FMTimeFormateHelper
 
 
-+ (NSString *)generateTimeStr:(double)time
++ (NSString *)generateSongTimeStr:(double)time
 {
     int iTime = time;
     int second = iTime % 60;

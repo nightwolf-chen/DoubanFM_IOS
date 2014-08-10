@@ -124,12 +124,12 @@
             duration = 0;
         }
         
-        [_durationLabel setText:[FMTimeFormateHelper generateTimeStr:duration]];
+        [_durationLabel setText:[FMTimeFormateHelper generateSongTimeStr:duration]];
     }
    
     self.songProgressSlider.value = time / duration;
     
-    NSString *timeString = [FMTimeFormateHelper generateTimeStr:time];
+    NSString *timeString = [FMTimeFormateHelper generateSongTimeStr:time];
     
     [self.timeLabel setText:timeString];
 

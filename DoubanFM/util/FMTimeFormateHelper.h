@@ -10,6 +10,6 @@
 
 @interface FMTimeFormateHelper : NSObject
 
-+ (NSString *)generateTimeStr:(double)time;
++ (NSString *)generateSongTimeStr:(double)time;
 
 @end
