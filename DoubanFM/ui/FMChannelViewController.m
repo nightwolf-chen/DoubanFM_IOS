@@ -45,7 +45,6 @@ static NSString *cellIdentifier = @"channelCell";
 
         FMApiRequest *request = [[FMApiRequestChannel alloc] initWithDelegate:self];
         _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request complete:^(FMApiResponse *response){
-            
                 FMApiResponseChannel *channelRespones = (FMApiResponseChannel *)response;
                 _channels = [[NSMutableArray alloc] initWithArray:channelRespones.channels];
                 [_tableView reloadData];
