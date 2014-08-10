@@ -11,6 +11,8 @@
 #import "FMApiResponseChannel.h"
 #import "FMChannelCell.h"
 #import "FMNotifications.h"
+#import "FMApiResponse.h"
+#import "FMRequestExecutor.h"
 
 static NSString *cellIdentifier = @"channelCell";
 
@@ -19,7 +21,7 @@ static NSString *cellIdentifier = @"channelCell";
     UITableView *_tableView;
     NSMutableArray *_channels;
 }
-@property (retain, nonatomic) FMApiRequestChannel *channelRequest;
+@property (retain, nonatomic) FMRequestExecutor *requestExecutor;
 
 @end
 
@@ -38,12 +40,18 @@ static NSString *cellIdentifier = @"channelCell";
         [_tableView registerNib:[UINib nibWithNibName:@"FMChannelCell" bundle:nil]
                                                        forCellReuseIdentifier:cellIdentifier];
         [self.view addSubview:_tableView];
-
-        _channelRequest = [[FMApiRequestChannel alloc] initWithDelegate:self];
-        [_channelRequest sendRequest];
-        
         _channels = [[NSMutableArray alloc] init];
-       
+
+
+        FMApiRequest *request = [[FMApiRequestChannel alloc] initWithDelegate:self];
+        _requestExecutor = [[FMRequestExecutor alloc] initWithRequest:request complete:^(FMApiResponse *response){
+            
+                FMApiResponseChannel *channelRespones = (FMApiResponseChannel *)response;
+                _channels = [[NSMutableArray alloc] initWithArray:channelRespones.channels];
+                [_tableView reloadData];
+        }];
+        
+        [_requestExecutor execute];
     }
     return self;
 }
@@ -51,8 +59,6 @@ static NSString *cellIdentifier = @"channelCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [_tableView reloadData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -60,20 +66,6 @@ static NSString *cellIdentifier = @"channelCell";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - request delegate
-
-- (void)didRecieveResponse:(FMApiResponse *)response
-{
-    FMApiResponseChannel *channelRespones = (FMApiResponseChannel *)response;
-    _channels = [[NSMutableArray alloc] initWithArray:channelRespones.channels];
-    [_tableView reloadData];
-}
-
-- (void)didFailWithError:(NSError *)error
-{
-    NSLog(@"Errors ocur when trying to get channels!");
 }
 
 #pragma mark - UITableViewDataSource
@@ -122,7 +114,7 @@ static NSString *cellIdentifier = @"channelCell";
 - (void)dealloc
 {
     [_tableView release];
-    [_channelRequest release];
+    [_requestExecutor release];
     [_channels release];
     
     [super dealloc];

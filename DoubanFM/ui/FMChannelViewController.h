@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMApiRequestDelegate.h"
 
-@interface FMChannelViewController : UIViewController<FMApiRequestDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface FMChannelViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

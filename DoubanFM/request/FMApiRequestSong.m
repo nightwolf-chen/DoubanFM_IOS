@@ -11,6 +11,7 @@
 #import "FMUser.h"
 #import "FMHttpClient.h"
 #import "FMApiResponseSong.h"
+#import "FMRequestType.h"
 
 
 @implementation FMApiRequestSong
@@ -22,6 +23,7 @@
     if (self) {
         self.requestURL = [NSString stringWithFormat:@"%@:%@/j/app/radio/people?app_name=radio_desktop_win&version=100",self.protocool,self.domaimName];
         [self addInfo:info];
+        self.requestType = FMRequestTypeSong;
     }
     
     return self;

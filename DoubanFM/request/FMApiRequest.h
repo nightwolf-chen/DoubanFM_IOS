@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FMHttpClientDelegate.h"
 #import "FMApiRequestDelegate.h"
+#import "../FMRequestType.h"
 
 @class FMHttpClient;
 
@@ -19,6 +20,7 @@
 @property (nonatomic,copy,readonly) NSString *protocool;
 @property (nonatomic,retain,readonly) FMHttpClient *httpClient;
 @property (nonatomic,retain) id<FMApiRequestDelegate> delegate;
+@property (nonatomic,assign) FMRequestType requestType;
 
 - (id)initWithDelegate:(id)delegate;
 

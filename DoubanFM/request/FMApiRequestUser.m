@@ -10,6 +10,7 @@
 #import "FMHttpClient.h"
 #import "FMUser.h"
 #import "FMApiResponseUser.h"
+#import "FMRequestType.h"
 
 @implementation FMApiRequestUser
 
@@ -21,6 +22,7 @@
         _user = user;
         _isLogin = NO;
         self.requestURL = [NSString stringWithFormat:@"%@:%@/j/app/login",self.protocool,self.domaimName];
+        self.requestType = FMRequestTypeUser;
     }
     
     return self;

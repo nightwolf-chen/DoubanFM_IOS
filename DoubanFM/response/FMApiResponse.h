@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMRequestType.h"
 
 @interface FMApiResponse : NSObject
+
+@property (nonatomic,assign) FMRequestType requestType;
 
 - (id)initWithData:(NSData *)data;
 
