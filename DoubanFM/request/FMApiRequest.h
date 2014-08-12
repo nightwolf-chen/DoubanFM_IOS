@@ -28,10 +28,10 @@
 
 - (FMApiResponse *)parseData:(NSData *)data;
 
-- (void)sendRequest;
-
 - (NSString *)getRequestURL;
 
 - (FMRequestType)getRequestType;
+
+- (void)sendRequest;
 
 @end
