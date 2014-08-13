@@ -18,6 +18,7 @@
 #import "FMSong.h"
 #import "FMPlayerViewController.h"
 #import "ui/FMTabbarViewController.h"
+#import "FMHomeViewController.h"
 
 
 
@@ -30,56 +31,11 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-//    NSDictionary *value = @{
-//                            @"app_name" : @"radio_desktop_win",
-//                            @"version" : @"100",
-//                            @"email" : @"466202783@qq.com",
-//                            @"password" : @"a13827970772b"
-//                            };
-    
-//    client = [[FMHttpClient alloc] init];
-//    [client doPost:@"http://www.douban.com/j/app/login" parameters:value];
-//    
-//    FMUser *user = [[FMUser alloc] init];
-//    user.email = @"466202783@qq.com";
-//    user.password = @"a13827970772b";
-//    
-//    FMApiRequestUser *userRequest = [[FMApiRequestUser alloc] initWithDelegate:self user:user];
-//    [userRequest sendRequest];
-//    [userRequest autorelease];
-    
-//    FMApiRequestChannel *channelRequest = [[FMApiRequestChannel alloc] initWithDelegate:self];
-//    [channelRequest sendRequest];
-//    [channelRequest autorelease];
-    
-//    NSString *songId = @"10086";
-//    NSString *channelId = @"10086";
-    
-//    FMUser *user = [[FMUser alloc] init];
-//    user.token = @"10000";
-//    user.expire = @"10000";
-//    user.userid = @"10086";
-    
-//    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW
-//                                                                   song:nil
-//                                                                channel:channelId];
-//    info.user = user;
-    
-//    FMApiRequestSong *songRequest = [[FMApiRequestSong alloc] initWithDelegate:self info:info];
-//    
-//    [songRequest sendRequest];
-//    
-//     player = [[FMPlayer alloc] init];
-//    
-//    
-    FMTabbarViewController *rootController = [[FMTabbarViewController alloc] initWithNibName:nil
-                                                                                      bundle:nil];
+
+    UIViewController *rootController = [[FMHomeViewController alloc] init];
     self.window.rootViewController = rootController;
     
     [rootController release];
-//
-//    [user release];
-//    [info release];
     
     return YES;
 }
