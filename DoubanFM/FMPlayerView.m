@@ -23,6 +23,7 @@ typedef enum FMPlayerViewStatus {
 }
 
 @property (nonatomic,assign) FMPlayerViewStatus status;
+@property (nonatomic,assign) CGPoint preLoc;
 @end
 
 @implementation FMPlayerView
@@ -54,12 +55,15 @@ typedef enum FMPlayerViewStatus {
     switch (_status) {
         case FMPlayerViewStatusBig:
         {
-            
+            _preLoc = [[touches anyObject] locationInView:self];
+            self.status = FMPlayerViewStatusMoving;
         }
             break;
             
         case FMPlayerViewStatusSmall:
         {
+            self.status = FMPlayerViewStatusMoving;
+            
             [UIView animateWithDuration:0.2
                              animations:^{
                                  CGRect frame = self.frame;
@@ -67,7 +71,7 @@ typedef enum FMPlayerViewStatus {
                                  self.frame = frame;
                              }
                              completion:^(BOOL isSuccess){
-                                 
+                                 self.status = FMPlayerViewStatusBig;
                              }];
         }
             break;
@@ -81,7 +85,36 @@ typedef enum FMPlayerViewStatus {
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    switch (_status) {
+        case FMPlayerViewStatusBig:
+        {
+        }
+            break;
+            
+        case FMPlayerViewStatusSmall:
+        {
+           
+        }
+            break;
+        case FMPlayerViewStatusMoving:
+        {
+            CGPoint curLoc = [[touches anyObject] locationInView:self];
+            float lenToMove = curLoc.y - _preLoc.y;
+            CGRect frame = self.frame;
+            float changedY = frame.origin.y + lenToMove;
+            
+            frame = CGRectMake(0, changedY , SCREEN_SIZE.width, SCREEN_SIZE.height-changedY);
+            
+            [UIView animateWithDuration:0.1
+                             animations:^{
+                                 self.frame = frame;
+                             }
+                             completion:^(BOOL ret){
+                                 //
+                             }];
+        }
+            break;
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

@@ -11,7 +11,8 @@
 
 #define SAFE_DELETE(x) if(!x){ [x release]; x = nil; }
 
-#define SCREEN_SIZE [UIScreen mainScreen].applicationFrame.size
+#define SCREEN_SIZE  [[UIScreen mainScreen] bounds].size
+
 #define STATUSBAR_SIZE [[UIApplication sharedApplication] statusBarFrame].size
 
 #endif
