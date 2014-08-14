@@ -54,13 +54,15 @@ typedef enum FMPlayerViewStatus {
 
 
 #pragma mark - Gesture event helpers
-- (void)myToucheBegan:(CGPoint)curLoc
+- (void)myToucheBegan:(UIPanGestureRecognizer *)recognizer
 {
+    CGPoint curLoc = [recognizer locationInView:self];
     _preLoc = curLoc;
 }
 
-- (void)myTouchMoved:(CGPoint)curLoc
+- (void)myTouchMoved:(UIPanGestureRecognizer *)recognizer
 {
+    CGPoint curLoc = [recognizer locationInView:self];
     if (self.status == FMPlayerViewStatusDrag){
         
             [UIView animateWithDuration:0.1
@@ -75,16 +77,22 @@ typedef enum FMPlayerViewStatus {
     
 }
 
-- (void)myTouchEnded:(CGPoint)curLoc
+- (void)myTouchEnded:(UIPanGestureRecognizer *)recognizer
 {
     if (self.status == FMPlayerViewStatusDrag) {
-        float screenCenterY = SCREEN_SIZE.height * 0.4f;
-        if (self.frame.size.height > screenCenterY) {
+        CGPoint velocity = [recognizer velocityInView:self];
+        CGFloat centerY = SCREEN_SIZE.height / 2.0f;
+        if (velocity.y > 0 && self.frame.size.height < SCREEN_SIZE.height * 0.65) {
+            [self animateToStatusSmall];
+        }else if (velocity.y < 0 && self.frame.size.height > SCREEN_SIZE.height * 0.3){
             [self animateToStatusBig];
         }else{
-            [self animateToStatusSmall];
+            if (self.frame.size.height > centerY) {
+                [self animateToStatusBig];
+            }else{
+                [self animateToStatusSmall];
+            }
         }
-        
     }
 }
 
@@ -98,13 +106,11 @@ typedef enum FMPlayerViewStatus {
 
 - (void)viewDidPan:(UIPanGestureRecognizer *)recognizer
 {
-    CGPoint curLoc = [recognizer locationInView:self];
-
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
             self.status = FMPlayerViewStatusDrag;
-            [self myToucheBegan:curLoc];
+            [self myToucheBegan:recognizer];
         }
             break;
             
@@ -112,12 +118,12 @@ typedef enum FMPlayerViewStatus {
         {
             CGPoint velocity = [recognizer velocityInView:self];
             
-            if (velocity.y > 2200) {
+            if (velocity.y > 2000) {
                 [self animateToStatusSmall];
-            }else if(velocity.y < -2400){
+            }else if(velocity.y < -2200){
                 [self animateToStatusBig];
             }else{
-                [self myTouchMoved:curLoc];
+                [self myTouchMoved:recognizer];
             }
         }
             break;
@@ -125,7 +131,7 @@ typedef enum FMPlayerViewStatus {
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
         {
-            [self myTouchEnded:curLoc];
+            [self myTouchEnded:recognizer];
         }
             break;
         case UIGestureRecognizerStatePossible:
@@ -141,18 +147,34 @@ typedef enum FMPlayerViewStatus {
 #pragma mark - Animation helpers.
 - (void)animateToStatusBig
 {
-    self.status = FMPlayerViewStatusAnimation;
+    if (self.status == FMPlayerViewStatusAnimation) {
+        return;
+    }
+    else{
+        self.status = FMPlayerViewStatusAnimation;
+    }
     
     void (^animationBlock)(void) = ^{
-        CGRect frame = CGRectMake(_bOrigin.x,_bOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_bOrigin.y);
+        CGFloat targetY = _bOrigin.y - 8;
+        CGRect frame = CGRectMake(_bOrigin.x,targetY, SCREEN_SIZE.width, SCREEN_SIZE.height-targetY);
         self.frame = frame;
     };
     
     void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
-        self.status = FMPlayerViewStatusBig;
+        
+        [UIView animateWithDuration:0.05
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             CGRect frame = CGRectMake(_bOrigin.x,_bOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_bOrigin.y);                             self.frame = frame;
+                         }
+                         completion:^(BOOL success){
+                             self.status = FMPlayerViewStatusBig;
+                         }];
+
     };
     
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animationBlock
@@ -161,18 +183,35 @@ typedef enum FMPlayerViewStatus {
 
 - (void)animateToStatusSmall
 {
-    self.status = FMPlayerViewStatusAnimation;
+    if (self.status == FMPlayerViewStatusAnimation) {
+        return;
+    }
+    else{
+        self.status = FMPlayerViewStatusAnimation;
+    }
     
     void (^animationBlock)(void) = ^{
-        CGRect frame = CGRectMake(_sOrigin.x,_sOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_sOrigin.y);
+        CGFloat targetY = _sOrigin.y + 8;
+        CGRect frame = CGRectMake(_sOrigin.x,targetY, SCREEN_SIZE.width, SCREEN_SIZE.height-targetY);
         self.frame = frame;
     };
     
     void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
-        self.status = FMPlayerViewStatusSmall;
+        
+        [UIView animateWithDuration:0.05
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             CGRect frame = CGRectMake(_sOrigin.x,_sOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_sOrigin.y);
+                             self.frame = frame;
+                         }
+                         completion:^(BOOL success){
+                             self.status = FMPlayerViewStatusSmall;
+                         }];
+        
     };
     
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:animationBlock

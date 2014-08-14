@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DoubanFM/FMPlayerView.m"
-            timestampString = "429691829.526353"
+            timestampString = "429695320.649357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "-viewDidPan:"
             landmarkType = "5">
          </BreakpointContent>
