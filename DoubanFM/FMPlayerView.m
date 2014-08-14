@@ -82,6 +82,7 @@ typedef enum FMPlayerViewStatus {
     if (self.status == FMPlayerViewStatusDrag) {
         CGPoint velocity = [recognizer velocityInView:self];
         CGFloat centerY = SCREEN_SIZE.height / 2.0f;
+        //拖动结束的时候通过此时手指滑动的方向和view的frame大小来决定最终的形态
         if (velocity.y > 0 && self.frame.size.height < SCREEN_SIZE.height * 0.65) {
             [self animateToStatusSmall];
         }else if (velocity.y < 0 && self.frame.size.height > SCREEN_SIZE.height * 0.3){
@@ -118,6 +119,7 @@ typedef enum FMPlayerViewStatus {
         {
             CGPoint velocity = [recognizer velocityInView:self];
             
+            //在刚开始拖动的时候如果速度比较大的话直接执行切换动画，否则执行拖动动画
             if (velocity.y > 1500 && self.frame.size.height > (SCREEN_SIZE.height - _bOrigin.y) - 50) {
                 [self animateToStatusSmall];
             }else if(velocity.y < - 1500 && self.frame.size.height < (SCREEN_SIZE.height - _sOrigin.y) + 50){
@@ -162,7 +164,7 @@ typedef enum FMPlayerViewStatus {
     
     void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
         
-        [UIView animateWithDuration:0.1
+        [UIView animateWithDuration:0.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
@@ -174,9 +176,9 @@ typedef enum FMPlayerViewStatus {
 
     };
     
-    [UIView animateWithDuration:0.25
+    [UIView animateWithDuration:0.2
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
+                        options:UIViewAnimationOptionCurveLinear
                      animations:animationBlock
                      completion:comleteBlock];
 }
@@ -198,7 +200,7 @@ typedef enum FMPlayerViewStatus {
     
     void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
         
-        [UIView animateWithDuration:0.1
+        [UIView animateWithDuration:0.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
@@ -211,9 +213,9 @@ typedef enum FMPlayerViewStatus {
         
     };
     
-    [UIView animateWithDuration:0.25
+    [UIView animateWithDuration:0.2
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
+                        options:UIViewAnimationOptionCurveLinear
                      animations:animationBlock
                      completion:comleteBlock];
 }
