@@ -19,6 +19,12 @@
 
 @implementation FMTabbarView
 
+- (void)dealloc
+{
+    SAFE_DELETE(_greenLineView);
+    [super dealloc];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

@@ -32,7 +32,6 @@ typedef enum FMPlayerViewStatus {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
         _sHeight = 60;
         _bOrigin = frame.origin;
         _sOrigin = CGPointMake(0, SCREEN_SIZE.height - _sHeight);
@@ -48,6 +47,9 @@ typedef enum FMPlayerViewStatus {
         
         [tapRecognizer release];
         [panRecognizer release];
+        
+        //Init this view as small status.
+        self.frame = CGRectMake(_sOrigin.x, _sOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_sOrigin.y);
     }
     return self;
 }
@@ -120,9 +122,9 @@ typedef enum FMPlayerViewStatus {
             CGPoint velocity = [recognizer velocityInView:self];
             
             //在刚开始拖动的时候如果速度比较大的话直接执行切换动画，否则执行拖动动画
-            if (velocity.y > 1500 && self.frame.size.height > (SCREEN_SIZE.height - _bOrigin.y) - 50) {
+            if (velocity.y > 1200 && self.frame.size.height > (SCREEN_SIZE.height - _bOrigin.y) - 30) {
                 [self animateToStatusSmall];
-            }else if(velocity.y < - 1500 && self.frame.size.height < (SCREEN_SIZE.height - _sOrigin.y) + 50){
+            }else if(velocity.y < - 1200 && self.frame.size.height < (SCREEN_SIZE.height - _sOrigin.y) + 30){
                 [self animateToStatusBig];
             }else{
                 [self myTouchMoved:recognizer];
