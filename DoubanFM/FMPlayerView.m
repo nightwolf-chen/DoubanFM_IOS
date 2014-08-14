@@ -78,9 +78,7 @@ typedef enum FMPlayerViewStatus {
 - (void)myTouchEnded:(CGPoint)curLoc
 {
     if (self.status == FMPlayerViewStatusDrag) {
-        
-        float screenCenterY = SCREEN_SIZE.height * 0.45f;
-        
+        float screenCenterY = SCREEN_SIZE.height * 0.4f;
         if (self.frame.size.height > screenCenterY) {
             [self animateToStatusBig];
         }else{
@@ -100,29 +98,26 @@ typedef enum FMPlayerViewStatus {
 
 - (void)viewDidPan:(UIPanGestureRecognizer *)recognizer
 {
-    CGPoint velocity = [recognizer velocityInView:self];
-    
-    if (velocity.y > 1200) {
-        [self animateToStatusSmall];
-        return;
-    }else if(velocity.y < -1200){
-        [self animateToStatusBig];
-        return;
-    }
-    
-    self.status = FMPlayerViewStatusDrag;
     CGPoint curLoc = [recognizer locationInView:self];
 
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
         {
+            self.status = FMPlayerViewStatusDrag;
             [self myToucheBegan:curLoc];
         }
             break;
             
         case UIGestureRecognizerStateChanged:
         {
-            [self myTouchMoved:curLoc];
+            CGPoint velocity = [recognizer velocityInView:self];
+            
+            if (velocity.y > 2800) {
+            }else if(velocity.y < -2800){
+                [self animateToStatusBig];
+            }else{
+                [self myTouchMoved:curLoc];
+            }
         }
             break;
         case UIGestureRecognizerStateEnded:
