@@ -112,8 +112,9 @@ typedef enum FMPlayerViewStatus {
         {
             CGPoint velocity = [recognizer velocityInView:self];
             
-            if (velocity.y > 2800) {
-            }else if(velocity.y < -2800){
+            if (velocity.y > 2200) {
+                [self animateToStatusSmall];
+            }else if(velocity.y < -2400){
                 [self animateToStatusBig];
             }else{
                 [self myTouchMoved:curLoc];
