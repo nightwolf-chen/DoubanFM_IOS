@@ -118,9 +118,9 @@ typedef enum FMPlayerViewStatus {
         {
             CGPoint velocity = [recognizer velocityInView:self];
             
-            if (velocity.y > 2000) {
+            if (velocity.y > 1500 && self.frame.size.height > (SCREEN_SIZE.height - _bOrigin.y) - 50) {
                 [self animateToStatusSmall];
-            }else if(velocity.y < -2200){
+            }else if(velocity.y < - 1500 && self.frame.size.height < (SCREEN_SIZE.height - _sOrigin.y) + 50){
                 [self animateToStatusBig];
             }else{
                 [self myTouchMoved:recognizer];
@@ -155,14 +155,14 @@ typedef enum FMPlayerViewStatus {
     }
     
     void (^animationBlock)(void) = ^{
-        CGFloat targetY = _bOrigin.y - 8;
+        CGFloat targetY = _bOrigin.y - 10;
         CGRect frame = CGRectMake(_bOrigin.x,targetY, SCREEN_SIZE.width, SCREEN_SIZE.height-targetY);
         self.frame = frame;
     };
     
     void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
         
-        [UIView animateWithDuration:0.05
+        [UIView animateWithDuration:0.1
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
@@ -176,7 +176,7 @@ typedef enum FMPlayerViewStatus {
     
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:animationBlock
                      completion:comleteBlock];
 }
@@ -191,14 +191,14 @@ typedef enum FMPlayerViewStatus {
     }
     
     void (^animationBlock)(void) = ^{
-        CGFloat targetY = _sOrigin.y + 8;
+        CGFloat targetY = _sOrigin.y + 10;
         CGRect frame = CGRectMake(_sOrigin.x,targetY, SCREEN_SIZE.width, SCREEN_SIZE.height-targetY);
         self.frame = frame;
     };
     
     void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
         
-        [UIView animateWithDuration:0.05
+        [UIView animateWithDuration:0.1
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
@@ -213,7 +213,7 @@ typedef enum FMPlayerViewStatus {
     
     [UIView animateWithDuration:0.25
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:animationBlock
                      completion:comleteBlock];
 }
