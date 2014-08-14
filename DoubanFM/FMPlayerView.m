@@ -10,8 +10,9 @@
 
 typedef enum FMPlayerViewStatus {
     FMPlayerViewStatusBig,
+    FMPlayerViewStatusDrag,
+    FMPlayerViewStatusAnimation,
     FMPlayerViewStatusSmall,
-    FMPlayerViewStatusMoving
 }FMPlayerViewStatus;
 
 @interface FMPlayerView ()
@@ -19,7 +20,6 @@ typedef enum FMPlayerViewStatus {
     CGPoint _bOrigin;
     CGPoint _sOrigin;
     float _sHeight;
-    FMPlayerViewStatus _status;
 }
 
 @property (nonatomic,assign) FMPlayerViewStatus status;
@@ -37,94 +37,149 @@ typedef enum FMPlayerViewStatus {
         _bOrigin = frame.origin;
         _sOrigin = CGPointMake(0, SCREEN_SIZE.height - _sHeight);
         _status = FMPlayerViewStatusBig;
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap)];
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+        
+        [tapRecognizer requireGestureRecognizerToFail:panRecognizer];
+        
+        [self addGestureRecognizer:tapRecognizer];
+        [self addGestureRecognizer:panRecognizer];
+        
+        [tapRecognizer release];
+        [panRecognizer release];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+#pragma mark - Gesture event helpers
+- (void)myToucheBegan:(CGPoint)curLoc
 {
-    switch (_status) {
-        case FMPlayerViewStatusBig:
-        {
-            _preLoc = [[touches anyObject] locationInView:self];
-            self.status = FMPlayerViewStatusMoving;
-        }
-            break;
-            
-        case FMPlayerViewStatusSmall:
-        {
-            self.status = FMPlayerViewStatusMoving;
-            
-            [UIView animateWithDuration:0.2
-                             animations:^{
-                                 CGRect frame = self.frame;
-                                 frame = CGRectMake(_bOrigin.x,_bOrigin.y, frame.size.width, frame.size.height);
-                                 self.frame = frame;
-                             }
-                             completion:^(BOOL isSuccess){
-                                 self.status = FMPlayerViewStatusBig;
-                             }];
-        }
-            break;
-        case FMPlayerViewStatusMoving:
-        {
-            //Do nothing.
-        }
-            break;
-    }
+    _preLoc = curLoc;
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)myTouchMoved:(CGPoint)curLoc
 {
-    switch (_status) {
-        case FMPlayerViewStatusBig:
-        {
-        }
-            break;
-            
-        case FMPlayerViewStatusSmall:
-        {
-           
-        }
-            break;
-        case FMPlayerViewStatusMoving:
-        {
-            CGPoint curLoc = [[touches anyObject] locationInView:self];
-            float lenToMove = curLoc.y - _preLoc.y;
-            CGRect frame = self.frame;
-            float changedY = frame.origin.y + lenToMove;
-            
-            frame = CGRectMake(0, changedY , SCREEN_SIZE.width, SCREEN_SIZE.height-changedY);
-            
+    if (self.status == FMPlayerViewStatusDrag){
+        
             [UIView animateWithDuration:0.1
                              animations:^{
+                                 CGRect frame = self.frame;
+                                 float changedY = frame.origin.y + (curLoc.y - _preLoc.y);
+                                 frame = CGRectMake(0, changedY , SCREEN_SIZE.width, SCREEN_SIZE.height-changedY);
                                  self.frame = frame;
-                             }
-                             completion:^(BOOL ret){
-                                 //
                              }];
+        
         }
-            break;
+    
+}
+
+- (void)myTouchEnded:(CGPoint)curLoc
+{
+    if (self.status == FMPlayerViewStatusDrag) {
+        
+        float screenCenterY = SCREEN_SIZE.height * 0.45f;
+        
+        if (self.frame.size.height > screenCenterY) {
+            [self animateToStatusBig];
+        }else{
+            [self animateToStatusSmall];
+        }
+        
     }
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+#pragma mark - GestureRecognizer Actions.
+- (void)viewDidTap
 {
+    if (self.status == FMPlayerViewStatusSmall) {
+        [self animateToStatusBig];
+    }
+}
+
+- (void)viewDidPan:(UIPanGestureRecognizer *)recognizer
+{
+    CGPoint velocity = [recognizer velocityInView:self];
+    
+    if (velocity.y > 1200) {
+        [self animateToStatusSmall];
+        return;
+    }else if(velocity.y < -1200){
+        [self animateToStatusBig];
+        return;
+    }
+    
+    self.status = FMPlayerViewStatusDrag;
+    CGPoint curLoc = [recognizer locationInView:self];
+
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            [self myToucheBegan:curLoc];
+        }
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+        {
+            [self myTouchMoved:curLoc];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed:
+        {
+            [self myTouchEnded:curLoc];
+        }
+            break;
+        case UIGestureRecognizerStatePossible:
+        {
+            
+        }
+            break;
+    }
     
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+
+#pragma mark - Animation helpers.
+- (void)animateToStatusBig
 {
+    self.status = FMPlayerViewStatusAnimation;
     
+    void (^animationBlock)(void) = ^{
+        CGRect frame = CGRectMake(_bOrigin.x,_bOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_bOrigin.y);
+        self.frame = frame;
+    };
+    
+    void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
+        self.status = FMPlayerViewStatusBig;
+    };
+    
+    [UIView animateWithDuration:0.2
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animationBlock
+                     completion:comleteBlock];
 }
 
+- (void)animateToStatusSmall
+{
+    self.status = FMPlayerViewStatusAnimation;
+    
+    void (^animationBlock)(void) = ^{
+        CGRect frame = CGRectMake(_sOrigin.x,_sOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_sOrigin.y);
+        self.frame = frame;
+    };
+    
+    void (^comleteBlock)(BOOL) = ^(BOOL isSuccess){
+        self.status = FMPlayerViewStatusSmall;
+    };
+    
+    [UIView animateWithDuration:0.2
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:animationBlock
+                     completion:comleteBlock];
+}
 @end
