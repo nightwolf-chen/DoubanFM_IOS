@@ -10,4 +10,7 @@
 
 @interface FMPlayerView : UIView
 
+@property (nonatomic,assign) CGPoint bOrigin;
+@property (nonatomic,assign) CGPoint sOrigin;
+
 @end

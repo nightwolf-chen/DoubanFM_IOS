@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanFM/FMPlayerView.m"
-            timestampString = "429699296.873401"
+            filePath = "DoubanFM/ui/FMPlayerControlButton.m"
+            timestampString = "429783059.556085"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-viewDidPan:"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DoubanFM/ui/FMPlayerAnimationCalculator.m"
+            timestampString = "429783114.33512"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "+calculateRate:end:current:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

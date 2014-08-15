@@ -7,6 +7,7 @@
 //
 
 #import "FMPlayerView.h"
+#import "FMPlayerControlButton.h"
 
 typedef enum FMPlayerViewStatus {
     FMPlayerViewStatusBig,
@@ -17,8 +18,6 @@ typedef enum FMPlayerViewStatus {
 
 @interface FMPlayerView ()
 {
-    CGPoint _bOrigin;
-    CGPoint _sOrigin;
     float _sHeight;
 }
 
@@ -49,7 +48,8 @@ typedef enum FMPlayerViewStatus {
         [panRecognizer release];
         
         //Init this view as small status.
-        self.frame = CGRectMake(_sOrigin.x, _sOrigin.y, SCREEN_SIZE.width, SCREEN_SIZE.height-_sOrigin.y);
+       
+        
     }
     return self;
 }
@@ -220,5 +220,14 @@ typedef enum FMPlayerViewStatus {
                         options:UIViewAnimationOptionCurveLinear
                      animations:animationBlock
                      completion:comleteBlock];
+}
+
+- (void)addSubview:(UIView *)view
+{
+    [self addObserver:view forKeyPath:@"frame"
+              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+              context:nil];
+    
+    [super addSubview:view];
 }
 @end
