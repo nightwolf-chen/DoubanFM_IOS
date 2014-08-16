@@ -25,6 +25,7 @@
 		3083FC1D1955A8E7006D6FAA /* FMUserCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3083FC1B1955A8E7006D6FAA /* FMUserCenterController.m */; };
 		3083FC1E1955A8E7006D6FAA /* FMUserCenterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3083FC1C1955A8E7006D6FAA /* FMUserCenterController.xib */; };
 		3083FC211955AE39006D6FAA /* FMUserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3083FC201955AE39006D6FAA /* FMUserCenter.m */; };
+		308E2C73199F2010009CE6D0 /* FMPlayerPlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 308E2C72199F2010009CE6D0 /* FMPlayerPlayButton.m */; };
 		30B5E0231955358300904BB0 /* FMChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B5E0211955358300904BB0 /* FMChannelCell.m */; };
 		30B5E0241955358300904BB0 /* FMChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30B5E0221955358300904BB0 /* FMChannelCell.xib */; };
 		30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */; };
@@ -102,6 +103,8 @@
 		3083FC1C1955A8E7006D6FAA /* FMUserCenterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMUserCenterController.xib; path = ui/FMUserCenterController.xib; sourceTree = "<group>"; };
 		3083FC1F1955AE39006D6FAA /* FMUserCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMUserCenter.h; path = entities/FMUserCenter.h; sourceTree = "<group>"; };
 		3083FC201955AE39006D6FAA /* FMUserCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMUserCenter.m; path = entities/FMUserCenter.m; sourceTree = "<group>"; };
+		308E2C71199F2010009CE6D0 /* FMPlayerPlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMPlayerPlayButton.h; path = ui/FMPlayerPlayButton.h; sourceTree = "<group>"; };
+		308E2C72199F2010009CE6D0 /* FMPlayerPlayButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMPlayerPlayButton.m; path = ui/FMPlayerPlayButton.m; sourceTree = "<group>"; };
 		30B0F1DF19500CA000AA0763 /* FMUIPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMUIPlayerDelegate.h; path = player/FMUIPlayerDelegate.h; sourceTree = "<group>"; };
 		30B5E0201955358300904BB0 /* FMChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMChannelCell.h; path = ui/FMChannelCell.h; sourceTree = "<group>"; };
 		30B5E0211955358300904BB0 /* FMChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMChannelCell.m; path = ui/FMChannelCell.m; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 				1212749B199B80CB00DF005E /* FMPlayerView.m */,
 				123E7BAF199DE833005CF912 /* FMPlayerControlButton.h */,
 				123E7BB0199DE833005CF912 /* FMPlayerControlButton.m */,
+				308E2C71199F2010009CE6D0 /* FMPlayerPlayButton.h */,
+				308E2C72199F2010009CE6D0 /* FMPlayerPlayButton.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				30C9EB9C1933038300AFFA38 /* FMUser.m in Sources */,
 				30E80E2F1931D7A9001E334B /* FMHttpClient.m in Sources */,
 				3083FC1D1955A8E7006D6FAA /* FMUserCenterController.m in Sources */,
+				308E2C73199F2010009CE6D0 /* FMPlayerPlayButton.m in Sources */,
 				122D4998199B458F007A7BB3 /* FMHomeViewController.m in Sources */,
 				303C5AB81952C34A00932C66 /* FMChannelViewController.m in Sources */,
 				30395753194D9BFC00D76121 /* FMUIPlayer.m in Sources */,
@@ -650,6 +656,7 @@
 				GCC_PREFIX_HEADER = "DoubanFM/DoubanFM-Prefix.pch";
 				INFOPLIST_FILE = "DoubanFM/DoubanFM-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "19049E3D-F17C-4602-BF4B-7424F8E782F0";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
