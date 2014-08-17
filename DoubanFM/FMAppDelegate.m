@@ -17,9 +17,10 @@
 #import "FMApiResponseSong.h"
 #import "FMSong.h"
 #import "FMPlayerViewController.h"
-#import "ui/FMTabbarViewController.h"
 #import "FMHomeViewController.h"
-
+#import "FMDiscoverMusicView.h"
+#import "FMMyMusicView.h"
+#import "FMTabarViewController.h"
 
 
 @implementation FMAppDelegate
@@ -30,9 +31,8 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
 
-    UIViewController *rootController = [[FMHomeViewController alloc] init];
+    UIViewController *rootController = [[FMTabarViewController alloc] init];
     self.window.rootViewController = rootController;
     
     [rootController release];

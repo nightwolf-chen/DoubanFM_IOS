@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "./ui/FMTabbarViewDelegate.h"
 
 @interface FMTabbarView : UIView
+
+@property (nonatomic,assign) id<FMTabbarViewDelegate> delegate;
+
+- (id)initWithDelegate:(id)delegate;
 
 @end

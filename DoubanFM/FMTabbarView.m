@@ -34,6 +34,17 @@
     return self;
 }
 
+- (id)initWithDelegate:(id)delegate
+{
+    self = [self init];
+    
+    if (self) {
+        _delegate = delegate;
+    }
+    
+    return self;
+}
+
 - (id)init
 {
     self = [super init];
@@ -94,6 +105,8 @@
         frame = CGRectMake(_greenRight.x, _greenRight.y, frame.size.width, frame.size.height);
         _greenLineView.frame = frame;
     }];
+    
+    [self.delegate tabbar:self didSelected:2];
 }
 
 - (void)discoverButtonClicked
@@ -103,6 +116,8 @@
         frame = CGRectMake(_greenLeft.x, _greenLeft.y, frame.size.width, frame.size.height);
         _greenLineView.frame = frame;
     }];
+    
+    [self.delegate tabbar:self didSelected:1];
 }
 
 

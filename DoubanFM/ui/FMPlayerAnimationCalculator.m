@@ -17,6 +17,7 @@
 
 + (float)calculateRate:(float)start end:(float)end current:(float)cur
 {
+    NSAssert(start-end!=0, @"Cannot devide 0!");
     return (cur - start) / (end - start);
 }
 
