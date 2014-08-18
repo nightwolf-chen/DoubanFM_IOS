@@ -13,4 +13,6 @@
 @property (nonatomic,assign) CGPoint bOrigin;
 @property (nonatomic,assign) CGPoint sOrigin;
 
++ (float)smallPlayerHeight;
+
 @end

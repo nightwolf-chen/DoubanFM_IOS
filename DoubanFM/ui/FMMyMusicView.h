@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMMyMusicView : UIView
+@interface FMMyMusicView : UIView<UITableViewDataSource,UITableViewDelegate>
 
 @end

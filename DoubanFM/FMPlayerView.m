@@ -25,6 +25,7 @@ static const float kPlayButtonMarginTop = 120;
 static const float kSmallPlayButtonMarginLeft = 25;
 static const float kAdditionButtonMarginLeft = 70;
 static const float kAdditionButtonMarginTop = 360;
+static const float kSmallHight = 60;
 
 @interface FMPlayerView ()
 {
@@ -56,7 +57,7 @@ static const float kAdditionButtonMarginTop = 360;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _sHeight = 60;
+        _sHeight = kSmallHight;
         _bHeight = frame.size.height;
         _bOrigin = frame.origin;
         _sOrigin = CGPointMake(0, SCREEN_SIZE.height - _sHeight);
@@ -365,5 +366,10 @@ static const float kAdditionButtonMarginTop = 360;
         }
         
     }
+}
+
++ (float)smallPlayerHeight
+{
+    return kSmallHight;
 }
 @end
