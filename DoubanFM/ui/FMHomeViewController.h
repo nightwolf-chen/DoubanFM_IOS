@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMHomeViewController : UIViewController
+@class FMTabarViewController;
+
+@interface FMHomeViewController : FMTabarViewController
 
 @end
