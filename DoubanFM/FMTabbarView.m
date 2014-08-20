@@ -20,7 +20,6 @@
 @implementation FMTabbarView
 
 static const float kTabbarHight = 61;
-
 - (void)dealloc
 {
     SAFE_DELETE(_greenLineView);
@@ -127,4 +126,8 @@ static const float kTabbarHight = 61;
     return kTabbarHight;
 }
 
++ (CGPoint)tabbarOrigin
+{
+    return CGPointMake(0, STATUSBAR_SIZE.height);
+}
 @end

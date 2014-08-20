@@ -17,4 +17,6 @@
 
 + (float)tabbarViewHight;
 
++ (CGPoint)tabbarOrigin;
+
 @end

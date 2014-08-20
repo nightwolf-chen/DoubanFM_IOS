@@ -45,7 +45,7 @@
 {
     [super viewDidLoad];
     [self setupHeader];
-    [self setupPlayerView];
+//    [self setupPlayerView];
     
     for(UIView *view in _tabViews){
         float y = _tabbarView.frame.origin.y + _tabbarView.frame.size.height;
