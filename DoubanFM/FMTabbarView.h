@@ -15,4 +15,6 @@
 
 - (id)initWithDelegate:(id)delegate;
 
++ (float)tabbarViewHight;
+
 @end

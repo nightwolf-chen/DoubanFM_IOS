@@ -31,9 +31,15 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
-    UIViewController *rootController = [[FMTabarViewController alloc] init];
-    self.window.rootViewController = rootController;
+    
+    
+    UIViewController *rootController = [[FMHomeViewController alloc] init];
+    
+    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:rootController] autorelease];
+    
+    self.window.rootViewController = self.navigationController;
+    
+    self.navigationController.navigationBarHidden = YES;
     
     [rootController release];
     

@@ -8,10 +8,10 @@
 
 #import "FMMyMusicView.h"
 #import "FMPlayerView.h"
+#import "FMPlayerViewController.h"
 
 @interface FMMyMusicView ()
 
-@property (nonatomic,retain) UITableView *tableView;
 
 @end
 
@@ -30,6 +30,7 @@ static const int kCellHeight[] = {200,60,60,60,60};
         [_tableView setDataSource:self];
         [_tableView setDelegate:self];
         [self addSubview:_tableView];
+        
     }
     
     return self;
@@ -104,6 +105,13 @@ static const int kCellHeight[] = {200,60,60,60,60};
         }
             break;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIViewController *controller = [[FMPlayerViewController alloc] initWithNibName:nil bundle:nil];
+    APP_DELEGATE.navigationController.navigationBarHidden = NO;
+    [APP_DELEGATE.navigationController pushViewController:[controller autorelease] animated:YES];
 }
 
 @end

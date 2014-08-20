@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMDiscoverMusicView : UIView
+@interface FMDiscoverMusicView : UIView<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,retain) UIButton *hzButton;
+@property (nonatomic,retain) UIButton *showButton;
+@property (nonatomic,retain) UIButton *searchButton;
+@property (nonatomic,retain) UITableView *tableView;
 
 @end

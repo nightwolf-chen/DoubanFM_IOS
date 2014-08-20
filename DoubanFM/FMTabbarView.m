@@ -19,6 +19,8 @@
 
 @implementation FMTabbarView
 
+static const float kTabbarHight = 61;
+
 - (void)dealloc
 {
     SAFE_DELETE(_greenLineView);
@@ -52,7 +54,7 @@
     if (self) {
         CGSize screenSize = SCREEN_SIZE;
         CGSize statusBarSize = STATUSBAR_SIZE;
-        float bgHeight = 61;
+        float bgHeight = kTabbarHight;
         float bgWidth = screenSize.width;
         
         UIView *backgroundView = self;
@@ -120,5 +122,9 @@
     [self.delegate tabbar:self didSelected:1];
 }
 
++ (float)tabbarViewHight
+{
+    return kTabbarHight;
+}
 
 @end
