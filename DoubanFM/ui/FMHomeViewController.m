@@ -20,9 +20,6 @@
 
 
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    APP_DELEGATE.navigationController.navigationBarHidden = YES;
-}
+
 
 @end

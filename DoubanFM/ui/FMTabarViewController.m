@@ -36,6 +36,8 @@
         
         [discoverView release];
         [myMusicView release];
+        
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
     return self;
@@ -92,4 +94,13 @@
 {
     [self setSelectedTab:index];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    APP_DELEGATE.navigationController.navigationBarHidden = YES;
+}
+
+
 @end

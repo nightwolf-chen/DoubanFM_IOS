@@ -38,9 +38,7 @@
     UIViewController *rootController = [[FMHomeViewController alloc] init];
     
     self.navigationController = [[[UINavigationController alloc] initWithRootViewController:rootController] autorelease];
-    
     self.window.rootViewController = self.navigationController;
-    
     self.navigationController.navigationBarHidden = YES;
     
     float y = [FMTabbarView tabbarViewHight];
@@ -49,6 +47,7 @@
     [self.window addSubview:playerView];
     
     [rootController release];
+    [playerView release];
     
     return YES;
 }

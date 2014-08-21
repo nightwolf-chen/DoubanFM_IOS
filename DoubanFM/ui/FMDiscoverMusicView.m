@@ -31,7 +31,6 @@ static const float kSearchButtonWidth = 320 - kHzButtonWidth - kShowButtonWidth;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor grayColor];
         
         _hzButton = [[UIButton alloc] initWithFrame:CGRectMake(kHzButtonOriginX, kHzButtonOriginY, kHzButtonWidth, kButtonHight)];
         [_hzButton setTitle:@"MHz" forState:UIControlStateNormal];

@@ -9,6 +9,7 @@
 #import "FMMyMusicView.h"
 #import "FMPlayerView.h"
 #import "FMPlayerViewController.h"
+#import "FMUserCenterController.h"
 
 @interface FMMyMusicView ()
 
@@ -23,7 +24,6 @@ static const int kCellHeight[] = {200,60,60,60,60};
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor purpleColor];
         
         _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -31,6 +31,8 @@ static const int kCellHeight[] = {200,60,60,60,60};
         [_tableView setDelegate:self];
         [self addSubview:_tableView];
         
+        self.backgroundColor = [UIColor redColor];
+        _tableView.backgroundColor = [UIColor blueColor];
     }
     
     return self;
@@ -76,32 +78,35 @@ static const int kCellHeight[] = {200,60,60,60,60};
 
 - (void)setCell:(UITableViewCell *)cell ForIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    
     switch (indexPath.row) {
         case 0:
         {
-            cell.contentView.backgroundColor = [UIColor blackColor];
+            cell.backgroundColor = [UIColor blackColor];
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
             break;
             
         case 1:
         {
-            cell.contentView.backgroundColor = [UIColor grayColor];
+            cell.textLabel.text = @"我的离线";
         }
             break;
         case 2:
         {
-            cell.contentView.backgroundColor = [UIColor brownColor];
+            cell.textLabel.text = @"手机里的歌曲";
         }
             break;
         case 3:
         {
-            cell.contentView.backgroundColor = [UIColor grayColor];
-           
+            cell.textLabel.text = @"我的收藏";
         }
             break;
         case 4:
         {
-            cell.contentView.backgroundColor = [UIColor brownColor];
+            cell.textLabel.text = @"设置";
         }
             break;
     }
@@ -109,9 +114,12 @@ static const int kCellHeight[] = {200,60,60,60,60};
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *controller = [[FMPlayerViewController alloc] initWithNibName:nil bundle:nil];
-    APP_DELEGATE.navigationController.navigationBarHidden = NO;
+    UIViewController *controller = [[FMUserCenterController alloc] initWithNibName:nil bundle:nil];
     [APP_DELEGATE.navigationController pushViewController:[controller autorelease] animated:YES];
+    APP_DELEGATE.navigationController.navigationBarHidden = NO;
+    
 }
+
+
 
 @end
