@@ -10,15 +10,36 @@
 #import "FMPlayerView.h"
 #import "FMPlayerViewController.h"
 #import "FMUserCenterController.h"
+#import "FMLoginViewController.h"
+#import "FMOffilineViewController.h"
+#import "FMFavoriteViewController.h"
+#import "FMSettingsViewController.h"
+#import "FMLocalSongsViewController.h"
+
+typedef enum FMMusicViewCellType{
+    FMMusicViewCellTypeUserInfo = 0,
+    FMMusicViewCellTypeOffline,
+    FMMusicViewCellTypeLocalSongs,
+    FMMusicViewCellTypeFavorite,
+    FMMusicViewCellTypeSettings,
+}FMMusicViewCellType;
 
 @interface FMMyMusicView ()
-
+{
+    NSArray *_controllerClasses;
+}
 
 @end
 
 static const int kCellHeight[] = {200,60,60,60,60};
 
 @implementation FMMyMusicView
+
+- (void)dealloc
+{
+    [_controllerClasses release];
+    [super dealloc];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,8 +52,16 @@ static const int kCellHeight[] = {200,60,60,60,60};
         [_tableView setDelegate:self];
         [self addSubview:_tableView];
         
-        self.backgroundColor = [UIColor redColor];
-        _tableView.backgroundColor = [UIColor blueColor];
+        
+        _controllerClasses = @[
+                               [FMLoginViewController class],
+                               [FMOffilineViewController class],
+                               [FMLocalSongsViewController class],
+                               [FMFavoriteViewController class],
+                               [FMSettingsViewController class]
+                               ];
+        
+        [_controllerClasses retain];
     }
     
     return self;
@@ -56,7 +85,7 @@ static const int kCellHeight[] = {200,60,60,60,60};
         [cell autorelease];
     }
     
-    [self setCell:cell ForIndexPath:indexPath];
+    [self setCell:cell forCellType:(FMMusicViewCellType)indexPath.row];
     
     return cell;
 }
@@ -76,35 +105,35 @@ static const int kCellHeight[] = {200,60,60,60,60};
     return kCellHeight[indexPath.row];
 }
 
-- (void)setCell:(UITableViewCell *)cell ForIndexPath:(NSIndexPath *)indexPath
+- (void)setCell:(UITableViewCell *)cell forCellType:(FMMusicViewCellType)type
 {
     
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
-    switch (indexPath.row) {
-        case 0:
+    switch (type) {
+        case FMMusicViewCellTypeUserInfo:
         {
             cell.backgroundColor = [UIColor blackColor];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
             break;
             
-        case 1:
+        case FMMusicViewCellTypeOffline:
         {
             cell.textLabel.text = @"我的离线";
         }
             break;
-        case 2:
+        case FMMusicViewCellTypeLocalSongs:
         {
             cell.textLabel.text = @"手机里的歌曲";
         }
             break;
-        case 3:
+        case FMMusicViewCellTypeFavorite:
         {
             cell.textLabel.text = @"我的收藏";
         }
             break;
-        case 4:
+        case FMMusicViewCellTypeSettings:
         {
             cell.textLabel.text = @"设置";
         }
@@ -112,12 +141,26 @@ static const int kCellHeight[] = {200,60,60,60,60};
     }
 }
 
+- (void)handleTableViewSelected:(FMMusicViewCellType)type{
+   
+    Class aClass = _controllerClasses[type];
+    
+    UIViewController *ctr = [[aClass alloc] initWithNibName:nil bundle:nil];
+    
+    
+    if (type == FMMusicViewCellTypeUserInfo) {
+        
+    }else{
+        [APP_DELEGATE.navigationController pushViewController:ctr animated:YES];
+        APP_DELEGATE.navigationController.navigationBarHidden = NO;
+    }
+    
+    [ctr release];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *controller = [[FMUserCenterController alloc] initWithNibName:nil bundle:nil];
-    [APP_DELEGATE.navigationController pushViewController:[controller autorelease] animated:YES];
-    APP_DELEGATE.navigationController.navigationBarHidden = NO;
-    
+    [self handleTableViewSelected:(FMMusicViewCellType)indexPath.row];
 }
 
 
