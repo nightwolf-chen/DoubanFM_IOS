@@ -39,19 +39,19 @@
     
     
 #ifdef FM_TEST
-    FMTabBarController *tabController = [[FMTabBarController alloc] init];
+    
+    UITabBarController *tabController = [[FMTabBarController alloc] init];
     FMPlayerViewController *playerViewController = [[FMPlayerViewController alloc] initWithNibName:nil bundle:nil];
     FMChannelViewController *channelViewController = [[FMChannelViewController alloc] initWithNibName:nil bundle:nil];
     
-    tabController.viewControllers = @[tabController,channelViewController];
     self.window.rootViewController = tabController;
+    tabController.viewControllers = @[playerViewController,channelViewController];
     
     [playerViewController release];
     [channelViewController release];
     [tabController release];
-#endif
     
-#ifndef FM_TEST
+#else
     
     UIViewController *rootController = [[FMHomeViewController alloc] init];
     

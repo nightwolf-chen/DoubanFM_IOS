@@ -61,6 +61,10 @@
 }
 - (void)setSelectedTab:(int)index
 {
+    if (index > 2) {
+        return;
+    }
+    
     if (_currentTabIndex >= 0) {
         [(UIView *)_tabViews[_currentTabIndex - 1] removeFromSuperview];
     }
@@ -74,7 +78,8 @@
 }
 - (void)setupHeader
 {
-    FMTabbarView *headView = [FMTopBarView topbarWithType:FMTopBarViewTypeTabbar];
+//    FMTabbarView *headView = [FMTopBarView topbarWithType:FMTopBarViewTypeTabbar];
+    FMTabbarView *headView = [[FMTabbarView alloc] initWithTabNumber:4];
     [self.view addSubview:headView];
     _tabbarView = headView;
     _tabbarView.delegate = self;

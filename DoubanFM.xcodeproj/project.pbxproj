@@ -264,6 +264,8 @@
 			children = (
 				308E2C7A19A0D6A7009CE6D0 /* FMTabarViewController.h */,
 				308E2C7B19A0D6A7009CE6D0 /* FMTabarViewController.m */,
+				12AF4C9B19A74149004BDB0D /* FMTabBarController.h */,
+				12AF4C9C19A74149004BDB0D /* FMTabBarController.m */,
 				121E569819A5E7E800BCF0F3 /* FMLoginViewController.h */,
 				121E569919A5E7E800BCF0F3 /* FMLoginViewController.m */,
 				121E569A19A5E7E800BCF0F3 /* FMLoginViewController.xib */,
@@ -287,8 +289,6 @@
 				12AF4C9619A736AF004BDB0D /* FMSearchViewController.h */,
 				12AF4C9719A736AF004BDB0D /* FMSearchViewController.m */,
 				12AF4C9819A736AF004BDB0D /* FMSearchViewController.xib */,
-				12AF4C9B19A74149004BDB0D /* FMTabBarController.h */,
-				12AF4C9C19A74149004BDB0D /* FMTabBarController.m */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";

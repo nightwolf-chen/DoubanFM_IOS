@@ -23,8 +23,11 @@
 @interface FMTabbarView : FMTopBarView
 
 @property (nonatomic,assign) id<FMTabbarViewDelegate> delegate;
+@property (nonatomic,retain) NSArray *tabButtons;
 
 - (id)initWithDelegate:(id)delegate;
 
+
+- (id)initWithTabNumber:(int)tabNum;
 
 @end
