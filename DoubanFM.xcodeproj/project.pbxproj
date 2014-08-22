@@ -29,6 +29,7 @@
 		12AF4C9519A7252E004BDB0D /* FMDynamicPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AF4C9419A7252E004BDB0D /* FMDynamicPlayViewController.m */; };
 		12AF4C9919A736AF004BDB0D /* FMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AF4C9719A736AF004BDB0D /* FMSearchViewController.m */; };
 		12AF4C9A19A736AF004BDB0D /* FMSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12AF4C9819A736AF004BDB0D /* FMSearchViewController.xib */; };
+		12AF4C9D19A74149004BDB0D /* FMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AF4C9C19A74149004BDB0D /* FMTabBarController.m */; };
 		12C3D62C197D2EA5007CD6D6 /* FMResponseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3D62B197D2EA5007CD6D6 /* FMResponseFactory.m */; };
 		30395753194D9BFC00D76121 /* FMUIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 30395752194D9BFC00D76121 /* FMUIPlayer.m */; };
 		30395758194D9E6E00D76121 /* FMPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30395756194D9E6E00D76121 /* FMPlayerViewController.m */; };
@@ -124,6 +125,8 @@
 		12AF4C9619A736AF004BDB0D /* FMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMSearchViewController.h; path = ui/FMSearchViewController.h; sourceTree = "<group>"; };
 		12AF4C9719A736AF004BDB0D /* FMSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMSearchViewController.m; path = ui/FMSearchViewController.m; sourceTree = "<group>"; };
 		12AF4C9819A736AF004BDB0D /* FMSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMSearchViewController.xib; path = ui/FMSearchViewController.xib; sourceTree = "<group>"; };
+		12AF4C9B19A74149004BDB0D /* FMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMTabBarController.h; path = ui/FMTabBarController.h; sourceTree = "<group>"; };
+		12AF4C9C19A74149004BDB0D /* FMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMTabBarController.m; path = ui/FMTabBarController.m; sourceTree = "<group>"; };
 		12C3D629197D2B58007CD6D6 /* FMRequestType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMRequestType.h; sourceTree = "<group>"; };
 		12C3D62A197D2EA5007CD6D6 /* FMResponseFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResponseFactory.h; sourceTree = "<group>"; };
 		12C3D62B197D2EA5007CD6D6 /* FMResponseFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResponseFactory.m; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				12AF4C9619A736AF004BDB0D /* FMSearchViewController.h */,
 				12AF4C9719A736AF004BDB0D /* FMSearchViewController.m */,
 				12AF4C9819A736AF004BDB0D /* FMSearchViewController.xib */,
+				12AF4C9B19A74149004BDB0D /* FMTabBarController.h */,
+				12AF4C9C19A74149004BDB0D /* FMTabBarController.m */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				30C9EB8C1933000800AFFA38 /* FMApiResponseChannel.m in Sources */,
 				30395758194D9E6E00D76121 /* FMPlayerViewController.m in Sources */,
 				30C9EB7E1932EFD200AFFA38 /* FMApiRequest.m in Sources */,
+				12AF4C9D19A74149004BDB0D /* FMTabBarController.m in Sources */,
 				30B5E0231955358300904BB0 /* FMChannelCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
