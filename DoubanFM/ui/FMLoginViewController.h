@@ -10,4 +10,8 @@
 
 @interface FMLoginViewController : UIViewController
 
+- (void)hideViewWithAnimation;
+
+- (void)showViewWithAnimaition;
+
 @end

@@ -52,7 +52,6 @@ static const int kCellHeight[] = {200,60,60,60,60};
         [_tableView setDelegate:self];
         [self addSubview:_tableView];
         
-        
         _controllerClasses = @[
                                [FMLoginViewController class],
                                [FMOffilineViewController class],
@@ -147,9 +146,8 @@ static const int kCellHeight[] = {200,60,60,60,60};
     
     UIViewController *ctr = [[aClass alloc] initWithNibName:nil bundle:nil];
     
-    
     if (type == FMMusicViewCellTypeUserInfo) {
-        
+        [(FMLoginViewController *)ctr showViewWithAnimaition];
     }else{
         [APP_DELEGATE.navigationController pushViewController:ctr animated:YES];
         APP_DELEGATE.navigationController.navigationBarHidden = NO;

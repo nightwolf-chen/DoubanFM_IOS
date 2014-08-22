@@ -8,11 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum FMPlayerViewStatus {
+    FMPlayerViewStatusBig,
+    FMPlayerViewStatusDrag,
+    FMPlayerViewStatusAnimation,
+    FMPlayerViewStatusSmall,
+}FMPlayerViewStatus;
+
 @interface FMPlayerView : UIView
 
 @property (nonatomic,assign) CGPoint bOrigin;
 @property (nonatomic,assign) CGPoint sOrigin;
+@property (nonatomic,assign) FMPlayerViewStatus status;
 
 + (float)smallPlayerHeight;
+
+- (void)animateToStatusSmall;
+- (void)animateToStatusBig;
+
+- (void)setSizeToSmall;
+- (void)setSizeToBig;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMTabbarViewDelegate.h"
+#import "FMTabbarView.h"
 
 @class FMTabbarView;
 @class FMPlayerView;

@@ -11,12 +11,6 @@
 #import "FMPlayerPlayButton.h"
 #import "FMPlayerAnimationCalculator.h"
 
-typedef enum FMPlayerViewStatus {
-    FMPlayerViewStatusBig,
-    FMPlayerViewStatusDrag,
-    FMPlayerViewStatusAnimation,
-    FMPlayerViewStatusSmall,
-}FMPlayerViewStatus;
 
 static const float kControlButtonMarginLeft = 40;
 static const float kControlButtonMarginButtom = 85;
@@ -34,8 +28,8 @@ static const float kSmallHight = 60;
     NSMutableArray *_alphaChangingViews;
 }
 
-@property (nonatomic,assign) FMPlayerViewStatus status;
 @property (nonatomic,assign) CGPoint preLoc;
+
 @end
 
 @implementation FMPlayerView
@@ -61,7 +55,7 @@ static const float kSmallHight = 60;
         _bHeight = frame.size.height;
         _bOrigin = frame.origin;
         _sOrigin = CGPointMake(0, SCREEN_SIZE.height - _sHeight);
-        _status = FMPlayerViewStatusBig;
+        _status = FMPlayerViewStatusSmall;
         _alphaChangingViews = [[NSMutableArray alloc] init];
         
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap)];
@@ -81,7 +75,7 @@ static const float kSmallHight = 60;
         [self addLabels];
         [self addControlButtons];
         
-        [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:self];
+        [self addObserver:self forKeyPath:@"frame" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:self];
         
     }
     return self;
@@ -372,4 +366,22 @@ static const float kSmallHight = 60;
 {
     return kSmallHight;
 }
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+}
+
+- (void)setSizeToSmall
+{
+    CGRect frame = CGRectMake(_sOrigin.x, _sOrigin.y, SCREEN_SIZE.width, _sHeight);
+    self.frame = frame;
+}
+
+- (void)setSizeToBig
+{
+    CGRect frame = CGRectMake(_bOrigin.x, _bOrigin.y, SCREEN_SIZE.width, _bHeight);
+    self.frame = frame;
+}
+
 @end

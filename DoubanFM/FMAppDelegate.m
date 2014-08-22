@@ -23,7 +23,7 @@
 #import "FMTabarViewController.h"
 #import "FMPlayerView.h"
 #import "FMTabbarView.h"
-
+#import "FMDynamicPlayViewController.h"
 
 @implementation FMAppDelegate
 
@@ -41,13 +41,14 @@
     self.window.rootViewController = self.navigationController;
     self.navigationController.navigationBarHidden = YES;
     
-    float y = [FMTabbarView tabbarViewHight];
-    FMPlayerView *playerView = [[FMPlayerView alloc] initWithFrame:CGRectMake(0,y,SCREEN_SIZE.width,SCREEN_SIZE.height-y)];
-    playerView.backgroundColor = [UIColor lightGrayColor];
-    [self.window addSubview:playerView];
+    
+    UIViewController *playerController = [[FMDynamicPlayViewController alloc] init];
+    
+    [self.window addSubview:playerController.view];
+    self.playViewController = playerController;
     
     [rootController release];
-    [playerView release];
+    [playerController release];
     
     return YES;
 }

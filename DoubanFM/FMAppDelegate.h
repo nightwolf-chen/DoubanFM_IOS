@@ -11,6 +11,6 @@
 @interface FMAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (retain ,nonatomic) UINavigationController *navigationController;
-
+@property (retain, nonatomic) UINavigationController *navigationController;
+@property (retain, nonatomic) UIViewController *playViewController;
 @end

@@ -7,16 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "./ui/FMTabbarViewDelegate.h"
+#import "FMTopBarView.h"
 
-@interface FMTabbarView : UIView
+@class FMTabbarView;
+
+@protocol FMTabbarViewDelegate <NSObject>
+
+@required
+- (void)tabbar:(FMTabbarView *)tabbarView didSelected:(int)index;
+
+@end
+
+
+
+@interface FMTabbarView : FMTopBarView
 
 @property (nonatomic,assign) id<FMTabbarViewDelegate> delegate;
 
 - (id)initWithDelegate:(id)delegate;
 
-+ (float)tabbarViewHight;
-
-+ (CGPoint)tabbarOrigin;
 
 @end

@@ -74,7 +74,7 @@
 }
 - (void)setupHeader
 {
-    FMTabbarView *headView = [[FMTabbarView alloc] init];
+    FMTabbarView *headView = [FMTopBarView topbarWithType:FMTopBarViewTypeTabbar];
     [self.view addSubview:headView];
     _tabbarView = headView;
     _tabbarView.delegate = self;
