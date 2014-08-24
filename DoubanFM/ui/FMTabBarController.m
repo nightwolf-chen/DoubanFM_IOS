@@ -70,9 +70,7 @@
     CGRect frame = CGRectMake(x, y, width, hight);
     
     _contentViewContainer = [[UIView alloc] initWithFrame:frame];
-    
     _contentViewContainer.backgroundColor = [UIColor redColor];
-    
     _contentViewContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:_contentViewContainer];
@@ -106,7 +104,6 @@
 - (void)addTabbarItemsToTabbarview
 {
     for(int index = 0; index < _viewControllers.count ; index++){
-    
         UIViewController *ctr = _viewControllers[index];
         UIButton *tabButton = _myTabbarView.tabButtons[index];
         
@@ -132,6 +129,12 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -152,7 +155,6 @@
     }
     
     if (tCtr) {
-        
         if (_selectedViewController) {
             [_selectedViewController.view removeFromSuperview];
         }

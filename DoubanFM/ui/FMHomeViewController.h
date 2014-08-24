@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMTabarViewController.h"
 
-@interface FMHomeViewController : FMTabarViewController
+@interface FMHomeViewController : NSObject
 
 @end

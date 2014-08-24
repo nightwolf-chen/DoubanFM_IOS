@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMMyMusicController : UIViewController
+@interface FMMyMusicController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic,retain) UITableView *tableView;
 
 @end

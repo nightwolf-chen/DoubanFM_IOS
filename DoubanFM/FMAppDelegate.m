@@ -19,8 +19,6 @@
 #import "FMPlayerViewController.h"
 #import "FMHomeViewController.h"
 #import "FMDiscoverMusicView.h"
-#import "FMMyMusicView.h"
-#import "FMTabarViewController.h"
 #import "FMPlayerView.h"
 #import "FMTabbarView.h"
 #import "FMDynamicPlayViewController.h"
@@ -56,11 +54,13 @@
     
     FMTabBarController *rootController = [[FMTabBarController alloc] init];
     
-    UIViewController *playerViewController = [[FMDiscoverController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *channelViewController = [[FMMyMusicController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *discoverController = [[FMDiscoverController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *myMusicViewController = [[FMMyMusicController alloc] initWithNibName:nil bundle:nil];
     
-    rootController.viewControllers = @[playerViewController,channelViewController];
-    self.window.rootViewController = rootController;
+    UINavigationController *rootNaviCtr = [[UINavigationController alloc] initWithRootViewController:rootController];
+    
+    rootController.viewControllers = @[discoverController, myMusicViewController];
+    self.window.rootViewController = rootNaviCtr;
 
     UIViewController *playerController = [[FMDynamicPlayViewController alloc] init];
     [self.window addSubview:playerController.view];
@@ -68,8 +68,9 @@
     
     [rootController release];
     [playerController release];
-    [playerViewController release];
-    [channelViewController release];
+    [discoverController release];
+    [myMusicViewController release];
+    [rootNaviCtr release];
 #endif
     return YES;
 }
