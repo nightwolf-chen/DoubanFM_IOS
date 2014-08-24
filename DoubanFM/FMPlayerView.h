@@ -21,12 +21,13 @@ typedef enum FMPlayerViewStatus {
 @property (nonatomic,assign) CGPoint sOrigin;
 @property (nonatomic,assign) FMPlayerViewStatus status;
 
-+ (float)smallPlayerHeight;
-
 - (void)animateToStatusSmall;
 - (void)animateToStatusBig;
 
 - (void)setSizeToSmall;
 - (void)setSizeToBig;
+
++ (CGPoint)sOrigin;
++ (float)smallPlayerHeight;
 
 @end

@@ -26,7 +26,8 @@
 #import "FMDynamicPlayViewController.h"
 #import "FMTabBarController.h"
 #import "FMChannelViewController.h"
-
+#import "FMDiscoverController.h"
+#import "FMMyMusicController.h"
 @implementation FMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -53,19 +54,22 @@
     
 #else
     
-    UIViewController *rootController = [[FMHomeViewController alloc] init];
+    FMTabBarController *rootController = [[FMTabBarController alloc] init];
     
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:rootController] autorelease];
-    self.window.rootViewController = self.navigationController;
-    self.navigationController.navigationBarHidden = YES;
+    UIViewController *playerViewController = [[FMDiscoverController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *channelViewController = [[FMMyMusicController alloc] initWithNibName:nil bundle:nil];
+    
+    rootController.viewControllers = @[playerViewController,channelViewController];
+    self.window.rootViewController = rootController;
 
     UIViewController *playerController = [[FMDynamicPlayViewController alloc] init];
-    
     [self.window addSubview:playerController.view];
     self.playViewController = playerController;
     
     [rootController release];
     [playerController release];
+    [playerViewController release];
+    [channelViewController release];
 #endif
     return YES;
 }

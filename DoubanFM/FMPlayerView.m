@@ -204,6 +204,7 @@ static const float kSmallHight = 60;
 - (void)myTouchEnded:(UIPanGestureRecognizer *)recognizer
 {
     if (self.status == FMPlayerViewStatusDrag) {
+        
         CGPoint velocity = [recognizer velocityInView:self];
         CGFloat centerY = SCREEN_SIZE.height / 2.0f;
         //拖动结束的时候通过此时手指滑动的方向和view的frame大小来决定最终的形态
@@ -384,4 +385,8 @@ static const float kSmallHight = 60;
     self.frame = frame;
 }
 
++ (CGPoint)sOrigin
+{
+   return CGPointMake(0, SCREEN_SIZE.height - kSmallHight);
+}
 @end

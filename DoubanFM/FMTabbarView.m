@@ -73,7 +73,7 @@ static const float kTabbarHight = 61;
     
     NSMutableArray *tmpButtons = [NSMutableArray array];
     
-    for (int i = 1; i <= _tabNum; i++) {
+    for (int i = 0; i < _tabNum; i++) {
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = buttonFrame;
@@ -115,63 +115,15 @@ static const float kTabbarHight = 61;
     return CGRectMake(x, _greenLineOriginY, _greenLineWidth, _greenLineHight);
 }
 
-- (id)init
-{
-    self = [super init];
-    
-    if (self) {
-        
-        CGSize screenSize = SCREEN_SIZE;
-        CGSize statusBarSize = STATUSBAR_SIZE;
-        
-        float greenLineLen = screenSize.width*0.4;
-        UIView *greenLine = [[UIView alloc] initWithFrame:CGRectMake(30, 58,greenLineLen, 3)];
-        _greenLeft = CGPointMake(30, 58);
-        _greenRight = CGPointMake(screenSize.width-30-greenLineLen, 58);
-        _greenLineView = greenLine;
-        greenLine.backgroundColor = [UIColor greenColor];
-        [self addSubview:greenLine];
-        
-        float buttonLen = screenSize.width/2.0;
-        float buttonHeight = self.frame.size.height - statusBarSize.height;
-        UIButton *discoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [discoverButton setTitle:@"发现音乐" forState:UIControlStateNormal];
-        [discoverButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [discoverButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        discoverButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        discoverButton.frame = CGRectMake(0, statusBarSize.height,buttonLen, buttonHeight);
-        [discoverButton addTarget:self action:@selector(discoverButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:discoverButton];
-        
-        UIButton *fmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [fmButton setTitle:@"我的FM" forState:UIControlStateNormal];
-        [fmButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [fmButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        fmButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        fmButton.frame = CGRectMake(screenSize.width/2.0, statusBarSize.height, buttonLen, buttonHeight);
-        [fmButton addTarget:self action:@selector(fmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:fmButton];
-    }
-    
-    return self;
-}
-
-- (void)fmButtonClicked
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = _greenLineView.frame;
-        frame = CGRectMake(_greenRight.x, _greenRight.y, frame.size.width, frame.size.height);
-        _greenLineView.frame = frame;
-    }];
-    
-    [self.delegate tabbar:self didSelected:2];
-}
-
 - (IBAction)buttonClicked:(id)sender
 {
     UIButton *button = (UIButton *)sender;
+    
     [self  marklineAnimateTo:button];
-    [self.delegate tabbar:self didSelected:button.tag];
+    
+    if ([_delegate respondsToSelector:@selector(tabbar:didSelected:)]) {
+        [_delegate tabbar:self didSelected:(float)button.tag];
+    }
 }
 
 - (void)marklineAnimateTo:(UIButton *)button
@@ -181,16 +133,6 @@ static const float kTabbarHight = 61;
     }];
 }
 
-- (void)discoverButtonClicked
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = _greenLineView.frame;
-        frame = CGRectMake(_greenLeft.x, _greenLeft.y, frame.size.width, frame.size.height);
-        _greenLineView.frame = frame;
-    }];
-    
-    [self.delegate tabbar:self didSelected:1];
-}
 
 + (float)tabbarViewHight
 {

@@ -66,12 +66,6 @@ static const int kCellHeight[] = {200,60,60,60,60};
     return self;
 }
 
-- (void)setFrame:(CGRect)frame
-{
-    [super setFrame:frame];
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_SIZE.width, frame.size.height-[FMPlayerView smallPlayerHeight]);
-}
-
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

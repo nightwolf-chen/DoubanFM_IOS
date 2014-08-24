@@ -15,7 +15,6 @@
 
 @required
 - (void)tabbar:(FMTabbarView *)tabbarView didSelected:(int)index;
-
 @end
 
 
@@ -27,7 +26,10 @@
 
 - (id)initWithDelegate:(id)delegate;
 
-
 - (id)initWithTabNumber:(int)tabNum;
+
++ (float)tabbarViewHight;
+
++ (CGPoint)tabbarOrigin;
 
 @end
