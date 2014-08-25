@@ -10,4 +10,5 @@
 
 @interface FMDynamicPlayViewController : UIViewController
 
+- (id)initWithRootViewController:(UIViewController *)rootViewController;
 @end

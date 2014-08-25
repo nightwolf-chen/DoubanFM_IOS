@@ -156,7 +156,8 @@ static const int kCellHeight[] = {200,60,60,60,60};
     UIViewController *ctr = [[aClass alloc] initWithNibName:nil bundle:nil];
     
     if (type == FMMusicViewCellTypeUserInfo) {
-        [(FMLoginViewController *)ctr showViewWithAnimaition];
+//        [(FMLoginViewController *)ctr showViewWithAnimaition];
+        [APP_DELEGATE.window.rootViewController presentViewController:ctr animated:YES completion:nil];
     }else{
         [self.navigationController pushViewController:ctr animated:YES];
         [self.navigationController setNavigationBarHidden:NO animated:YES];

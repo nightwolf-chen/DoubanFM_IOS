@@ -51,26 +51,22 @@
     [tabController release];
     
 #else
-    
-    FMTabBarController *rootController = [[FMTabBarController alloc] init];
-    
+    FMTabBarController *tabbarController = [[FMTabBarController alloc] init];
     UIViewController *discoverController = [[FMDiscoverController alloc] initWithNibName:nil bundle:nil];
     UIViewController *myMusicViewController = [[FMMyMusicController alloc] initWithNibName:nil bundle:nil];
+    tabbarController.viewControllers = @[discoverController, myMusicViewController];
     
-    UINavigationController *rootNaviCtr = [[UINavigationController alloc] initWithRootViewController:rootController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabbarController];
     
-    rootController.viewControllers = @[discoverController, myMusicViewController];
-    self.window.rootViewController = rootNaviCtr;
-
-    UIViewController *playerController = [[FMDynamicPlayViewController alloc] init];
-    [self.window addSubview:playerController.view];
-    self.playViewController = playerController;
+    UIViewController *rootController = [[FMDynamicPlayViewController alloc] initWithRootViewController:navigationController];
     
+    self.window.rootViewController = rootController;
+    
+    [tabbarController release];
+    [navigationController release];
     [rootController release];
-    [playerController release];
     [discoverController release];
     [myMusicViewController release];
-    [rootNaviCtr release];
 #endif
     return YES;
 }

@@ -21,8 +21,6 @@
 
 - (void)dealloc
 {
-    [_playView release];
-    
     [super dealloc];
 }
 
@@ -35,21 +33,28 @@
     return self;
 }
 
-- (id)init
+- (id)initWithRootViewController:(UIViewController *)rootViewController
 {
-    self = [super init];
-    
-    if (self) {
-        float y = [FMTabbarView tabbarViewHight];
-        FMPlayerView *playerView = [[FMPlayerView alloc] initWithFrame:CGRectMake(0,y,SCREEN_SIZE.width,SCREEN_SIZE.height-y)];
-        playerView.backgroundColor = [UIColor lightGrayColor];
-        self.view = playerView;
+    if (self = [super init]) {
+        [self addChildViewController:rootViewController];
+        [self.view addSubview:rootViewController.view];
         
+        FMPlayerView *playerView = [self playView];
         _status = playerView.status;
         _playView = playerView;
+        [self.view addSubview:playerView];
     }
     
     return self;
+}
+
+
+- (UIView *)playView
+{
+    float y = [FMTabbarView tabbarViewHight];
+    FMPlayerView *playerView = [[FMPlayerView alloc] initWithFrame:CGRectMake(0,y,SCREEN_SIZE.width,SCREEN_SIZE.height-y)];
+    playerView.backgroundColor = [UIColor lightGrayColor];
+    return [playerView autorelease];
 }
 
 - (void)viewDidLoad
@@ -64,10 +69,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
-{
-    [super presentViewController:viewControllerToPresent animated:YES completion:completion];
-    self.status = _playView.status;
-}
+
 
 @end

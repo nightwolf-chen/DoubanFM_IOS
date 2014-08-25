@@ -32,7 +32,7 @@
         _hiddenFrame.origin.y = SCREEN_SIZE.height;
         
         topbar.buttonClickedBlock = ^{
-            [self hideViewWithAnimation];
+            [self dismissViewControllerAnimated:YES completion:nil];
         };
     }
     return self;
