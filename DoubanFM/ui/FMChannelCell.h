@@ -13,6 +13,7 @@
 @interface FMChannelCell : UITableViewCell
 
 @property (retain, nonatomic) IBOutlet UIImageView *channelImgView;
+
 @property (retain, nonatomic) IBOutlet UILabel *channelNameLabel;
 
 @property (retain, nonatomic) IBOutlet UILabel *introLabel;
