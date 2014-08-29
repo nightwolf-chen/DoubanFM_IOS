@@ -13,7 +13,7 @@
 #import "FMApiRequestChannel.h"
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestSong.h"
-#import "FMPlayer.h"
+#import "FMAVPlayer.h"
 #import "FMApiResponseSong.h"
 #import "FMSong.h"
 #import "FMPlayerViewController.h"
@@ -26,6 +26,14 @@
 #import "FMChannelViewController.h"
 #import "FMDiscoverController.h"
 #import "FMMyMusicController.h"
+#import "FMPlayer.h"
+#import "FMApiRequestSong.h"
+#import "FMApiRequestSongInfo.h"
+#import "FMApiRequest.h"
+#import "FMApiResponse.h"
+#import "FMApiResponseSong.h"
+#import "FMChannel.h"
+
 @implementation FMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -67,6 +75,27 @@
     [rootController release];
     [discoverController release];
     [myMusicViewController release];
+    
+    FMPlayer *aPlayer = [[FMPlayer defaultPlayer] retain];
+    FMChannel *channel = [[FMChannel alloc] init];
+    channel.channelId = 0;
+    NSString *channelId = [NSString stringWithFormat:@"%d",channel.channelId];
+    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW song:nil channel:channelId];
+    
+    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
+                                                completion:^(FMApiResponse *response){
+                                                    
+                                                    FMApiResponseSong *songResp = (FMApiResponseSong *)response;
+                                                    aPlayer.songQueue = songResp.songs;
+                                                    [aPlayer play];
+                                                    
+                                                }
+                                                  errBlock:^(NSError *error){
+                                                      NSLog(@"Error loading songs via network!");
+                                                  }];
+    
+    [request sendRequest];
+    
 #endif
     return YES;
 }

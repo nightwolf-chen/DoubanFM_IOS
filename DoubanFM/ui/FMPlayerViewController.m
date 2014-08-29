@@ -9,7 +9,7 @@
 #import "FMPlayerViewController.h"
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestSong.h"
-#import "FMPlayer.h"
+#import "FMAVPlayer.h"
 #import "FMApiResponseSong.h"
 #import "FMApiResponse.h"
 #import "FMSong.h"

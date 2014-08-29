@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 nirvawolf. All rights reserved.
 //
 
-#import "FMPlayer.h"
+#import "FMAVPlayer.h"
 #import "FMUIPlayerDelegate.h"
 
 extern const NSString *FMUIPLayerNeedsNewSongsNotification;
 
 @class FMSong;
 
-@interface FMUIPlayer : FMPlayer
+@interface FMUIPlayer : FMAVPlayer
 
 @property (nonatomic,retain) NSMutableArray *songQueue;
 @property (nonatomic,retain) id<FMUIPlayerDelegate> delegate;

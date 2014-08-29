@@ -2,37 +2,76 @@
 //  FMPlayer.m
 //  DoubanFM
 //
-//  Created by nirvawolf on 30/5/14.
-//  Copyright (c) 2014 nirvawolf. All rights reserved.
+//  Created by exitingchen on 14-8-29.
+//  Copyright (c) 2014年 nirvawolf. All rights reserved.
 //
 
 #import "FMPlayer.h"
-#import <AVFoundation/AVFoundation.h>
-#import "FMSong.h"
+#import "FMDouStreamAdaptor.h"
+
+@interface FMPlayer ()
+
+@property (nonatomic,retain,readwrite) FMSong *currentSong;
+@property (nonatomic,retain,readwrite) FMChannel *currentChannel;
+@property (nonatomic,assign,readwrite) NSTimeInterval currentTime;
+@property (nonatomic,assign,readwrite) NSTimeInterval totalTime;
+
+@end
 
 @implementation FMPlayer
 
-- (id)init
++(instancetype)defaultPlayer
 {
-    self = [super init];
-    
-    if (self) {
-        _player = [[AVPlayer alloc] init];
-    }
-    
-    return self;
+    return [[[FMDouStreamAdaptor alloc] init] autorelease];
 }
 
 
+- (void)play
+{
+    [self abstractMethodWarnning];
+}
+
+- (void)stop
+{
+    [self abstractMethodWarnning];
+}
 
 - (void)pause
 {
-    [_player pause];
+    [self abstractMethodWarnning];
 }
 
-- (void)setVolume:(float)v
+- (void)resume
 {
-    _player.volume = v;
+    [self abstractMethodWarnning];
 }
+
+- (void)next
+{
+    [self abstractMethodWarnning];
+}
+
+- (void)skip
+{
+    [self abstractMethodWarnning];
+}
+
+- (void)like
+{
+    [self abstractMethodWarnning];
+}
+
+- (void)dislike
+{
+    [self abstractMethodWarnning];
+}
+
+- (void)abstractMethodWarnning
+{
+    @throw @"This is a abstract method!";
+}
+
+
+
 
 @end
