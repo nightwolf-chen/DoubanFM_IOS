@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMUIPlayer.h"
+#import "FMAVPlayerAdapter.h"
 
 
-@interface FMPlayerViewController : UIViewController<FMUIPlayerDelegate>
+@interface FMPlayerViewController : UIViewController<FMAVPlayerAdapterDelegate>
 
 
 @property (retain, nonatomic) IBOutlet UILabel *channelInfoLabel;
@@ -22,7 +22,7 @@
 @property (retain, nonatomic) IBOutlet UISlider *songProgressSlider;
 @property (retain, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (retain, nonatomic, readonly) FMUIPlayer *player;
+@property (retain, nonatomic, readonly) FMAVPlayerAdapter *player;
 
 //If you set this channelId property, you will force the controller load songs from server and restart player. 
 @property (copy, nonatomic) NSString *channelId;

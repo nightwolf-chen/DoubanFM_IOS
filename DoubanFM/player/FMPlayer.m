@@ -8,6 +8,7 @@
 
 #import "FMPlayer.h"
 #import "FMDouStreamAdaptor.h"
+#import "FMAVPlayerAdapter.h"
 
 @interface FMPlayer ()
 
@@ -20,11 +21,24 @@
 
 @implementation FMPlayer
 
-+(instancetype)defaultPlayer
++ (instancetype)defaultPlayer
 {
     return [[[FMDouStreamAdaptor alloc] init] autorelease];
 }
 
++ (instancetype)defaultPlayerWithSongs:(NSArray *)songs
+{
+    return [[[FMDouStreamAdaptor alloc] initWithSongs:songs] autorelease];
+}
+
+- (id)initWithSongs:(NSArray *)songs
+{
+    if (self = [super init]) {
+        _songQueue = [songs retain];
+    }
+    
+    return self;
+}
 
 - (void)play
 {
@@ -62,6 +76,11 @@
 }
 
 - (void)dislike
+{
+    [self abstractMethodWarnning];
+}
+
+- (void)setChannel:(NSString *)channelId
 {
     [self abstractMethodWarnning];
 }

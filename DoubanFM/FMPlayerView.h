@@ -15,6 +15,21 @@ typedef enum FMPlayerViewStatus {
     FMPlayerViewStatusSmall,
 }FMPlayerViewStatus;
 
+typedef enum FMPlayerViewTag{
+    FMPlayerViewTagButtonStart = 1000,
+    FMPlayerViewTagButtonPlay,
+    FMPlayerViewTagButtonLike,
+    FMPlayerViewTagButtonTrash,
+    FMPlayerViewTagButtonSkip,
+    FMPlayerViewTagButtonSimilar,
+    FMPlayerViewTagButtonLrc,
+    FMPlayerViewTagButtonShare,
+    FMPlayerViewTagButtonEnd,
+    FMPlayerViewTagButtonChannel,
+    FMPlayerViewTagLabelSong,
+    FMPlayerViewTagLabelArtist
+}FMPlayerViewTag;
+
 @interface FMPlayerView : UIView
 
 @property (nonatomic,assign) CGPoint bOrigin;

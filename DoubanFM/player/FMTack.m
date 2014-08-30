@@ -9,11 +9,6 @@
 #import "FMTack.h"
 #import "FMSong.h"
 
-@interface FMTack ()
-
-@property (nonatomic,retain) FMSong* song;
-
-@end
 
 @implementation FMTack
 

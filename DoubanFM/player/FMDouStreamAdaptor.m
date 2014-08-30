@@ -27,8 +27,7 @@
 
 @implementation FMDouStreamAdaptor
 
-@synthesize currentChannel;
-
+#pragma mark - player control.
 - (void)play
 {
     if (self.songQueue.count > 0) {
@@ -73,6 +72,23 @@
     }
 }
 
+- (float)volume
+{
+    if (_dPlayer) {
+        return _dPlayer.volume;
+    }
+    
+    return -1.0f;
+}
+
+- (void)setVolume:(float)volume
+{
+    if (_dPlayer) {
+        [_dPlayer setVolume:volume];
+    }
+}
+
+#pragma mark - User acts.
 - (void)skip
 {
     //TODO:additional things to perform

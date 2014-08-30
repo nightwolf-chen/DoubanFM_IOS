@@ -11,7 +11,6 @@
 #import "FMPlayerPlayButton.h"
 #import "FMPlayerAnimationCalculator.h"
 
-
 static const float kControlButtonMarginLeft = 40;
 static const float kControlButtonMarginButtom = 85;
 static const float kControlButtonGap = 65;
@@ -85,21 +84,25 @@ static const float kSmallHight = 60;
 {
     CGRect channelRect = CGRectMake(0, 25, SCREEN_SIZE.width, SCREEN_SIZE.height*0.1);
     UIButton *channelButton = [[UIButton alloc] initWithFrame:channelRect];
+    channelButton.tag = FMPlayerViewTagButtonChannel;
     [self addSubview:channelButton];
     [_alphaChangingViews addObject:channelButton];
     
     CGRect similarRect = CGRectMake(kAdditionButtonMarginLeft, kAdditionButtonMarginTop, 30, 30);
     UIButton *similarButton = [[UIButton alloc] initWithFrame:similarRect];
+    similarButton.tag = FMPlayerViewTagButtonSimilar;
     [self addSubview:similarButton];
     [_alphaChangingViews addObject:similarButton];
     
     CGRect lrcRect = CGRectMake(SCREEN_SIZE.width/2.0 - 15, similarRect.origin.y, 30, 30);
     UIButton *lrcButton = [[UIButton alloc] initWithFrame:lrcRect];
+    lrcButton.tag = FMPlayerViewTagButtonLrc;
     [self addSubview:lrcButton];
     [_alphaChangingViews addObject:lrcButton];
     
     CGRect opRect = CGRectMake(SCREEN_SIZE.width - kAdditionButtonMarginLeft - 30, similarRect.origin.y, 30, 30);
     UIButton *opButton = [[UIButton alloc] initWithFrame:opRect];
+    opButton.tag = FMPlayerViewTagButtonShare;
     [self addSubview:opButton];
     [_alphaChangingViews addObject:opButton];
     
@@ -119,6 +122,7 @@ static const float kSmallHight = 60;
 {
     CGRect nameRect = CGRectMake(SCREEN_SIZE.width / 2.0 - 50, 290, 100, 30);
     UILabel *songnameLabel = [[UILabel alloc] initWithFrame:nameRect];
+    songnameLabel.tag = FMPlayerViewTagLabelSong;
     songnameLabel.text = @"Hello world";
     [self addSubview:songnameLabel];
     [_alphaChangingViews addObject:songnameLabel];
@@ -126,6 +130,7 @@ static const float kSmallHight = 60;
     
     CGRect artistRect = CGRectMake(SCREEN_SIZE.width /2.0 -  30, 330, 60, 15);
     UILabel *artistLabel = [[UILabel alloc] initWithFrame:artistRect];
+    artistLabel.tag = FMPlayerViewTagLabelArtist;
     artistLabel.text = @"once";
     [self addSubview:artistLabel];
     [_alphaChangingViews addObject:artistLabel];
@@ -143,16 +148,19 @@ static const float kSmallHight = 60;
     CGPoint likeButtonOriginS = CGPointMake(SCREEN_SIZE.width/2.0f - 25, _sHeight / 2.0 - sButtonHight / 2.0);
     FMPlayerControlButton *likeButton = [[FMPlayerControlButton alloc] initSmaillOrigin:likeButtonOriginS
                                                                               bigOrigin:likeButtonOriginB];
+    likeButton.tag = FMPlayerViewTagButtonLike;
     
     CGPoint trashButtonOriginB = CGPointMake(SCREEN_SIZE.width/2.0 - bButtonWidth/2.0, likeButtonOriginB.y);
     CGPoint trashButtonOriginS = CGPointMake(likeButtonOriginS.x + kControlButtonGap, likeButtonOriginS.y);
     FMPlayerControlButton *trashButton = [[FMPlayerControlButton alloc] initSmaillOrigin:trashButtonOriginS
                                                                                bigOrigin:trashButtonOriginB];
+    trashButton.tag = FMPlayerViewTagButtonTrash;
     
     CGPoint nextButtonOriginB = CGPointMake(SCREEN_SIZE.width - kControlButtonMarginLeft - bButtonWidth, likeButtonOriginB.y);
     CGPoint nextButtonOriginS = CGPointMake(trashButtonOriginS.x + kControlButtonGap, likeButtonOriginS.y);
     FMPlayerControlButton *nextButton = [[FMPlayerControlButton alloc] initSmaillOrigin:nextButtonOriginS
                                                                               bigOrigin:nextButtonOriginB];
+    nextButton.tag = FMPlayerViewTagButtonSkip;
     
     [self addSubview:likeButton];
     [self addObserver:likeButton forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:self];
@@ -172,6 +180,8 @@ static const float kSmallHight = 60;
     CGPoint playButtonOriginS = CGPointMake(kSmallPlayButtonMarginLeft, (_sHeight - pSBtnSize.height) / 2.0);
     FMPlayerPlayButton *playButton = [[FMPlayerPlayButton alloc] initSmaillOrigin:playButtonOriginS
                                                                         bigOrigin:playButtonOriginB];
+    playButton.tag = FMPlayerViewTagButtonPlay;
+    
     [self addSubview:playButton];
     [self addObserver:playButton forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:self];
     [playButton release];

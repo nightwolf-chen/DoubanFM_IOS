@@ -9,12 +9,12 @@
 #import "FMPlayerViewController.h"
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestSong.h"
-#import "FMAVPlayer.h"
+#import "FMAVPlayerAdapter.h"
 #import "FMApiResponseSong.h"
 #import "FMApiResponse.h"
 #import "FMSong.h"
 #import "FMChannel.h"
-#import "FMUIPlayer.h"
+#import "FMAVPlayerAdapter.h"
 #import "../util/FMMacros.h"
 #import "FMTimeFormateHelper.h"
 #import "FMNotifications.h"
@@ -38,7 +38,7 @@
         self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory
                                                                       tag:UITabBarSystemItemHistory] autorelease];
         
-        _player = [[FMUIPlayer alloc] initWithSongs:nil delegate:self];
+        _player = [[FMAVPlayerAdapter alloc] initWithSongs:nil delegate:self];
         
         //Default channel setting.
         _channelId = @"1";
@@ -92,7 +92,7 @@
 }
 
 #pragma mark - FMUIPlayer delegate
-- (void)player:(FMUIPlayer *)player currentTime:(double)time totalTime:(double)duration
+- (void)player:(FMAVPlayerAdapter *)player currentTime:(double)time totalTime:(double)duration
 {
     FMSong * cSong = [player getPlayingSong];
 
@@ -128,13 +128,13 @@
 
 }
 
-- (void)playerIsLoadingSong:(FMUIPlayer *)player
+- (void)playerIsLoadingSong:(FMAVPlayerAdapter *)player
 {
     [_actIndicator startAnimating];
 }
 
 
-- (void)playerNeedsMoreSongs:(FMUIPlayer *)player
+- (void)playerNeedsMoreSongs:(FMAVPlayerAdapter *)player
 {
     [self loadSongsFromServer];
 }

@@ -13,6 +13,8 @@
 
 @interface FMTack : NSObject<DOUAudioFile>
 
+@property (nonatomic,readonly) FMSong *song;
+
 + (id)trackWithSong:(FMSong *)song;
 
 - (id)initWithSong:(FMSong *)song;

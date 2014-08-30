@@ -6,28 +6,36 @@
 //  Copyright (c) 2014 nirvawolf. All rights reserved.
 //
 
-#import "FMUIPlayer.h"
+#import "FMAVPlayerAdapter.h"
 #import "FMSong.h"
 #import <AVFoundation/AVFoundation.h>
 
 const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSongsNotification__";
 
-@interface FMUIPlayer ()
+@interface FMPlayer ()
+@property (nonatomic,retain,readwrite) FMSong *currentSong;
+@property (nonatomic,retain,readwrite) FMChannel *currentChannel;
+@property (nonatomic,assign,readwrite) NSTimeInterval currentTime;
+@property (nonatomic,assign,readwrite) NSTimeInterval totalTime;
+@end
+
+@interface FMAVPlayerAdapter ()
+@property (nonatomic,readonly,retain) AVQueuePlayer *player;
+@property (nonatomic,retain) NSArray *fmPlayItems;
 
 - (void)play:(FMSong *)song;
 - (void)playerItemDidReachEnd:(NSNotification *)notiication;
-
 @end
 
-@implementation FMUIPlayer
+@implementation FMAVPlayerAdapter
 
-- (id)initWithSongs:(NSArray *)songs delegate:(id)delegate
+- (id)initWithSongs:(NSArray *)songs
 {
     self = [super init];
     
     if (self) {
-        _songQueue = [[NSMutableArray alloc] initWithArray:songs];
-        _delegate = delegate;
+        self.songQueue = [[NSMutableArray alloc] initWithArray:songs];
+        _player = [[AVQueuePlayer alloc] init];
     }
     
     [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,1)
@@ -39,7 +47,6 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
                                                     totalTime:CMTimeGetSeconds([self.player.currentItem duration])];
                                         
                                          }];
-
 
     return self;
 }
@@ -64,7 +71,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
     
     NSURL *url = [NSURL URLWithString:song.songUrl];
     
-    AVPlayerItem *item = [[AVPlayerItem playerItemWithURL:url] retain];
+    AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
     
     [self.player replaceCurrentItemWithPlayerItem:item];
     
@@ -83,7 +90,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:self.player.currentItem];
-    [self.songQueue removeLastObject];
+//    [self.songQueue removeLastObject];
     [self start];
 }
 
