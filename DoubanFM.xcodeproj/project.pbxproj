@@ -22,7 +22,7 @@
 		122D4998199B458F007A7BB3 /* FMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 122D4997199B458F007A7BB3 /* FMHomeViewController.m */; };
 		123E7BB1199DE833005CF912 /* FMPlayerControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E7BB0199DE833005CF912 /* FMPlayerControlButton.m */; };
 		123E7BB5199DEBDD005CF912 /* FMPlayerAnimationCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E7BB4199DEBDD005CF912 /* FMPlayerAnimationCalculator.m */; };
-		128B45CE19B02455002CDA7F /* FMDouStreamAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 128B45CD19B02455002CDA7F /* FMDouStreamAdaptor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		128B45CE19B02455002CDA7F /* FMDouStreamAdaptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 128B45CD19B02455002CDA7F /* FMDouStreamAdaptor.m */; };
 		128B45FC19B0556F002CDA7F /* FMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 128B45FB19B0556F002CDA7F /* FMPlayer.m */; };
 		128B460119B07053002CDA7F /* FMTack.m in Sources */ = {isa = PBXBuildFile; fileRef = 128B460019B07053002CDA7F /* FMTack.m */; };
 		1291B47C19A5F41800862378 /* FMSongDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1291B47A19A5F41800862378 /* FMSongDetailViewController.m */; };
@@ -524,6 +524,13 @@
 			name = DOUPlayer;
 			sourceTree = "<group>";
 		};
+		30744A8E19B1F5B000B167FD /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		30C9EB7B1932EFA400AFFA38 /* request */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +640,7 @@
 				30E80E071931D5BE001E334B /* FMAppDelegate.h */,
 				30E80E081931D5BE001E334B /* FMAppDelegate.m */,
 				30E80E0A1931D5BE001E334B /* Images.xcassets */,
+				30744A8E19B1F5B000B167FD /* images */,
 				30E80DFF1931D5BE001E334B /* Supporting Files */,
 			);
 			path = DoubanFM;

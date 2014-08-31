@@ -13,56 +13,67 @@
 @interface FMPlayer ()
 
 @property (nonatomic,retain,readwrite) FMSong *currentSong;
-@property (nonatomic,retain,readwrite) FMChannel *currentChannel;
 @property (nonatomic,assign,readwrite) NSTimeInterval currentTime;
-@property (nonatomic,assign,readwrite) NSTimeInterval totalTime;
 
 @end
 
 @interface FMDouStreamAdaptor ()
 
 @property (nonatomic,retain) DOUAudioStreamer *dPlayer;
+@property (nonatomic,retain,readwrite) NSMutableArray *tracks;
 
 @end
 
+static void *kKVOContext = &kKVOContext;
+
 @implementation FMDouStreamAdaptor
+
+- (void)dealloc
+{
+    self.currentChannel = nil;
+    self.currentSong = nil;
+    self.songs = nil;
+    self.dPlayer = nil;
+    self.tracks = nil;
+    
+    [super dealloc];
+}
 
 #pragma mark - player control.
 - (void)play
 {
-    if (self.songQueue.count > 0) {
+    if (self.tracks.count > 0) {
         
-        self.currentSong = self.songQueue.firstObject;
-        FMTack *aTrack = [FMTack trackWithSong:self.currentSong];
+        if (_dPlayer) {
+            [_dPlayer removeObserver:self forKeyPath:@"status" context:kKVOContext];
+        }
+        
+        FMTack *aTrack = [_tracks lastObject];
         self.dPlayer = [DOUAudioStreamer streamerWithAudioFile:aTrack];
-        [self.dPlayer play];
-    
+        [_dPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:kKVOContext];
+        [_dPlayer play];
+        
+        self.currentSong = aTrack.song;
     }
 }
 
 - (void)stop
 {
-    if (_dPlayer.status == DOUAudioStreamerPlaying) {
-        [_dPlayer stop];
-    }
-    
-    self.dPlayer = nil;
+    [_dPlayer stop];
 }
 
 - (void)next
 {
-    if (_dPlayer) {
-        [self stop];
-    }
+    [self stop];
+    
+    [self popTrack];
     
     [self play];
 }
 
 - (void)pause
 {
-    if (_dPlayer && _dPlayer.status == DOUAudioStreamerPlaying) {
-        [_dPlayer pause];
-    }
+    
 }
 
 - (void)resume
@@ -110,5 +121,57 @@
     }
 }
 
+- (BOOL)popTrack
+{
+    if (_tracks) {
+        [_tracks removeLastObject];
+        return YES;
+    }
+    
+    return NO;
+}
 
+- (void)setSongs:(NSArray *)songs
+{
+    [super setSongs:songs];
+    [self addSongsToTrackQueue];
+}
+
+- (void)addSongsToTrackQueue
+{
+    self.tracks = [NSMutableArray arrayWithCapacity:self.songs.count];
+    for(FMSong *song in self.songs){
+        [_tracks addObject:[FMTack trackWithSong:song]];
+    }
+ 
+}
+
+- (NSTimeInterval)totalTime
+{
+    return _dPlayer.duration;
+}
+
+- (NSTimeInterval)currentTime
+{
+    return _dPlayer.currentTime;
+}
+
+- (void)setCurrentTime:(NSTimeInterval)currentTime
+{
+    [_dPlayer setCurrentTime:currentTime];
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"status"]) {
+        DOUAudioStreamerStatus status = [change[@"new"] integerValue];
+        
+        if (status == DOUAudioStreamerFinished) {
+            [self play];
+        }
+    }
+    
+}
 @end

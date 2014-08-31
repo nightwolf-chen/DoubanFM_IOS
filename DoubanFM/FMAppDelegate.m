@@ -85,7 +85,7 @@
                                                 completion:^(FMApiResponse *response){
                                                     
                                                     FMApiResponseSong *songResp = (FMApiResponseSong *)response;
-                                                    aPlayer.songQueue = songResp.songs;
+                                                    aPlayer.songs = songResp.songs;
                                                     [aPlayer play];
                                                     
                                                 }

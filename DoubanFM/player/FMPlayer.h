@@ -8,21 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, FMPlayerStatus){
+    FMPlayerPlaying,
+    FMPlayerStoped,
+    FMPlayerPaused,
+    FMPlayerUnprepared,
+    FMPlayerReadyToPlay,
+    FMPlayerAllFinished
+};
+
 @class FMSong,FMChannel;
 
 @interface FMPlayer : NSObject
 
 @property (nonatomic,readonly) FMSong *currentSong;
-@property (nonatomic,readonly) FMChannel *currentChannel;
 @property (nonatomic,readonly) NSTimeInterval currentTime;
 @property (nonatomic,readonly) NSTimeInterval totalTime;
-@property (nonatomic,copy) NSArray *songQueue;
+
+@property (nonatomic,copy) NSArray *songs;
 @property (nonatomic,assign) float volume;
+@property (nonatomic,retain,readwrite) FMChannel *currentChannel;
 
 #pragma mark - These methods are abstract, overide them in subclasses.
 - (void)play;
 - (void)stop;
-- (void)next;
 - (void)pause;
 - (void)resume;
 

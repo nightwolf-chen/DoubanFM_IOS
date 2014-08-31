@@ -57,7 +57,7 @@
         void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
             [_actIndicator stopAnimating];
             FMApiResponseSong *songResponse = (FMApiResponseSong *)response;
-            _player.songQueue = [NSMutableArray arrayWithArray:songResponse.songs];
+            _player.songs = [NSMutableArray arrayWithArray:songResponse.songs];
             [_player start];
         };
         

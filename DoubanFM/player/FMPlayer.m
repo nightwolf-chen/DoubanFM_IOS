@@ -13,7 +13,6 @@
 @interface FMPlayer ()
 
 @property (nonatomic,retain,readwrite) FMSong *currentSong;
-@property (nonatomic,retain,readwrite) FMChannel *currentChannel;
 @property (nonatomic,assign,readwrite) NSTimeInterval currentTime;
 @property (nonatomic,assign,readwrite) NSTimeInterval totalTime;
 
@@ -34,7 +33,7 @@
 - (id)initWithSongs:(NSArray *)songs
 {
     if (self = [super init]) {
-        _songQueue = [songs retain];
+        _songs = [songs retain];
     }
     
     return self;

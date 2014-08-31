@@ -14,7 +14,6 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 
 @interface FMPlayer ()
 @property (nonatomic,retain,readwrite) FMSong *currentSong;
-@property (nonatomic,retain,readwrite) FMChannel *currentChannel;
 @property (nonatomic,assign,readwrite) NSTimeInterval currentTime;
 @property (nonatomic,assign,readwrite) NSTimeInterval totalTime;
 @end
@@ -34,7 +33,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
     self = [super init];
     
     if (self) {
-        self.songQueue = [[NSMutableArray alloc] initWithArray:songs];
+        self.songs = [[NSMutableArray alloc] initWithArray:songs];
         _player = [[AVQueuePlayer alloc] init];
     }
     
@@ -53,7 +52,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 
 - (void)start
 {
-    FMSong *aSong = [self.songQueue lastObject];
+    FMSong *aSong = [self.songs lastObject];
     
     if (aSong) {
         [self play:aSong];
@@ -101,7 +100,7 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 
 - (FMSong*) getPlayingSong
 {
-    return [self.songQueue lastObject];
+    return [self.songs lastObject];
 }
 
 
