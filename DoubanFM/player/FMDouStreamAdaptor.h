@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "FMPlayer.h"
 
+extern NSString *const FMDounStreamAdaptorStatusChangedNotification;
+
 @interface FMDouStreamAdaptor : FMPlayer
 
 

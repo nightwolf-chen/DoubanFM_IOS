@@ -10,6 +10,8 @@
 #import "DOUAudioStreamer.h"
 #import "FMTack.h"
 
+NSString *const FMDounStreamAdaptorStatusChangedNotification = @"_FMDounStreamAdaptorStatusChangedNotification_";
+
 @interface FMPlayer ()
 
 @property (nonatomic,retain,readwrite) FMSong *currentSong;
@@ -46,6 +48,8 @@ static void *kKVOContext = &kKVOContext;
         
         if (_dPlayer) {
             [_dPlayer removeObserver:self forKeyPath:@"status" context:kKVOContext];
+            [_dPlayer release];
+            _dPlayer = nil;
         }
         
         FMTack *aTrack = [_tracks lastObject];
@@ -60,20 +64,19 @@ static void *kKVOContext = &kKVOContext;
 - (void)stop
 {
     [_dPlayer stop];
+    SAFE_DELETE(self.dPlayer);
 }
 
 - (void)next
 {
     [self stop];
-    
     [self popTrack];
-    
     [self play];
 }
 
 - (void)pause
 {
-    
+    [_dPlayer pause];
 }
 
 - (void)resume
@@ -81,6 +84,7 @@ static void *kKVOContext = &kKVOContext;
     if (_dPlayer && _dPlayer.status == DOUAudioStreamerPaused) {
         [_dPlayer play];
     }
+    
 }
 
 - (float)volume
@@ -161,16 +165,23 @@ static void *kKVOContext = &kKVOContext;
     [_dPlayer setCurrentTime:currentTime];
 }
 
+- (NSInteger)unplayedSongNumber
+{
+    if (_tracks) {
+        return 0;
+    }
+    return _tracks.count;
+}
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"status"]) {
-        DOUAudioStreamerStatus status = [change[@"new"] integerValue];
         
-        if (status == DOUAudioStreamerFinished) {
-            [self play];
-        }
+        DOUAudioStreamerStatus status = [change[@"new"] integerValue];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FMDounStreamAdaptorStatusChangedNotification
+                                                            object:self
+                                                          userInfo:@{@"status": @(status)}];
     }
     
 }

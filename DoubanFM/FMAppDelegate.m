@@ -32,7 +32,7 @@
 #import "FMApiResponse.h"
 #import "FMApiResponseSong.h"
 #import "FMChannel.h"
-
+#import "FMPlayerManager.h"
 @implementation FMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -75,27 +75,30 @@
     [discoverController release];
     [myMusicViewController release];
     
-    FMPlayer *aPlayer = [[FMPlayer defaultPlayer] retain];
-    FMChannel *channel = [[FMChannel alloc] init];
-    channel.channelId = 0;
-    NSString *channelId = [NSString stringWithFormat:@"%d",channel.channelId];
-    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW song:nil channel:channelId];
-    
-    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
-                                                completion:^(FMApiResponse *response){
-                                                    
-                                                    FMApiResponseSong *songResp = (FMApiResponseSong *)response;
-                                                    aPlayer.songs = songResp.songs;
-                                                    [aPlayer play];
-                                                    
-                                                }
-                                                  errBlock:^(NSError *error){
-                                                      NSLog(@"Error loading songs via network!");
-                                                  }];
-    
-    [request sendRequest];
+//    FMPlayer *aPlayer = [[FMPlayer defaultPlayer] retain];
+//    FMChannel *channel = [[FMChannel alloc] init];
+//    channel.channelId = 0;
+//    NSString *channelId = [NSString stringWithFormat:@"%d",channel.channelId];
+//    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW song:nil channel:channelId];
+//    
+//    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
+//                                                completion:^(FMApiResponse *response){
+//                                                    
+//                                                    FMApiResponseSong *songResp = (FMApiResponseSong *)response;
+//                                                    aPlayer.songs = songResp.songs;
+//                                                    [aPlayer play];
+//                                                    
+//                                                }
+//                                                  errBlock:^(NSError *error){
+//                                                      NSLog(@"Error loading songs via network!");
+//                                                  }];
+//    
+//    [request sendRequest];
+//
+    [FMPlayerManager sharedInstance];
     
 #endif
+    
     return YES;
 }
 

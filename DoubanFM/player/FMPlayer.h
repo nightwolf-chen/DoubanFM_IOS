@@ -38,7 +38,10 @@ typedef NS_ENUM(NSInteger, FMPlayerStatus){
 - (void)like;
 - (void)dislike;
 - (void)skip;
-- (void)setChannel:(NSString *)channelId;
+
+- (NSInteger)unplayedSongNumber;
+//- (void)setChannel:(NSString *)channelId;
+
 
 #pragma mark - These are some easy constructor, do not overide.
 + (instancetype)defaultPlayer;

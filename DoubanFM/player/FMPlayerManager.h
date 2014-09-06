@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class FMPlayer;
+@class FMChannel;
 
 @interface FMPlayerManager : NSObject
 
 @property (nonatomic,readonly) FMPlayer *activePlayer;
+@property (nonatomic,readonly) FMChannel *currentChannel;
 
 + (instancetype)sharedInstance;
 
++ (FMChannel *)defaultChannel;
 @end

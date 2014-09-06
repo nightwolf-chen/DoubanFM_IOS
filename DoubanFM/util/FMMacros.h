@@ -9,7 +9,7 @@
 #ifndef DoubanFM_FMMacros_h
 #define DoubanFM_FMMacros_h
 
-#define SAFE_DELETE(x) if(!x){ [x release]; x = nil; }
+#define SAFE_DELETE(x) if(!x){ [x release]; x = nil; }; x = nil;
 
 #define SCREEN_SIZE  [[UIScreen mainScreen] bounds].size
 
