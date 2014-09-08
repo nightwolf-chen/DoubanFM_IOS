@@ -7,6 +7,8 @@
 //
 
 #import "FMPlayerPlayButton.h"
+#import "FMPlayerCircleProgressView.h"
+
 
 @implementation FMPlayerPlayButton
 
@@ -15,7 +17,19 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+       
     }
+    return self;
+}
+
+- (id)initSmaillOrigin:(CGPoint)bOrigin bigOrigin:(CGPoint)sOrigin
+{
+    self = [super initSmaillOrigin:bOrigin bigOrigin:sOrigin];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.clipsToBounds = YES;
+    }
+    
     return self;
 }
 
@@ -27,5 +41,11 @@
 + (CGSize)bSize
 {
     return CGSizeMake(160, 160);
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    self.layer.cornerRadius = self.frame.size.width / 2.0f;
 }
 @end

@@ -40,6 +40,7 @@
         _errBlock = Block_copy(errBlock);
         _requestURL = [[self getRequestURL] retain];
         _requestType = [self getRequestType];
+        _isFinished = NO;
     }
     
     return self;
@@ -74,10 +75,14 @@
 {
     FMApiResponse *response = [self parseData:data];
     _completeBlock(response);
+    
+    self.isFinished = YES;
 }
 
 - (void)client:(FMHttpClient *)client didFailWithError:(NSError *)error
 {
     _errBlock(error);
+    
+    self.isFinished = YES;
 }
 @end

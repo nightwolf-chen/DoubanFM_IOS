@@ -23,6 +23,8 @@
 @property (nonatomic,copy) void (^completeBlock)(FMApiResponse *response);
 @property (nonatomic,copy) void (^errBlock)(NSError *error);
 
+@property (nonatomic,assign) BOOL isFinished;
+
 - (id)initWithComplete:(void (^)(FMApiResponse *)) completeBlock
               errBlock:(void (^)(NSError *)) errBlock;
 

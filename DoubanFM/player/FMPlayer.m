@@ -10,7 +10,11 @@
 #import "FMDouStreamAdaptor.h"
 #import "FMAVPlayerAdapter.h"
 
+
 @interface FMPlayer ()
+{
+    
+}
 
 @property (nonatomic,retain,readwrite) FMSong *currentSong;
 @property (nonatomic,assign,readwrite) NSTimeInterval currentTime;
@@ -37,6 +41,23 @@
     }
     
     return self;
+}
+
+- (void)setDelegate:(id<FMPlayerDelegate>)delegate
+{
+    _delegate = delegate;
+    _delegateFlags.didLikeSong = [delegate respondsToSelector:@selector(player:didLikeSong:)];
+    _delegateFlags.didDislikeSong = [delegate respondsToSelector:@selector(player:didDislikeSong:)];
+    _delegateFlags.didEndSong = [delegate respondsToSelector:@selector(player:didEndSong:)];
+    _delegateFlags.didSkipSong = [delegate respondsToSelector:@selector(player:didSkipSong:)];
+    _delegateFlags.didMoveSongToTrash = [delegate respondsToSelector:@selector(player:didMoveSongToTrash:)];
+}
+
+#pragma mark abstract methods
+- (NSInteger)unplayedSongNumber
+{
+    [self abstractMethodWarnning];
+    return 0;
 }
 
 - (void)play
@@ -79,6 +100,11 @@
     [self abstractMethodWarnning];
 }
 
+- (void)trash
+{
+    [self abstractMethodWarnning];
+}
+
 - (void)setChannel:(NSString *)channelId
 {
     [self abstractMethodWarnning];
@@ -86,7 +112,9 @@
 
 - (void)abstractMethodWarnning
 {
-    @throw @"This is a abstract method!";
+    @throw [NSException exceptionWithName:@"Abstract method exception"
+                                   reason:@"Call an unimplemented abstract method!"
+                                 userInfo:nil];
 }
 
 

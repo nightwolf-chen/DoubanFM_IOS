@@ -46,12 +46,7 @@ static void *kKVOContext = &kKVOContext;
 {
     if (self.tracks.count > 0) {
         
-        if (_dPlayer) {
-            [_dPlayer removeObserver:self forKeyPath:@"status" context:kKVOContext];
-            [_dPlayer release];
-            _dPlayer = nil;
-        }
-        
+        [self stop];
         FMTack *aTrack = [_tracks lastObject];
         self.dPlayer = [DOUAudioStreamer streamerWithAudioFile:aTrack];
         [_dPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:kKVOContext];
@@ -61,16 +56,26 @@ static void *kKVOContext = &kKVOContext;
     }
 }
 
+- (void)setDPlayer:(DOUAudioStreamer *)dPlayer
+{
+    if (_dPlayer) {
+        [_dPlayer removeObserver:self forKeyPath:@"status" context:kKVOContext];
+        SAFE_DELETE(_dPlayer);
+    }
+    
+    _dPlayer = [dPlayer retain];
+}
+
 - (void)stop
 {
+    [self popTrack];
     [_dPlayer stop];
-    SAFE_DELETE(self.dPlayer);
+    self.dPlayer = nil;
 }
 
 - (void)next
 {
     [self stop];
-    [self popTrack];
     [self play];
 }
 
@@ -107,6 +112,9 @@ static void *kKVOContext = &kKVOContext;
 - (void)skip
 {
     //TODO:additional things to perform
+    if (self->_delegateFlags.didSkipSong) {
+        [self.delegate player:self didEndSong:self.currentSong];
+    }
     
     [self next];
 }
@@ -114,15 +122,29 @@ static void *kKVOContext = &kKVOContext;
 - (void)like
 {
     if (self.currentSong && _dPlayer) {
-        
+        if (self->_delegateFlags.didLikeSong) {
+            [self.delegate player:self didLikeSong:self.currentSong];
+        }
     }
 }
 
 - (void)dislike
 {
     if (self.currentSong && _dPlayer) {
-        
+        if (self->_delegateFlags.didDislikeSong) {
+            [self.delegate player:self didDislikeSong:self.currentSong];
+        }
     }
+}
+
+- (void)trash
+{
+    if (self.currentSong && _dPlayer) {
+        if (self->_delegateFlags.didMoveSongToTrash) {
+            [self.delegate player:self didMoveSongToTrash:self.currentSong];
+        }
+    }
+    [self next];
 }
 
 - (BOOL)popTrack
@@ -157,6 +179,7 @@ static void *kKVOContext = &kKVOContext;
 
 - (NSTimeInterval)currentTime
 {
+    NSLog(@"currentTime:%f",_dPlayer.currentTime);
     return _dPlayer.currentTime;
 }
 
@@ -167,7 +190,7 @@ static void *kKVOContext = &kKVOContext;
 
 - (NSInteger)unplayedSongNumber
 {
-    if (_tracks) {
+    if (!_tracks) {
         return 0;
     }
     return _tracks.count;
@@ -182,7 +205,15 @@ static void *kKVOContext = &kKVOContext;
         [[NSNotificationCenter defaultCenter] postNotificationName:FMDounStreamAdaptorStatusChangedNotification
                                                             object:self
                                                           userInfo:@{@"status": @(status)}];
+        
+        if (status == DOUAudioStreamerFinished) {
+            if (self->_delegateFlags.didEndSong) {
+                [self.delegate player:self didEndSong:self.currentSong];
+            }
+        }
+        
     }
     
 }
+
 @end

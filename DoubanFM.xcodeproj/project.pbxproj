@@ -51,7 +51,6 @@
 		12B56F2A19AB2501007B4397 /* DOUMPMediaLibraryAssetLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56F1619AB2501007B4397 /* DOUMPMediaLibraryAssetLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F2B19AB2501007B4397 /* DOUSimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56F1819AB2501007B4397 /* DOUSimpleHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F2C19AB2501007B4397 /* NSData+DOUMappedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56F1A19AB2501007B4397 /* NSData+DOUMappedFile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		12C3D62C197D2EA5007CD6D6 /* FMResponseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C3D62B197D2EA5007CD6D6 /* FMResponseFactory.m */; };
 		12C9713C19AED837007EF9C8 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712A19AED837007EF9C8 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12C9713D19AED837007EF9C8 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712C19AED837007EF9C8 /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12C9713E19AED837007EF9C8 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712E19AED837007EF9C8 /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -81,6 +80,15 @@
 		308E2C7619A0D42B009CE6D0 /* FMDiscoverMusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 308E2C7519A0D42B009CE6D0 /* FMDiscoverMusicView.m */; };
 		30B5E0231955358300904BB0 /* FMChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B5E0211955358300904BB0 /* FMChannelCell.m */; };
 		30B5E0241955358300904BB0 /* FMChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30B5E0221955358300904BB0 /* FMChannelCell.xib */; };
+		30B82F1D19BC65BB00114D04 /* FMPlayerCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B82F1C19BC65BB00114D04 /* FMPlayerCircleProgressView.m */; };
+		30B82F2719BD59A300114D04 /* song_disliked_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F1F19BD59A300114D04 /* song_disliked_normal.png */; };
+		30B82F2819BD59A300114D04 /* song_disliked_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2019BD59A300114D04 /* song_disliked_selected.png */; };
+		30B82F2919BD59A300114D04 /* song_liked_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2119BD59A300114D04 /* song_liked_normal.png */; };
+		30B82F2A19BD59A300114D04 /* song_liked_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2219BD59A300114D04 /* song_liked_selected.png */; };
+		30B82F2B19BD59A300114D04 /* song_skip_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2319BD59A300114D04 /* song_skip_normal.png */; };
+		30B82F2C19BD59A300114D04 /* song_skip_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2419BD59A300114D04 /* song_skip_selected.png */; };
+		30B82F2D19BD59A300114D04 /* song_trash_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2519BD59A300114D04 /* song_trash_normal.png */; };
+		30B82F2E19BD59A300114D04 /* song_trash_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B82F2619BD59A300114D04 /* song_trash_selected.png */; };
 		30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */; };
 		30C9EB7E1932EFD200AFFA38 /* FMApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB7D1932EFD200AFFA38 /* FMApiRequest.m */; };
 		30C9EB831932F2BE00AFFA38 /* FMApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C9EB821932F2BE00AFFA38 /* FMApiResponse.m */; };
@@ -207,8 +215,6 @@
 		12B56F1919AB2501007B4397 /* NSData+DOUMappedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DOUMappedFile.h"; sourceTree = "<group>"; };
 		12B56F1A19AB2501007B4397 /* NSData+DOUMappedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DOUMappedFile.m"; sourceTree = "<group>"; };
 		12C3D629197D2B58007CD6D6 /* FMRequestType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMRequestType.h; sourceTree = "<group>"; };
-		12C3D62A197D2EA5007CD6D6 /* FMResponseFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResponseFactory.h; sourceTree = "<group>"; };
-		12C3D62B197D2EA5007CD6D6 /* FMResponseFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResponseFactory.m; sourceTree = "<group>"; };
 		12C9712919AED837007EF9C8 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		12C9712A19AED837007EF9C8 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		12C9712B19AED837007EF9C8 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -263,6 +269,16 @@
 		30B5E0201955358300904BB0 /* FMChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMChannelCell.h; path = ui/FMChannelCell.h; sourceTree = "<group>"; };
 		30B5E0211955358300904BB0 /* FMChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMChannelCell.m; path = ui/FMChannelCell.m; sourceTree = "<group>"; };
 		30B5E0221955358300904BB0 /* FMChannelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMChannelCell.xib; path = ui/FMChannelCell.xib; sourceTree = "<group>"; };
+		30B82F1B19BC65BB00114D04 /* FMPlayerCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMPlayerCircleProgressView.h; path = ui/FMPlayerCircleProgressView.h; sourceTree = "<group>"; };
+		30B82F1C19BC65BB00114D04 /* FMPlayerCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMPlayerCircleProgressView.m; path = ui/FMPlayerCircleProgressView.m; sourceTree = "<group>"; };
+		30B82F1F19BD59A300114D04 /* song_disliked_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_disliked_normal.png; sourceTree = "<group>"; };
+		30B82F2019BD59A300114D04 /* song_disliked_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_disliked_selected.png; sourceTree = "<group>"; };
+		30B82F2119BD59A300114D04 /* song_liked_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_liked_normal.png; sourceTree = "<group>"; };
+		30B82F2219BD59A300114D04 /* song_liked_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_liked_selected.png; sourceTree = "<group>"; };
+		30B82F2319BD59A300114D04 /* song_skip_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_skip_normal.png; sourceTree = "<group>"; };
+		30B82F2419BD59A300114D04 /* song_skip_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_skip_selected.png; sourceTree = "<group>"; };
+		30B82F2519BD59A300114D04 /* song_trash_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_trash_normal.png; sourceTree = "<group>"; };
+		30B82F2619BD59A300114D04 /* song_trash_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_trash_selected.png; sourceTree = "<group>"; };
 		30B8CD5C19371E7A002AD29A /* FMApiRequestSongInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestSongInfo.h; path = request/FMApiRequestSongInfo.h; sourceTree = "<group>"; };
 		30B8CD5D19371E7A002AD29A /* FMApiRequestSongInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestSongInfo.m; path = request/FMApiRequestSongInfo.m; sourceTree = "<group>"; };
 		30C9EB7C1932EFD200AFFA38 /* FMApiRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequest.h; path = request/FMApiRequest.h; sourceTree = "<group>"; };
@@ -342,6 +358,8 @@
 				123E7BB2199DEB9D005CF912 /* math */,
 				1212749A199B80CB00DF005E /* FMPlayerView.h */,
 				1212749B199B80CB00DF005E /* FMPlayerView.m */,
+				30B82F1B19BC65BB00114D04 /* FMPlayerCircleProgressView.h */,
+				30B82F1C19BC65BB00114D04 /* FMPlayerCircleProgressView.m */,
 				123E7BAF199DE833005CF912 /* FMPlayerControlButton.h */,
 				123E7BB0199DE833005CF912 /* FMPlayerControlButton.m */,
 				308E2C71199F2010009CE6D0 /* FMPlayerPlayButton.h */,
@@ -527,8 +545,25 @@
 		30744A8E19B1F5B000B167FD /* images */ = {
 			isa = PBXGroup;
 			children = (
+				30B82F1E19BD59A300114D04 /* buttons */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		30B82F1E19BD59A300114D04 /* buttons */ = {
+			isa = PBXGroup;
+			children = (
+				30B82F1F19BD59A300114D04 /* song_disliked_normal.png */,
+				30B82F2019BD59A300114D04 /* song_disliked_selected.png */,
+				30B82F2119BD59A300114D04 /* song_liked_normal.png */,
+				30B82F2219BD59A300114D04 /* song_liked_selected.png */,
+				30B82F2319BD59A300114D04 /* song_skip_normal.png */,
+				30B82F2419BD59A300114D04 /* song_skip_selected.png */,
+				30B82F2519BD59A300114D04 /* song_trash_normal.png */,
+				30B82F2619BD59A300114D04 /* song_trash_selected.png */,
+			);
+			name = buttons;
+			path = images;
 			sourceTree = "<group>";
 		};
 		30C9EB7B1932EFA400AFFA38 /* request */ = {
@@ -560,8 +595,6 @@
 				30C9EB881932FFED00AFFA38 /* FMApiResponseUser.m */,
 				30C9EB8A1933000800AFFA38 /* FMApiResponseChannel.h */,
 				30C9EB8B1933000800AFFA38 /* FMApiResponseChannel.m */,
-				12C3D62A197D2EA5007CD6D6 /* FMResponseFactory.h */,
-				12C3D62B197D2EA5007CD6D6 /* FMResponseFactory.m */,
 			);
 			name = response;
 			sourceTree = "<group>";
@@ -776,6 +809,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30B82F2C19BD59A300114D04 /* song_skip_selected.png in Resources */,
+				30B82F2719BD59A300114D04 /* song_disliked_normal.png in Resources */,
 				121E56AB19A5E87900BCF0F3 /* FMSettingsViewController.xib in Resources */,
 				30B5E0241955358300904BB0 /* FMChannelCell.xib in Resources */,
 				30E80E031931D5BE001E334B /* InfoPlist.strings in Resources */,
@@ -785,12 +820,18 @@
 				121E56A119A5E80500BCF0F3 /* FMOffilineViewController.xib in Resources */,
 				12AF4C9A19A736AF004BDB0D /* FMSearchViewController.xib in Resources */,
 				121E56B019A5EE2F00BCF0F3 /* FMLocalSongsViewController.xib in Resources */,
+				30B82F2B19BD59A300114D04 /* song_skip_normal.png in Resources */,
+				30B82F2D19BD59A300114D04 /* song_trash_normal.png in Resources */,
 				121E569C19A5E7E800BCF0F3 /* FMLoginViewController.xib in Resources */,
+				30B82F2919BD59A300114D04 /* song_liked_normal.png in Resources */,
+				30B82F2A19BD59A300114D04 /* song_liked_selected.png in Resources */,
 				30395759194D9E6E00D76121 /* FMPlayerViewController.xib in Resources */,
 				121E56A619A5E81F00BCF0F3 /* FMFavoriteViewController.xib in Resources */,
 				30758DB319A83B3B00C4CD75 /* FMMyMusicController.xib in Resources */,
+				30B82F2E19BD59A300114D04 /* song_trash_selected.png in Resources */,
 				30E80E0B1931D5BE001E334B /* Images.xcassets in Resources */,
 				303C5AB91952C34A00932C66 /* FMChannelViewController.xib in Resources */,
+				30B82F2819BD59A300114D04 /* song_disliked_selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,8 +894,8 @@
 				12B56F2219AB2501007B4397 /* DOUAudioLPCM.m in Sources */,
 				12B56F2119AB2501007B4397 /* DOUAudioFrequencyAnalyzer.m in Sources */,
 				12C9713D19AED837007EF9C8 /* AFHTTPRequestOperationManager.m in Sources */,
-				12C3D62C197D2EA5007CD6D6 /* FMResponseFactory.m in Sources */,
 				12C9714419AED837007EF9C8 /* AFURLSessionManager.m in Sources */,
+				30B82F1D19BC65BB00114D04 /* FMPlayerCircleProgressView.m in Sources */,
 				12AF4C8F19A6E5DE004BDB0D /* FMTopBarView.m in Sources */,
 				128B45CE19B02455002CDA7F /* FMDouStreamAdaptor.m in Sources */,
 				121E56AF19A5EE2F00BCF0F3 /* FMLocalSongsViewController.m in Sources */,

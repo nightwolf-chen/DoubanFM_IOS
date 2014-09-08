@@ -27,6 +27,7 @@ typedef enum FMPlayerViewTag{
     FMPlayerViewTagButtonEnd,
     FMPlayerViewTagButtonChannel,
     FMPlayerViewTagLabelSong,
+    FMPlayerViewTagProgressView,
     FMPlayerViewTagLabelArtist
 }FMPlayerViewTag;
 

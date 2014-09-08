@@ -10,6 +10,7 @@
 #import "FMPlayerControlButton.h"
 #import "FMPlayerPlayButton.h"
 #import "FMPlayerAnimationCalculator.h"
+#import "FMPlayerCircleProgressView.h"
 
 static const float kControlButtonMarginLeft = 40;
 static const float kControlButtonMarginButtom = 85;
@@ -20,11 +21,14 @@ static const float kAdditionButtonMarginLeft = 70;
 static const float kAdditionButtonMarginTop = 360;
 static const float kSmallHight = 60;
 
+static CGFloat const kCircleWidth = 5.0f;
+
 @interface FMPlayerView ()
 {
     float _sHeight;
     float _bHeight;
     NSMutableArray *_alphaChangingViews;
+    NSMutableArray *_kvoObervers ;
 }
 
 @property (nonatomic,assign) CGPoint preLoc;
@@ -39,10 +43,11 @@ static const float kSmallHight = 60;
     
     [self removeObserver:self forKeyPath:@"frame"];
     
-    for(UIView *view in self.subviews){
+    for(UIView *view in _kvoObervers){
         [self removeObserver:view forKeyPath:@"frame"];
     }
     
+    SAFE_DELETE(_kvoObervers);
     [super dealloc];
 }
 
@@ -56,6 +61,7 @@ static const float kSmallHight = 60;
         _sOrigin = CGPointMake(0, SCREEN_SIZE.height - _sHeight);
         _status = FMPlayerViewStatusSmall;
         _alphaChangingViews = [[NSMutableArray alloc] init];
+        _kvoObervers = [[NSMutableArray alloc] init];
         
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap)];
         UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
@@ -149,18 +155,24 @@ static const float kSmallHight = 60;
     FMPlayerControlButton *likeButton = [[FMPlayerControlButton alloc] initSmaillOrigin:likeButtonOriginS
                                                                               bigOrigin:likeButtonOriginB];
     likeButton.tag = FMPlayerViewTagButtonLike;
+    [likeButton setImage:[UIImage imageNamed:@"song_liked_normal"] forState:UIControlStateNormal];
+    [likeButton setImage:[UIImage imageNamed:@"song_liked_selected"] forState:UIControlStateSelected];
     
     CGPoint trashButtonOriginB = CGPointMake(SCREEN_SIZE.width/2.0 - bButtonWidth/2.0, likeButtonOriginB.y);
     CGPoint trashButtonOriginS = CGPointMake(likeButtonOriginS.x + kControlButtonGap, likeButtonOriginS.y);
     FMPlayerControlButton *trashButton = [[FMPlayerControlButton alloc] initSmaillOrigin:trashButtonOriginS
                                                                                bigOrigin:trashButtonOriginB];
     trashButton.tag = FMPlayerViewTagButtonTrash;
+    [trashButton setImage:[UIImage imageNamed:@"song_trash_normal"] forState:UIControlStateNormal];
+    [trashButton setImage:[UIImage imageNamed:@"song_trash_selected"] forState:UIControlStateSelected];
     
     CGPoint nextButtonOriginB = CGPointMake(SCREEN_SIZE.width - kControlButtonMarginLeft - bButtonWidth, likeButtonOriginB.y);
     CGPoint nextButtonOriginS = CGPointMake(trashButtonOriginS.x + kControlButtonGap, likeButtonOriginS.y);
     FMPlayerControlButton *nextButton = [[FMPlayerControlButton alloc] initSmaillOrigin:nextButtonOriginS
                                                                               bigOrigin:nextButtonOriginB];
     nextButton.tag = FMPlayerViewTagButtonSkip;
+    [nextButton setImage:[UIImage imageNamed:@"song_skip_normal"] forState:UIControlStateNormal];
+    [nextButton setImage:[UIImage imageNamed:@"song_skip_selected"] forState:UIControlStateSelected];
     
     [self addSubview:likeButton];
     [self addObserver:likeButton forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:self];
@@ -181,10 +193,18 @@ static const float kSmallHight = 60;
     FMPlayerPlayButton *playButton = [[FMPlayerPlayButton alloc] initSmaillOrigin:playButtonOriginS
                                                                         bigOrigin:playButtonOriginB];
     playButton.tag = FMPlayerViewTagButtonPlay;
-    
     [self addSubview:playButton];
     [self addObserver:playButton forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:self];
     [playButton release];
+    
+    
+    FMPlayerCircleProgressView *progressView = [[FMPlayerCircleProgressView alloc] initWithUIButton:playButton];
+    [self addSubview:progressView];
+    progressView.tag = FMPlayerViewTagProgressView;
+    progressView.lineWidth = kCircleWidth;
+    [progressView release];
+    
+    [self bringSubviewToFront:playButton];
 }
 
 #pragma mark - Gesture event helpers
@@ -371,6 +391,12 @@ static const float kSmallHight = 60;
         }
         
     }
+}
+
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
+{
+    [super addObserver:observer forKeyPath:keyPath options:options context:context];
+    [_kvoObervers addObject:observer];
 }
 
 + (float)smallPlayerHeight

@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMPlayer.h"
 
-@class FMPlayer;
 @class FMChannel;
 
-@interface FMPlayerManager : NSObject
+@interface FMPlayerManager : NSObject<FMPlayerDelegate>
 
 @property (nonatomic,readonly) FMPlayer *activePlayer;
 @property (nonatomic,readonly) FMChannel *currentChannel;

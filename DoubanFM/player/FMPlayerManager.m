@@ -15,9 +15,12 @@
 #import "FMApiResponseSong.h"
 #import "FMApiResponse.h"
 #import "DOUStreamPlayer/DOUAudioStreamer.h"
+
+static const int kCleanupCount = 10;
+
 @interface FMPlayerManager ()
 
-@property (nonatomic,retain) FMApiRequest *request;
+@property (nonatomic,retain) NSMutableArray *requestQueue;
 
 @end
 
@@ -53,7 +56,7 @@
 - (void)dealloc
 {
     SAFE_DELETE(_activePlayer);
-    SAFE_DELETE(_request);
+    SAFE_DELETE(_requestQueue);
     
     [super dealloc];
 }
@@ -62,44 +65,134 @@
 {
     if (self = [super init]) {
         _activePlayer = [[FMPlayer defaultPlayer] retain];
+        _activePlayer.delegate = self;
         
-        _currentChannel = [self.class defaultChannel];
+        _currentChannel = [[self.class defaultChannel] retain];
+        
+        _requestQueue = [[NSMutableArray alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerStatusDidChange:)
                                                      name:FMDounStreamAdaptorStatusChangedNotification
                                                    object:nil];
         
-        [self loadSongsFromServer];
+        [self loadSongsFromServer:SongRequestTypeNEW];
     }
     return self;
 }
 
-- (void)loadSongsFromServer
+- (void)loadSongsFromServer:(SongRequestType)type
 {
-    FMChannel *channel = [self.class defaultChannel];
-    NSString *channelId = [NSString stringWithFormat:@"%d",channel.channelId];
-    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:SongRequestTypeNEW song:nil channel:channelId];
+    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:type
+                                                                   song:nil
+                                                                channel:_currentChannel];
 
-    self.request = [[FMApiRequestSong alloc] init:info
+    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
                                        completion:^(FMApiResponse *response){
                                            
-                                                FMApiResponseSong *songResp = (FMApiResponseSong *)response;
-                                                _activePlayer.songs = songResp.songs;
-                                                _activePlayer.currentChannel = channel;
-                                                [_activePlayer play];
+                                            FMApiResponseSong *songResp = (FMApiResponseSong *)response;
+                                            _activePlayer.songs = songResp.songs;
+                                            _activePlayer.currentChannel = _currentChannel;
+                                            [_activePlayer play];
                                            
-                                       }
+                                            [self cleanupRequestQueue];
+                                       
+                                   }
                                          errBlock:^(NSError *error){
-                                                      
-                                                NSLog(@"Error loading songs via network!");
+                                             
+                                             [self handleRequestError];
+                                             
+                                             [self cleanupRequestQueue];
+                                             
                                     }];
     
-    [_request sendRequest];
+    [_requestQueue addObject:request];
+    
+    [request sendRequest];
+    [request release];
     
     [info release];
 }
 
+- (void)operateSongWithType:(SongRequestType)type
+{
+    FMApiRequestSongInfo *info = [self requestInfoForCurrentSongWithType:type];
+    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
+                                                completion:^(FMApiResponse *response){
+                                                    
+                                                    NSLog(@"-Song operation %d did success-",type);
+                                                    [self cleanupRequestQueue];
+                                                }
+                                                  errBlock:^(NSError *error){
+                                                    [self handleRequestError];
+                                                    [self cleanupRequestQueue];
+                                              }];
+    
+    [request sendRequest];
+    [_requestQueue addObject:request];
+    
+    [request release];
+}
+
+- (void)setCurrentChannel:(FMChannel *)currentChannel
+{
+    SAFE_DELETE(_currentChannel);
+    
+    _currentChannel = [currentChannel retain];
+    
+    SongRequestType type;
+    if ([_activePlayer unplayedSongNumber] > 0) {
+        type = SongRequestTypePLAYING;
+    }else{
+        type = SongRequestTypeNEW;
+    }
+    
+    [self loadSongsFromServer:type];
+}
+
+- (FMApiRequestSongInfo *)requestInfoForCurrentSongWithType:(SongRequestType)type;
+{
+    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:type
+                                                                   song:_activePlayer.currentSong
+                                                                channel:_currentChannel];
+    
+    return [info autorelease];
+}
+
+
+
+#pragma helpers
+
+- (void)handleRequestError
+{
+    NSLog(@"Request network error!");
+}
+
+- (void) cleanupRequestQueue
+{
+    static int count = kCleanupCount;
+    
+    if (count > 0) {
+        count--;
+        return;
+    }else{
+        count = kCleanupCount;
+    }
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    
+    for(int i = 0 ; i < _requestQueue.count ;i++){
+        
+        if(((FMApiRequest *)_requestQueue[i]).isFinished){
+            [indexSet addIndex:i];
+        }
+    }
+    
+    [_requestQueue removeObjectsAtIndexes:indexSet];
+}
+
+
+#pragma mark Notification handler
 - (void)playerStatusDidChange:(NSNotification *)notificatioin
 {
     NSDictionary *userInfo = notificatioin.userInfo;
@@ -109,9 +202,36 @@
         if ([_activePlayer unplayedSongNumber] > 0) {
             [_activePlayer play];
         }else{
-            [self loadSongsFromServer];
+            [self loadSongsFromServer:SongRequestTypeNEW];
         }
         
     }
 }
+
+#pragma mark - FMPlayer delegate
+- (void)player:(FMPlayer *)player didMoveSongToTrash:(FMSong *)song
+{
+    [self operateSongWithType:SongRequestTypeBYE];
+}
+
+- (void)player:(FMPlayer *)player didSkipSong:(FMSong *)song
+{
+    [self operateSongWithType:SongRequestTypeSKIP];
+}
+
+- (void)player:(FMPlayer *)player didLikeSong:(FMSong *)song
+{
+    [self operateSongWithType:SongRequestTypeRATE];
+}
+
+- (void)player:(FMPlayer *)player didDislikeSong:(FMSong *)song
+{
+    [self operateSongWithType:SongRequestTypeUNRATE];
+}
+
+- (void)player:(FMPlayer *)player didEndSong:(FMSong *)song
+{
+    [self operateSongWithType:SongRequestTypeEND];
+}
+
 @end

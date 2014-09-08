@@ -10,10 +10,21 @@
 #import "FMPlayerView.h"
 #import "FMTabbarView.h"
 #import "FMPlayerManager.h"
+#import "FMSong.h"
+#import "FMPlayerCircleProgressView.h"
+
+static NSString *const kKVOPathCurrentSong = @"currentSong";
 
 @interface FMDynamicPlayViewController ()
 
 @property (nonatomic,assign) FMPlayerView *playView;
+@property (nonatomic,assign) UILabel *songNameLabel;
+@property (nonatomic,assign) UILabel *artistLabel;
+@property (nonatomic,assign) UIButton *playButton;
+
+@property (nonatomic,assign) FMPlayerCircleProgressView *progreesView;
+
+@property (nonatomic,retain) NSTimer *progressTimer;
 
 @end
 
@@ -21,6 +32,8 @@
 
 - (void)dealloc
 {
+    [[FMPlayerManager sharedInstance].activePlayer removeObserver:self
+                                                       forKeyPath:kKVOPathCurrentSong];
     [super dealloc];
 }
 
@@ -37,6 +50,17 @@
 {
     if (self = [super init]) {
         [self addChildViewController:rootViewController];
+        
+        [[FMPlayerManager sharedInstance].activePlayer addObserver:self
+                                                        forKeyPath:kKVOPathCurrentSong
+                                                           options:NSKeyValueObservingOptionNew
+                                                           context:nil];
+        
+        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                          target:self
+                                                        selector:@selector(updateProgressView)
+                                                        userInfo:nil
+                                                         repeats:YES];
     }
     
     return self;
@@ -49,6 +73,15 @@
     FMPlayerView *playerView = [[FMPlayerView alloc] initWithFrame:CGRectMake(0,y,SCREEN_SIZE.width,SCREEN_SIZE.height-y)];
     playerView.backgroundColor = [UIColor lightGrayColor];
     return [playerView autorelease];
+}
+
+- (void)updateProgressView
+{
+    FMPlayer *player = [FMPlayerManager sharedInstance].activePlayer;
+//    CGFloat duration = player.totalTime;
+//    CGFloat currentTime = player.currentTime;
+//    CGFloat percent = (currentTime / duration) * 100.0f;
+    _progreesView.percent = (player.currentTime / player.totalTime) * 100.0f;
 }
 
 - (void)viewDidLoad
@@ -65,6 +98,11 @@
         UIButton *button = (UIButton *)[self.view viewWithTag:tag];
         [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    self.songNameLabel = (UILabel *)[self.view viewWithTag:FMPlayerViewTagLabelSong];
+    self.artistLabel = (UILabel *)[self.view viewWithTag:FMPlayerViewTagLabelArtist];
+    self.playButton = (UIButton *)[self.view viewWithTag:FMPlayerViewTagButtonPlay];
+    self.progreesView = (FMPlayerCircleProgressView *)[self.view viewWithTag:FMPlayerViewTagProgressView];
 }
 
 - (void)buttonClicked:(id)sender
@@ -74,21 +112,28 @@
     switch (aButton.tag) {
         case FMPlayerViewTagButtonPlay:
         {
-            
+            static BOOL playing = YES;
+            if (!playing) {
+                [[FMPlayerManager sharedInstance].activePlayer resume];
+                playing = YES;
+            }else{
+                [[FMPlayerManager sharedInstance].activePlayer pause];
+                playing = NO;
+            }
         }
         case FMPlayerViewTagButtonLike:
         {
-            
+            [[FMPlayerManager sharedInstance].activePlayer like];
         }
             break;
         case FMPlayerViewTagButtonTrash:
         {
-            
+            [[FMPlayerManager sharedInstance].activePlayer trash];
         }
             break;
         case FMPlayerViewTagButtonSkip:
         {
-            
+            [[FMPlayerManager sharedInstance].activePlayer skip];
         }
             break;
         case FMPlayerViewTagButtonSimilar:
@@ -118,6 +163,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - KVO
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:kKVOPathCurrentSong]) {
+        
+        FMSong *song = change[@"new"];
+        
+        _songNameLabel.text = song.songTitle;
+        _artistLabel.text = song.artist;
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:song.pictureUrl]];
+        UIImage *image = [UIImage imageWithData:data];
+    
+        [_playButton setBackgroundImage:image forState:UIControlStateNormal];
+        [_playButton setBackgroundImage:image forState:UIControlStateSelected];
+    }
+}
 
 @end
