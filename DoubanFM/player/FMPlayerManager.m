@@ -64,12 +64,11 @@ static const int kCleanupCount = 10;
 - (id)_init
 {
     if (self = [super init]) {
-        _activePlayer = [[FMPlayer defaultPlayer] retain];
+        
+        _activePlayer          = [[FMPlayer defaultPlayer] retain];
         _activePlayer.delegate = self;
-        
-        _currentChannel = [[self.class defaultChannel] retain];
-        
-        _requestQueue = [[NSMutableArray alloc] init];
+        _currentChannel        = [[self.class defaultChannel] retain];
+        _requestQueue          = [[NSMutableArray alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerStatusDidChange:)
@@ -77,6 +76,7 @@ static const int kCleanupCount = 10;
                                                    object:nil];
         
         [self loadSongsFromServer:SongRequestTypeNEW];
+        
     }
     return self;
 }
@@ -94,14 +94,12 @@ static const int kCleanupCount = 10;
                                             _activePlayer.songs = songResp.songs;
                                             _activePlayer.currentChannel = _currentChannel;
                                             [_activePlayer play];
-                                           
                                             [self cleanupRequestQueue];
                                        
-                                   }
+                                       }
                                          errBlock:^(NSError *error){
                                              
                                              [self handleRequestError];
-                                             
                                              [self cleanupRequestQueue];
                                              
                                     }];
@@ -122,10 +120,13 @@ static const int kCleanupCount = 10;
                                                     
                                                     NSLog(@"-Song operation %d did success-",type);
                                                     [self cleanupRequestQueue];
+                                                    
                                                 }
-                                                  errBlock:^(NSError *error){
+                                                errBlock:^(NSError *error){
+    
                                                     [self handleRequestError];
                                                     [self cleanupRequestQueue];
+                                                      
                                               }];
     
     [request sendRequest];
@@ -146,7 +147,6 @@ static const int kCleanupCount = 10;
     }else{
         type = SongRequestTypeNEW;
     }
-    
     [self loadSongsFromServer:type];
 }
 
@@ -168,26 +168,22 @@ static const int kCleanupCount = 10;
     NSLog(@"Request network error!");
 }
 
-- (void) cleanupRequestQueue
+- (void)cleanupRequestQueue
 {
     static int count = kCleanupCount;
     
-    if (count > 0) {
-        count--;
+    if (count-- > 0){
         return;
     }else{
         count = kCleanupCount;
     }
     
     NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
-    
     for(int i = 0 ; i < _requestQueue.count ;i++){
-        
         if(((FMApiRequest *)_requestQueue[i]).isFinished){
             [indexSet addIndex:i];
         }
     }
-    
     [_requestQueue removeObjectsAtIndexes:indexSet];
 }
 
