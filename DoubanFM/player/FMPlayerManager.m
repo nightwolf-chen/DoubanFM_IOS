@@ -196,7 +196,7 @@ static const int kCleanupCount = 10;
     if ([userInfo[@"status"] integerValue] == DOUAudioStreamerFinished){
         
         if ([_activePlayer unplayedSongNumber] > 0) {
-            [_activePlayer play];
+            [_activePlayer skip];
         }else{
             [self loadSongsFromServer:SongRequestTypeNEW];
         }

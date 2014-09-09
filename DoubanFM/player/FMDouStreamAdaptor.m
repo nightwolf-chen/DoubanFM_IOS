@@ -44,15 +44,24 @@ static void *kKVOContext = &kKVOContext;
 #pragma mark - player control.
 - (void)play
 {
-    if (self.tracks.count > 0) {
+    @synchronized(self){
+    
+        if (_tracks.count > 0) {
+            
+            FMTack *aTrack = [_tracks lastObject];
+            self.dPlayer = [DOUAudioStreamer streamerWithAudioFile:aTrack];
+            [_dPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:kKVOContext];
+            [_dPlayer play];
+            
+            self.currentSong = aTrack.song;
+            
+        }else{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:FMDounStreamAdaptorStatusChangedNotification
+                                                                object:self
+                                                              userInfo:@{@"status": @(DOUAudioStreamerFinished)}];
+        }
         
-        [self stop];
-        FMTack *aTrack = [_tracks lastObject];
-        self.dPlayer = [DOUAudioStreamer streamerWithAudioFile:aTrack];
-        [_dPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:kKVOContext];
-        [_dPlayer play];
-        
-        self.currentSong = aTrack.song;
     }
 }
 
@@ -68,8 +77,14 @@ static void *kKVOContext = &kKVOContext;
 
 - (void)stop
 {
-    [self popTrack];
     [_dPlayer stop];
+    [self p_cleaupPlayer];
+}
+
+- (void)p_cleaupPlayer
+{
+    [self popTrack];
+    self.currentSong = nil;
     self.dPlayer = nil;
 }
 

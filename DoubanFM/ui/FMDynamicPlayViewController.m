@@ -67,7 +67,7 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
 }
 
 
-- (UIView *)playView
+- (FMPlayerView *)p_createPlayView
 {
     float y = [FMTabbarView tabbarViewHight];
     FMPlayerView *playerView = [[FMPlayerView alloc] initWithFrame:CGRectMake(0,y,SCREEN_SIZE.width,SCREEN_SIZE.height-y)];
@@ -78,9 +78,6 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
 - (void)updateProgressView
 {
     FMPlayer *player = [FMPlayerManager sharedInstance].activePlayer;
-//    CGFloat duration = player.totalTime;
-//    CGFloat currentTime = player.currentTime;
-//    CGFloat percent = (currentTime / duration) * 100.0f;
     _progreesView.percent = (player.currentTime / player.totalTime) * 100.0f;
 }
 
@@ -92,7 +89,7 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
     UIViewController *rootViewCtr = self.childViewControllers[0];
     [self.view addSubview:rootViewCtr.view];
     
-    [self.view addSubview: _playView = [self playView]];
+    [self.view addSubview: _playView = [self p_createPlayView]];
     
     for (int tag = FMPlayerViewTagButtonStart+1 ; tag < FMPlayerViewTagButtonEnd ; tag++) {
         UIButton *button = (UIButton *)[self.view viewWithTag:tag];
@@ -171,14 +168,23 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
         
         FMSong *song = change[@"new"];
         
-        _songNameLabel.text = song.songTitle;
-        _artistLabel.text = song.artist;
+        if ([song isKindOfClass:FMSong.class]) {
         
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:song.pictureUrl]];
-        UIImage *image = [UIImage imageWithData:data];
-    
-        [_playButton setBackgroundImage:image forState:UIControlStateNormal];
-        [_playButton setBackgroundImage:image forState:UIControlStateSelected];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:song.pictureUrl]];
+                UIImage *image = [UIImage imageWithData:data];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_playButton setBackgroundImage:image forState:UIControlStateNormal];
+                    [_playButton setBackgroundImage:image forState:UIControlStateSelected];
+                    _songNameLabel.text = song.songTitle;
+                    _artistLabel.text = song.artist;
+                });
+                
+            });
+            
+        }
     }
 }
 

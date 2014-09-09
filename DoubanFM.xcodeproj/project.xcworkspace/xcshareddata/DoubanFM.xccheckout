@@ -12,20 +12,24 @@
 	<dict>
 		<key>0F1C1C24-E463-4A0B-8867-E1512FF1BE8A</key>
 		<string>https://github.com/nightwolf-chen/DoubanFM_IOS.git</string>
+		<key>5A9CCE544844B9989CC5AA84BAE133DF7DFD1D52</key>
+		<string>https://github.com/nightwolf-chen/DoubanFM_IOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DoubanFM.xcodeproj/project.xcworkspace</string>
+	<string>DoubanFM.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0F1C1C24-E463-4A0B-8867-E1512FF1BE8A</key>
+		<string>../../../DoubanFM</string>
+		<key>5A9CCE544844B9989CC5AA84BAE133DF7DFD1D52</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/nightwolf-chen/DoubanFM_IOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>0F1C1C24-E463-4A0B-8867-E1512FF1BE8A</string>
+	<string>5A9CCE544844B9989CC5AA84BAE133DF7DFD1D52</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>0F1C1C24-E463-4A0B-8867-E1512FF1BE8A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>DoubanFM</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5A9CCE544844B9989CC5AA84BAE133DF7DFD1D52</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DoubanFM_IOS</string>
 		</dict>
 	</array>
 </dict>
