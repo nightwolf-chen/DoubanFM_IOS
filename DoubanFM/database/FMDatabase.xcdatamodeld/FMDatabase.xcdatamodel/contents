@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="14A361c" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="FMDBChannel" syncable="YES"/>
+    <entity name="FMDBSong" syncable="YES"/>
+    <entity name="FMDBUser" syncable="YES"/>
+    <elements>
+        <element name="FMDBSong" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="FMDBChannel" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="FMDBUser" positionX="-36" positionY="9" width="128" height="45"/>
+    </elements>
+</model>

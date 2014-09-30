@@ -33,6 +33,8 @@
 #import "FMApiResponseSong.h"
 #import "FMChannel.h"
 #import "FMPlayerManager.h"
+#import "FMDatabase.h"
+
 @implementation FMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -74,6 +76,8 @@
     [rootController release];
     [discoverController release];
     [myMusicViewController release];
+    
+    [FMDatabase database];
     
 //    FMPlayer *aPlayer = [[FMPlayer defaultPlayer] retain];
 //    FMChannel *channel = [[FMChannel alloc] init];
