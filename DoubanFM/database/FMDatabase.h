@@ -12,4 +12,12 @@
 
 + (instancetype)database;
 
+- (id)insertSong;
+- (id)insertChannel;
+- (id)insertUser;
+
+- (void)deleteObject:(id)target;
+- (void)deleteObjects:(NSArray *)targets;
+
+
 @end

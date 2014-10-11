@@ -74,4 +74,37 @@ static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
     return basePath;
 }
 
+- (id)p_insertWithEntityName:(NSString *)name
+{
+    id desc = [NSEntityDescription insertNewObjectForEntityForName:name
+                                                              inManagedObjectContext:_context];
+    return desc;
+}
+
+- (NSArray *)p_fetchWithEntityName:(NSString *)name
+{
+    NSEntityDescription *desc = [NSEntityDescription entityForName:name
+                                            inManagedObjectContext:_context];
+    
+    return [self p_fetchWithEntityDescrision:desc];
+}
+
+- (NSArray *)p_fetchWithEntityDescrision:(NSEntityDescription *)desciption
+{
+    NSFetchRequest *fRequest = [[NSFetchRequest alloc] init];
+    fRequest.entity = desciption;
+    
+    NSError *error = nil;
+    
+    NSArray *result = [_context executeFetchRequest:fRequest error:&error];
+    
+    if (error) {
+        NSLog(@"%@",[error localizedDescription]);
+    }
+    
+    [fRequest release];
+    
+    return result;
+}
+
 @end
