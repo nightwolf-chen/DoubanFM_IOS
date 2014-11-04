@@ -26,5 +26,30 @@
 @property (nonatomic,assign) int length;
 @property (nonatomic,assign) double ratingAverage;
 
+@property (nonatomic,assign) int songType;
+@property (nonatomic,assign) int currentChannel;
+
+/*
+ create table if not exists fm_songs (
+    song_title text ,
+    album_page_url text,
+    album_title text,
+    picture_url text,
+    ssid text,
+    artist text,
+    song_url text,
+    company text,
+    subtype text,
+    sid text,
+    aid text,
+    sha256 text,
+    like int,
+    length int,
+    rating_average real,
+    song_type int,
+    current_channel int,
+    primary key(song_title,artist,song_type,current_channel)
+ );
+ */
 
 @end

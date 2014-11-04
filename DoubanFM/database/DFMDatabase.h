@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FMDatabase : NSObject
+@interface DFMDatabase : NSObject
 
 + (instancetype)database;
 

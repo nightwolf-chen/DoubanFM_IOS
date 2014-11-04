@@ -6,12 +6,12 @@
 //  Copyright (c) 2014年 nirvawolf. All rights reserved.
 //
 
-#import "FMDatabase.h"
+#import "DFMDatabase.h"
 #import <CoreData/CoreData.h>
 
 static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
 
-@interface FMDatabase ()
+@interface DFMDatabase ()
 
 @property (nonatomic,retain) NSManagedObjectModel *model;
 @property (nonatomic,retain) NSManagedObjectContext *context;
@@ -19,14 +19,14 @@ static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
 
 @end
 
-@implementation FMDatabase
+@implementation DFMDatabase
 
 + (instancetype)database
 {
     static id s_instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_instance = [[FMDatabase alloc] p_init];
+        s_instance = [[DFMDatabase alloc] p_init];
     });
     
     return s_instance;

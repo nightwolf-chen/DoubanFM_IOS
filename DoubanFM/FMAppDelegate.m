@@ -33,7 +33,7 @@
 #import "FMApiResponseSong.h"
 #import "FMChannel.h"
 #import "FMPlayerManager.h"
-#import "FMDatabase.h"
+#import "DFMDatabase.h"
 
 @implementation FMAppDelegate
 
@@ -77,7 +77,7 @@
     [discoverController release];
     [myMusicViewController release];
     
-    [FMDatabase database];
+    [DFMDatabase database];
     
 //    FMPlayer *aPlayer = [[FMPlayer defaultPlayer] retain];
 //    FMChannel *channel = [[FMChannel alloc] init];

@@ -20,4 +20,17 @@
 @property (nonatomic,copy) NSString *coverImgUrl;
 @property (nonatomic,copy) NSString *introduction;
 
+/*
+ create table if not exists fm_channels (
+ channel_id int primary key ,
+ song_number int,
+ name_en text,
+ name_cn text,
+ category_id text,
+ category_name text,
+ addr_en text,
+ cover_img_url text,
+ introduction text
+ );
+ */
 @end

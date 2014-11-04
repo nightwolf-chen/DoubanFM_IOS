@@ -17,4 +17,15 @@
 @property (nonatomic,copy) NSString *expire;
 @property (nonatomic,copy) NSString *userid;
 
+/*
+ create table if not exists  fm_users (
+ username text primary key,
+ password text,
+ token text,
+ expire text,
+ userid text
+ );
+ */
+
+
 @end
