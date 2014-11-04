@@ -10,4 +10,8 @@
 
 @interface FMEntity : NSObject
 
+- (void)syncWithDatabase;
+
+- (void)deleteFromDatabase;
+
 @end

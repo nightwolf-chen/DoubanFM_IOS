@@ -16,4 +16,5 @@
 #define STATUSBAR_SIZE [[UIApplication sharedApplication] statusBarFrame].size
 
 #define APP_DELEGATE ((FMAppDelegate *)[UIApplication sharedApplication].delegate)
+
 #endif

@@ -44,6 +44,8 @@ static const int kCleanupCount = 10;
     channel.channelId = 0;
     channel.nameCN = @"华语";
     
+    [channel syncWithDatabase];
+    
     return [channel autorelease];
 }
 
@@ -92,6 +94,9 @@ static const int kCleanupCount = 10;
                                            
                                             FMApiResponseSong *songResp = (FMApiResponseSong *)response;
                                             _activePlayer.songs = songResp.songs;
+                                           
+                                           [songResp.songs[0] syncWithDatabase];
+                                           
                                             _activePlayer.currentChannel = _currentChannel;
                                             [_activePlayer play];
                                             [self cleanupRequestQueue];

@@ -21,7 +21,7 @@
 @property (nonatomic,copy) NSString *introduction;
 
 /*
- create table if not exists fm_channels (
+ create table if not exists fm_channels(
  channel_id int primary key ,
  song_number int,
  name_en text,

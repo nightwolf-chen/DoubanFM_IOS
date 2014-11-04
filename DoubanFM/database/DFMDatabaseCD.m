@@ -6,12 +6,12 @@
 //  Copyright (c) 2014年 nirvawolf. All rights reserved.
 //
 
-#import "DFMDatabase.h"
+#import "DFMDatabaseCD.h"
 #import <CoreData/CoreData.h>
 
 static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
 
-@interface DFMDatabase ()
+@interface DFMDatabaseCD ()
 
 @property (nonatomic,retain) NSManagedObjectModel *model;
 @property (nonatomic,retain) NSManagedObjectContext *context;
@@ -19,14 +19,14 @@ static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
 
 @end
 
-@implementation DFMDatabase
+@implementation DFMDatabaseCD
 
 + (instancetype)database
 {
     static id s_instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_instance = [[DFMDatabase alloc] p_init];
+        s_instance = [[DFMDatabaseCD alloc] p_init];
     });
     
     return s_instance;
@@ -109,17 +109,17 @@ static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
 
 - (id)insertChannel
 {
-    return [self p_insertWithEntityName:];
+    return nil;
 }
 
 - (id)insertSong
 {
-    
+    return nil;
 }
 
 - (id)insertUser
 {
-    
+    return nil;
 }
 
 @end

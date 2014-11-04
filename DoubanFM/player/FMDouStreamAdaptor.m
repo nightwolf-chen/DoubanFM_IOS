@@ -194,7 +194,7 @@ static void *kKVOContext = &kKVOContext;
 
 - (NSTimeInterval)currentTime
 {
-    NSLog(@"currentTime:%f",_dPlayer.currentTime);
+//    NSLog(@"currentTime:%f",_dPlayer.currentTime);
     return _dPlayer.currentTime;
 }
 
