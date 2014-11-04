@@ -107,4 +107,19 @@ static NSString *const kDatabaseName = @"FMDatabase.xcdatamodeld";
     return result;
 }
 
+- (id)insertChannel
+{
+    return [self p_insertWithEntityName:];
+}
+
+- (id)insertSong
+{
+    
+}
+
+- (id)insertUser
+{
+    
+}
+
 @end
