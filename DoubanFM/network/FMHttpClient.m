@@ -7,6 +7,7 @@
 //
 
 #import "FMHttpClient.h"
+#import "AFNetworking.h"
 
 @interface FMHttpClient ()
 {
@@ -33,12 +34,29 @@
 
 - (BOOL)doGet:(NSString *)urlStr
 {
-    return [self sendRequest:urlStr type:@"GET" parameters:nil];
+    [[AFHTTPRequestOperationManager manager] GET:urlStr
+                                      parameters:nil
+                                         success:^(AFHTTPRequestOperation *op,id respObj){
+                                             [_delegate client:self didFinishLoadingData:op.responseData];
+                                         }
+                                         failure:^(AFHTTPRequestOperation *op, NSError *error){
+                                             [_delegate client:self didFailWithError:error];
+                                         }];
+    return YES;
 }
 
 - (BOOL)doPost:(NSString *)urlStr parameters:(NSDictionary *)values
 {
-    return [self sendRequest:urlStr type:@"POST" parameters:values];
+     [[AFHTTPRequestOperationManager manager] GET:urlStr
+                                      parameters:nil
+                                         success:^(AFHTTPRequestOperation *op,id respObj){
+                                             [_delegate client:self didFinishLoadingData:op.responseData];
+                                         }
+                                         failure:^(AFHTTPRequestOperation *op, NSError *error){
+                                             [_delegate client:self didFailWithError:error];
+                                         }];
+    
+    return YES;
 }
 
 - (BOOL)sendRequest:(NSString *) urlStr type:(NSString *)requestType parameters:(NSDictionary *)values

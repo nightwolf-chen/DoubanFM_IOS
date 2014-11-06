@@ -13,6 +13,5 @@ extern NSString *const FMDounStreamAdaptorStatusChangedNotification;
 
 @interface FMDouStreamAdaptor : FMPlayer
 
-
 @end
 

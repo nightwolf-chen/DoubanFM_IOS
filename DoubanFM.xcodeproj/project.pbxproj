@@ -71,6 +71,7 @@
 		12D9C7CB19DA8FBF0002FF4B /* FMDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D9C7C919DA8FBF0002FF4B /* FMDatabase.xcdatamodeld */; };
 		12D9C7CE19DA90CC0002FF4B /* DFMDatabaseCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D9C7CD19DA90CC0002FF4B /* DFMDatabaseCD.m */; };
 		12D9C7D019DA97BE0002FF4B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D9C7CF19DA97BE0002FF4B /* CoreData.framework */; };
+		12E96B2B1A0B225100A9C4A0 /* FMRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */; };
 		30395753194D9BFC00D76121 /* FMAVPlayerAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 30395752194D9BFC00D76121 /* FMAVPlayerAdapter.m */; };
 		30395758194D9E6E00D76121 /* FMPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30395756194D9E6E00D76121 /* FMPlayerViewController.m */; };
 		30395759194D9E6E00D76121 /* FMPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30395757194D9E6E00D76121 /* FMPlayerViewController.xib */; };
@@ -265,6 +266,8 @@
 		12D9C7CC19DA90CC0002FF4B /* DFMDatabaseCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFMDatabaseCD.h; path = database/DFMDatabaseCD.h; sourceTree = "<group>"; };
 		12D9C7CD19DA90CC0002FF4B /* DFMDatabaseCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DFMDatabaseCD.m; path = database/DFMDatabaseCD.m; sourceTree = "<group>"; };
 		12D9C7CF19DA97BE0002FF4B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		12E96B291A0B225100A9C4A0 /* FMRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMRequestService.h; path = request/FMRequestService.h; sourceTree = "<group>"; };
+		12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMRequestService.m; path = request/FMRequestService.m; sourceTree = "<group>"; };
 		30395751194D9BFC00D76121 /* FMAVPlayerAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMAVPlayerAdapter.h; path = player/FMAVPlayerAdapter.h; sourceTree = "<group>"; };
 		30395752194D9BFC00D76121 /* FMAVPlayerAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMAVPlayerAdapter.m; path = player/FMAVPlayerAdapter.m; sourceTree = "<group>"; };
 		30395755194D9E6E00D76121 /* FMPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMPlayerViewController.h; path = ui/FMPlayerViewController.h; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 				30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */,
 				30C9EB93193301C900AFFA38 /* FMApiRequestChannel.h */,
 				30C9EB94193301C900AFFA38 /* FMApiRequestChannel.m */,
+				12E96B291A0B225100A9C4A0 /* FMRequestService.h */,
+				12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */,
 			);
 			name = request;
 			sourceTree = "<group>";
@@ -995,6 +1000,7 @@
 				12C9714219AED837007EF9C8 /* AFURLRequestSerialization.m in Sources */,
 				12127499199B5A6700DF005E /* FMTabbarView.m in Sources */,
 				12B56F2C19AB2501007B4397 /* NSData+DOUMappedFile.m in Sources */,
+				12E96B2B1A0B225100A9C4A0 /* FMRequestService.m in Sources */,
 				128B460119B07053002CDA7F /* FMTack.m in Sources */,
 				30C9EB92193301AB00AFFA38 /* FMApiRequestUser.m in Sources */,
 				1212749C199B80CB00DF005E /* FMPlayerView.m in Sources */,
