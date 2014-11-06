@@ -15,14 +15,8 @@
 #import "FMApiResponseSong.h"
 #import "FMApiResponse.h"
 #import "DOUStreamPlayer/DOUAudioStreamer.h"
+#import "FMRequestService.h"
 
-static const int kCleanupCount = 10;
-
-@interface FMPlayerManager ()
-
-@property (nonatomic,retain) NSMutableArray *requestQueue;
-
-@end
 
 @implementation FMPlayerManager
 
@@ -58,7 +52,6 @@ static const int kCleanupCount = 10;
 - (void)dealloc
 {
     SAFE_DELETE(_activePlayer);
-    SAFE_DELETE(_requestQueue);
     
     [super dealloc];
 }
@@ -70,7 +63,6 @@ static const int kCleanupCount = 10;
         _activePlayer          = [[FMPlayer defaultPlayer] retain];
         _activePlayer.delegate = self;
         _currentChannel        = [[self.class defaultChannel] retain];
-        _requestQueue          = [[NSMutableArray alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerStatusDidChange:)
@@ -85,59 +77,38 @@ static const int kCleanupCount = 10;
 
 - (void)loadSongsFromServer:(SongRequestType)type
 {
-    FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:type
+    FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:type
                                                                    song:nil
-                                                                channel:_currentChannel];
-
-    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
-                                       completion:^(FMApiResponse *response){
-                                           
-                                            FMApiResponseSong *songResp = (FMApiResponseSong *)response;
-                                            _activePlayer.songs = songResp.songs;
-                                           
-                                           [songResp.songs[0] syncWithDatabase];
-                                           
-                                            _activePlayer.currentChannel = _currentChannel;
-                                            [_activePlayer play];
-                                            [self cleanupRequestQueue];
-                                       
-                                       }
-                                         errBlock:^(NSError *error){
-                                             
-                                             [self handleRequestError];
-                                             [self cleanupRequestQueue];
-                                             
-                                    }];
+                                                                channel:_currentChannel] autorelease];
     
-    [_requestQueue addObject:request];
+    [[FMRequestService sharedService] sendSongOperation:info
+                                                success:^(FMApiResponse *response){
+                                                    FMApiResponseSong *songResp = (FMApiResponseSong *)response;
+                                                    _activePlayer.songs = songResp.songs;
+                                                    
+                                                    [songResp.songs[0] syncWithDatabase];
+                                                    
+                                                    _activePlayer.currentChannel = _currentChannel;
+                                                    [_activePlayer play];
+                                                }
+                                                  error:^(NSError *error){
+                                                      [self handleRequestError];
+                                                  }];
     
-    [request sendRequest];
-    [request release];
     
-    [info release];
 }
 
 - (void)operateSongWithType:(SongRequestType)type
 {
     FMApiRequestSongInfo *info = [self requestInfoForCurrentSongWithType:type];
-    FMApiRequest *request = [[FMApiRequestSong alloc] init:info
-                                                completion:^(FMApiResponse *response){
-                                                    
+    
+    [[FMRequestService sharedService] sendSongOperation:info
+                                                success:^(FMApiResponse *response){
                                                     NSLog(@"-Song operation %d did success-",type);
-                                                    [self cleanupRequestQueue];
-                                                    
                                                 }
-                                                errBlock:^(NSError *error){
-    
-                                                    [self handleRequestError];
-                                                    [self cleanupRequestQueue];
-                                                      
-                                              }];
-    
-    [request sendRequest];
-    [_requestQueue addObject:request];
-    
-    [request release];
+                                                  error:^(NSError *error){
+                                                      [self handleRequestError];
+                                                  }];
 }
 
 - (void)setCurrentChannel:(FMChannel *)currentChannel
@@ -171,25 +142,6 @@ static const int kCleanupCount = 10;
 - (void)handleRequestError
 {
     NSLog(@"Request network error!");
-}
-
-- (void)cleanupRequestQueue
-{
-    static int count = kCleanupCount;
-    
-    if (count-- > 0){
-        return;
-    }else{
-        count = kCleanupCount;
-    }
-    
-    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
-    for(int i = 0 ; i < _requestQueue.count ;i++){
-        if(((FMApiRequest *)_requestQueue[i]).isFinished){
-            [indexSet addIndex:i];
-        }
-    }
-    [_requestQueue removeObjectsAtIndexes:indexSet];
 }
 
 

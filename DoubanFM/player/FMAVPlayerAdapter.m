@@ -28,6 +28,13 @@ const NSString *FMUIPLayerNeedsNewSongsNotification = @"__FMUIPLayerNeedsNewSong
 
 @implementation FMAVPlayerAdapter
 
+- (void)dealloc
+{
+    SAFE_DELETE(_player);
+    
+    [super dealloc];
+}
+
 - (id)initWithSongs:(NSArray *)songs
 {
     self = [super init];

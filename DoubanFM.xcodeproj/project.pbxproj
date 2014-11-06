@@ -650,8 +650,6 @@
 				30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */,
 				30C9EB93193301C900AFFA38 /* FMApiRequestChannel.h */,
 				30C9EB94193301C900AFFA38 /* FMApiRequestChannel.m */,
-				12E96B291A0B225100A9C4A0 /* FMRequestService.h */,
-				12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */,
 			);
 			name = request;
 			sourceTree = "<group>";
@@ -792,6 +790,8 @@
 				30E80E2D1931D7A9001E334B /* FMHttpClient.h */,
 				30E80E2E1931D7A9001E334B /* FMHttpClient.m */,
 				30E80E301931F19B001E334B /* FMHttpClientDelegate.h */,
+				12E96B291A0B225100A9C4A0 /* FMRequestService.h */,
+				12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */,
 			);
 			name = network;
 			sourceTree = "<group>";

@@ -48,7 +48,7 @@
 - (BOOL)doPost:(NSString *)urlStr parameters:(NSDictionary *)values
 {
      [[AFHTTPRequestOperationManager manager] GET:urlStr
-                                      parameters:nil
+                                      parameters:values
                                          success:^(AFHTTPRequestOperation *op,id respObj){
                                              [_delegate client:self didFinishLoadingData:op.responseData];
                                          }
