@@ -86,7 +86,11 @@
                                                     FMApiResponseSong *songResp = (FMApiResponseSong *)response;
                                                     _activePlayer.songs = songResp.songs;
                                                     
-                                                    [songResp.songs[0] syncWithDatabase];
+//                                                    [songResp.songs[0] syncWithDatabase];
+                                                    
+                                                    for(FMSong *song in songResp.songs){
+                                                        [song syncWithDatabase];
+                                                    }
                                                     
                                                     _activePlayer.currentChannel = _currentChannel;
                                                     [_activePlayer play];
@@ -123,6 +127,8 @@
     }else{
         type = SongRequestTypeNEW;
     }
+    
+    [self.activePlayer stop];
     [self loadSongsFromServer:type];
 }
 

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMDiscoverController : UIViewController
+@interface FMDiscoverController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

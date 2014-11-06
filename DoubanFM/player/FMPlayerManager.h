@@ -14,7 +14,7 @@
 @interface FMPlayerManager : NSObject<FMPlayerDelegate>
 
 @property (nonatomic,readonly) FMPlayer *activePlayer;
-@property (nonatomic,readonly) FMChannel *currentChannel;
+@property (nonatomic,retain) FMChannel *currentChannel;
 
 + (instancetype)sharedInstance;
 

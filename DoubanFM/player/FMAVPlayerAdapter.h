@@ -16,7 +16,7 @@ extern const NSString *FMUIPLayerNeedsNewSongsNotification;
 
 
 @interface FMAVPlayerAdapter : FMPlayer
-@property (nonatomic,retain) id<FMAVPlayerAdapterDelegate> delegate;
+@property (nonatomic,assign) id<FMAVPlayerAdapterDelegate> delegate;
 @end
 
 

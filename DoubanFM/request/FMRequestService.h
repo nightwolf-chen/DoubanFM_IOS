@@ -7,11 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMUser.h"
+#import "FMChannel.h"
+#import "FMSong.h"
 
-@class FMApiRequest;
-@class FMApiResponse;
-@class FMUser;
-@class FMApiRequestSongInfo;
+#import "FMApiRequest.h"
+#import "FMApiRequestSong.h"
+#import "FMApiRequestSongInfo.h"
+#import "FMApiRequestChannel.h"
+#import "FMApiRequestUser.h"
+
+#import "FMApiResponse.h"
+#import "FMApiResponseChannel.h"
+#import "FMApiResponseUser.h"
+#import "FMApiResponseSong.h"
 
 @interface FMRequestService : NSObject
 
