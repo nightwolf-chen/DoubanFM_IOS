@@ -67,8 +67,10 @@ userid text \
 - (id)_init
 {
     if (self = [super init]) {
-        _databaseQueue = [[FMDatabaseQueue alloc ] initWithPath:[self databaseFilePath]];
         
+        _databaseQueue = [[FMDatabaseQueue alloc ] initWithPath:[self databaseFilePath]];
+        _helper = [[FMDatabaseHelper alloc] init]
+        ;
         [_databaseQueue inDatabase:^(FMDatabase *db){
             [db executeUpdate:kSQLCreateTableSongs];
             [db executeUpdate:kSQLCreateTableChannels];
@@ -87,6 +89,11 @@ userid text \
     NSString *documentDir = [dirs lastObject];
     
     return [documentDir stringByAppendingPathComponent:kDatabaseName];
+}
+
+- (FMDatabase *)database
+{
+    return [[[FMDatabase alloc] initWithPath:[self databaseFilePath]] autorelease];
 }
 
 @end

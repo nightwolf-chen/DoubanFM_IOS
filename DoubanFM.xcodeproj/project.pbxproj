@@ -64,6 +64,9 @@
 		12B9285F1A0C91EA001CECDB /* FMApiRequestShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9285E1A0C91EA001CECDB /* FMApiRequestShow.m */; };
 		12B928621A0C9250001CECDB /* FMShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B928611A0C9250001CECDB /* FMShow.m */; };
 		12B928651A0C9679001CECDB /* FMApiResponseShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B928641A0C9679001CECDB /* FMApiResponseShow.m */; };
+		12B928691A0CA004001CECDB /* FMUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B928681A0CA004001CECDB /* FMUpdateManager.m */; };
+		12B9286C1A0CA22A001CECDB /* FMChannelUpdator.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9286B1A0CA22A001CECDB /* FMChannelUpdator.m */; };
+		12B9286F1A0CAC05001CECDB /* FMDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9286E1A0CAC05001CECDB /* FMDatabaseHelper.m */; };
 		12C9713C19AED837007EF9C8 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712A19AED837007EF9C8 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12C9713D19AED837007EF9C8 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712C19AED837007EF9C8 /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12C9713E19AED837007EF9C8 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712E19AED837007EF9C8 /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -257,6 +260,12 @@
 		12B928611A0C9250001CECDB /* FMShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMShow.m; path = entities/FMShow.m; sourceTree = "<group>"; };
 		12B928631A0C9679001CECDB /* FMApiResponseShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponseShow.h; path = response/FMApiResponseShow.h; sourceTree = "<group>"; };
 		12B928641A0C9679001CECDB /* FMApiResponseShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponseShow.m; path = response/FMApiResponseShow.m; sourceTree = "<group>"; };
+		12B928671A0CA004001CECDB /* FMUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMUpdateManager.h; sourceTree = "<group>"; };
+		12B928681A0CA004001CECDB /* FMUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMUpdateManager.m; sourceTree = "<group>"; };
+		12B9286A1A0CA22A001CECDB /* FMChannelUpdator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMChannelUpdator.h; sourceTree = "<group>"; };
+		12B9286B1A0CA22A001CECDB /* FMChannelUpdator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMChannelUpdator.m; sourceTree = "<group>"; };
+		12B9286D1A0CAC05001CECDB /* FMDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseHelper.h; path = database/FMDatabaseHelper.h; sourceTree = "<group>"; };
+		12B9286E1A0CAC05001CECDB /* FMDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseHelper.m; path = database/FMDatabaseHelper.m; sourceTree = "<group>"; };
 		12C3D629197D2B58007CD6D6 /* FMRequestType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMRequestType.h; sourceTree = "<group>"; };
 		12C9712919AED837007EF9C8 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		12C9712A19AED837007EF9C8 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -552,6 +561,17 @@
 			name = AVPlayer;
 			sourceTree = "<group>";
 		};
+		12B928661A0C9FED001CECDB /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				12B928671A0CA004001CECDB /* FMUpdateManager.h */,
+				12B928681A0CA004001CECDB /* FMUpdateManager.m */,
+				12B9286A1A0CA22A001CECDB /* FMChannelUpdator.h */,
+				12B9286B1A0CA22A001CECDB /* FMChannelUpdator.m */,
+			);
+			path = engine;
+			sourceTree = "<group>";
+		};
 		12C9712819AED837007EF9C8 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +610,8 @@
 				122BA9441A08C0F9004740EE /* DBManager.m */,
 				12AC88C51A08DB90001F69BF /* FMDatabaseManager.h */,
 				12AC88C61A08DB90001F69BF /* FMDatabaseManager.m */,
+				12B9286D1A0CAC05001CECDB /* FMDatabaseHelper.h */,
+				12B9286E1A0CAC05001CECDB /* FMDatabaseHelper.m */,
 			);
 			name = database;
 			sourceTree = "<group>";
@@ -762,6 +784,7 @@
 		30E80DFE1931D5BE001E334B /* DoubanFM */ = {
 			isa = PBXGroup;
 			children = (
+				12B928661A0C9FED001CECDB /* engine */,
 				12D9C7C819DA8F4D0002FF4B /* database */,
 				30395754194D9E1C00D76121 /* ui */,
 				30D9B6F719387C0E0074BE50 /* player */,
@@ -996,6 +1019,7 @@
 				122BA9511A08C0F9004740EE /* DBManager.m in Sources */,
 				30C9EB891932FFED00AFFA38 /* FMApiResponseUser.m in Sources */,
 				3083FC211955AE39006D6FAA /* FMUserCenter.m in Sources */,
+				12B928691A0CA004001CECDB /* FMUpdateManager.m in Sources */,
 				12B9285F1A0C91EA001CECDB /* FMApiRequestShow.m in Sources */,
 				30C9EB9F193303B400AFFA38 /* FMSong.m in Sources */,
 				12B56F2419AB2501007B4397 /* DOUAudioRenderer.m in Sources */,
@@ -1023,10 +1047,12 @@
 				30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */,
 				12198C871A0C716C0065A085 /* FMApiRequestShowList.m in Sources */,
 				121E56A019A5E80500BCF0F3 /* FMOffilineViewController.m in Sources */,
+				12B9286C1A0CA22A001CECDB /* FMChannelUpdator.m in Sources */,
 				12C9713C19AED837007EF9C8 /* AFHTTPRequestOperation.m in Sources */,
 				12B56F2619AB2501007B4397 /* DOUAudioStreamer+Options.m in Sources */,
 				122BA9521A08C0F9004740EE /* FMDatabase.m in Sources */,
 				12C9714219AED837007EF9C8 /* AFURLRequestSerialization.m in Sources */,
+				12B9286F1A0CAC05001CECDB /* FMDatabaseHelper.m in Sources */,
 				12127499199B5A6700DF005E /* FMTabbarView.m in Sources */,
 				12198C8A1A0C72710065A085 /* FMApiResponseShowList.m in Sources */,
 				12B56F2C19AB2501007B4397 /* NSData+DOUMappedFile.m in Sources */,

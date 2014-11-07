@@ -24,6 +24,7 @@
 #import "FMApiResponseUser.h"
 #import "FMApiResponseSong.h"
 #import "FMApiResponseShowList.h"
+#import "FMApiResponseShow.h"
 #import "FMShow.h"
 
 @interface FMRequestService : NSObject

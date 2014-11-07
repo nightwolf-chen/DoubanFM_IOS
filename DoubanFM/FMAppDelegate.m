@@ -24,6 +24,7 @@
 #import "FMDatabaseManager.h"
 #import "FMRequestService.h"
 #import "FMShow.h"
+#import "FMUpdateManager.h"
 
 @implementation FMAppDelegate
 
@@ -90,18 +91,7 @@
 //
     [FMPlayerManager sharedInstance];
     
-    
-    FMShow *aShow = [[[FMShow alloc] init] autorelease];
-    aShow.showid = @"335";
-    aShow.showName = @"rock";
-    
-    [[FMRequestService sharedService] sendShowRequestWithSuccess:^(FMApiResponse *response){
-        
-        
-        
-    } error:^(NSError *error){
-    
-    } show:aShow];
+    [[FMUpdateManager sharedManager] startUpdating];
     
 #endif
     

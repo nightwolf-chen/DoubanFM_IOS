@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDB.h"
+#import "FMDatabaseHelper.h"
 
 @interface FMDatabaseManager : NSObject
 
 @property (nonatomic,readonly) FMDatabaseQueue *databaseQueue;
+@property (nonatomic,readonly) FMDatabaseHelper *helper;
 
 + (instancetype)sharedManager;
+
+- (FMDatabase *)database;
 
 @end

@@ -40,10 +40,10 @@
         
         FMChannel *channel = [[FMChannel alloc] init];
         channel.nameCN = [channelData objectForKey:@"name"];
-        channel.nameEn = [channelData objectForKey:@"name_en"];
-        channel.channelId = [[channelData objectForKey:@"channel_id"] intValue];
-        channel.addr_en = [channelData objectForKey:@"abbr_en"];
-        
+        channel.nameEn = [channelData objectForKey:@"name"];
+        channel.channelId = [[channelData objectForKey:@"id"] intValue];
+        channel.coverImgUrl = [channelData objectForKey:@"cover"];
+        channel.introduction = [channelData objectForKey:@"intro"];
         [channels addObject:channel];
         
         [channel release];

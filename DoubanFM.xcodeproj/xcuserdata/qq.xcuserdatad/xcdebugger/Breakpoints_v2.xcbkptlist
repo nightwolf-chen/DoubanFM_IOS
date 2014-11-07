@@ -22,78 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanFM/FMAppDelegate.m"
-            timestampString = "437032479.016895"
+            filePath = "DoubanFM/engine/FMChannelUpdator.m"
+            timestampString = "437039720.848604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__59-[FMAppDelegate application:didFinishLaunchingWithOptions:]_block_invoke"
-                  moduleName = "DoubanFM"
-                  urlString = "file:///Users/qq/Documents/project/DoubanFM_IOS/DoubanFM/FMAppDelegate.m"
-                  timestampString = "437033235.237551"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "8">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__59-[FMAppDelegate application:didFinishLaunchingWithOptions:]_block_invoke_2"
-                  moduleName = "DoubanFM"
-                  urlString = "file:///Users/qq/Documents/project/DoubanFM_IOS/DoubanFM/FMAppDelegate.m"
-                  timestampString = "437033235.237725"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "8">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DoubanFM/response/FMApiResponseShow.m"
-            timestampString = "437032738.493829"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-paserJsonDataForChannels:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DoubanFM/response/FMApiResponseShow.m"
-            timestampString = "437032919.877642"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-paserJsonDataForChannels:"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-p_updateShow:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

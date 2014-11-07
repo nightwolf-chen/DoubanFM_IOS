@@ -11,11 +11,20 @@
 #import "FMRequestService.h"
 #import "FMMacros.h"
 #import "FMPlayerManager.h"
+#import "FMDatabaseManager.h"
+
+typedef enum FMDiscoverControllerButton{
+    FMDiscoverControllerButtonHZ,
+    FMDiscoverControllerButtonShow
+}FMDiscoverControllerButton;
 
 @interface FMDiscoverController ()
 
 @property (nonatomic,assign) FMDiscoverMusicView *contentView;
 @property (nonatomic,retain) NSArray *channels;
+@property (nonatomic,retain) NSArray *showChannels;
+@property (nonatomic,retain) NSArray *classicChannles;
+@property (nonatomic,retain) NSCache *imageCaches;
 
 @end
 
@@ -34,9 +43,35 @@
         _contentView.tableView.delegate = self;
         _contentView.tableView.dataSource = self;
         
+        _contentView.hzButton.tag = FMDiscoverControllerButtonHZ;
+        _contentView.showButton.tag = FMDiscoverControllerButtonShow;
+        [_contentView.hzButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_contentView.showButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.tabBarItem.title = @"发现音乐";
+        
+        _imageCaches = [[NSCache alloc] init];
     }
     return self;
+}
+
+- (void)buttonClicked:(id)sender
+{
+    UIButton *button = sender;
+    
+    switch (button.tag) {
+        case FMDiscoverControllerButtonShow:
+        {
+            self.channels = _showChannels;
+        }
+            break;
+            
+        case FMDiscoverControllerButtonHZ:
+        {
+            self.channels = _classicChannles;
+        }
+            break;
+    }
 }
 
 - (void)viewDidLoad
@@ -48,14 +83,11 @@
 
 - (void)loadChannels
 {
-    [[FMRequestService sharedService] sendFectchChannelRequestWithSuccess:^(FMApiResponse *response){
-        FMApiResponseChannel *channelResponse = (FMApiResponseChannel *)response;
-        self.channels = channelResponse.channels;
-        [_contentView.tableView reloadData];
-    }
-                                                                    error:^(NSError *error){
-                                                                        NSLog(@"%@",error.localizedDescription);
-                                                                    }];
+    FMDatabaseHelper *dbHelper = [FMDatabaseManager sharedManager].helper;
+    self.classicChannles = [dbHelper getChannels];
+    self.showChannels = [dbHelper getShows];
+    
+    self.channels = _classicChannles;
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +113,16 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
     
-    cell.textLabel.text =  ((FMChannel *)_channels[indexPath.row]).nameCN;
+    FMChannel *channelForCell = _channels[indexPath.row];
+    cell.textLabel.text = channelForCell.nameCN;
+    
+    UIImage *cellImage = [_imageCaches objectForKey:channelForCell.coverImgUrl];
+    if (!cellImage) {
+        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:channelForCell.coverImgUrl]];
+        cellImage = [UIImage imageWithData:imgData];
+        [_imageCaches setObject:cellImage forKey:channelForCell.coverImgUrl];
+    }
+    cell.imageView.image = cellImage;
     
     return cell;
 }
@@ -94,6 +135,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [FMPlayerManager sharedInstance].currentChannel = _channels[indexPath.row];
+}
+
+- (void)setChannels:(NSArray *)channels
+{
+    if (_channels) {
+        [_channels release];
+    }
+    
+    _channels = [channels retain];
+    
+    [_contentView.tableView reloadData];
 }
 
 @end
