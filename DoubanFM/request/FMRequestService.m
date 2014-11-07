@@ -66,6 +66,24 @@ static void *kKVOContext = &kKVOContext;
     [self p_sendRequest:request];
 }
 
+- (void)sendShowListRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+                                      error:(void (^)(NSError *))errorBlock
+{
+    FMApiRequest *request = [[FMApiRequestShowList alloc] initWithComplete:successBlock
+                                                                  errBlock:errorBlock];
+    [self p_sendRequest:request];
+}
+
+- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+                             error:(void (^)(NSError *))errorBlock
+                              show:(FMShow *)show
+{
+    FMApiRequest *request = [[FMApiRequestShow alloc] initWithComplete:successBlock
+                                                                  errBlock:errorBlock
+                                                                  show:show];
+    [self p_sendRequest:request];
+}
+
 
 - (void)p_sendRequest:(FMApiRequest *)reqeust
 {

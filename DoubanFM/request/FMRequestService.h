@@ -16,11 +16,15 @@
 #import "FMApiRequestSongInfo.h"
 #import "FMApiRequestChannel.h"
 #import "FMApiRequestUser.h"
+#import "FMApiRequestShowList.h"
+#import "FMApiRequestShow.h"
 
 #import "FMApiResponse.h"
 #import "FMApiResponseChannel.h"
 #import "FMApiResponseUser.h"
 #import "FMApiResponseSong.h"
+#import "FMApiResponseShowList.h"
+#import "FMShow.h"
 
 @interface FMRequestService : NSObject
 
@@ -36,4 +40,11 @@
 - (void)sendSongOperation:(FMApiRequestSongInfo *)info
                   success:(void (^)(FMApiResponse *))successBlock
                     error:(void (^)(NSError *))errorBlock;
+
+- (void)sendShowListRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+                                 error:(void (^)(NSError *))errorBlock;
+
+- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+                             error:(void (^)(NSError *))errorBlock
+                              show:(FMShow *)show;
 @end

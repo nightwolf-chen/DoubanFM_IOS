@@ -12,7 +12,9 @@
 typedef enum FMRequestType {
     FMRequestTypeSong,
     FMRequestTypeChannel,
-    FMRequestTypeUser
+    FMRequestTypeUser,
+    FMRequestTypeShowList,
+    FMRequestTypeShow
 }FMRequestType;
 
 

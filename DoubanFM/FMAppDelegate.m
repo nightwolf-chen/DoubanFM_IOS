@@ -7,27 +7,14 @@
 //
 
 #import "FMAppDelegate.h"
-#import "FMHttpClient.h"
-#import "FMUser.h"
-#import "FMApiRequestUser.h"
-#import "FMApiRequestChannel.h"
-#import "FMApiRequestSongInfo.h"
-#import "FMApiRequestSong.h"
-#import "FMApiResponseSong.h"
-#import "FMSong.h"
-#import "FMPlayerViewController.h"
-#import "FMHomeViewController.h"
-#import "FMDiscoverMusicView.h"
-#import "FMPlayerView.h"
 #import "FMTabbarView.h"
 #import "FMDynamicPlayViewController.h"
 #import "FMTabBarController.h"
-#import "FMChannelViewController.h"
 #import "FMDiscoverController.h"
 #import "FMMyMusicController.h"
+
 #import "FMPlayer.h"
-#import "FMApiRequestSong.h"
-#import "FMApiRequestSongInfo.h"
+
 #import "FMApiRequest.h"
 #import "FMApiResponse.h"
 #import "FMApiResponseSong.h"
@@ -35,6 +22,8 @@
 #import "FMPlayerManager.h"
 #import "DFMDatabaseCD.h"
 #import "FMDatabaseManager.h"
+#import "FMRequestService.h"
+#import "FMShow.h"
 
 @implementation FMAppDelegate
 
@@ -100,6 +89,19 @@
 //    [request sendRequest];
 //
     [FMPlayerManager sharedInstance];
+    
+    
+    FMShow *aShow = [[[FMShow alloc] init] autorelease];
+    aShow.showid = @"335";
+    aShow.showName = @"rock";
+    
+    [[FMRequestService sharedService] sendShowRequestWithSuccess:^(FMApiResponse *response){
+        
+        
+        
+    } error:^(NSError *error){
+    
+    } show:aShow];
     
 #endif
     

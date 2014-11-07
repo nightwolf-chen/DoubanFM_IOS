@@ -19,5 +19,9 @@
 
 - (BOOL)doGet:(NSString *)urlStr;
 
+- (BOOL)doGet:(NSString *)urlStr parameters:(NSDictionary *)values;
+
 + (NSString *)dicToURLParameterString:(NSDictionary *)values;
+
+- (BOOL)sendRequest:(NSString *) urlStr type:(NSString *)requestType parameters:(NSDictionary *)values;
 @end

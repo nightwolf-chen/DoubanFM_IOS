@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		12127499199B5A6700DF005E /* FMTabbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12127498199B5A6700DF005E /* FMTabbarView.m */; };
 		1212749C199B80CB00DF005E /* FMPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1212749B199B80CB00DF005E /* FMPlayerView.m */; };
+		12198C871A0C716C0065A085 /* FMApiRequestShowList.m in Sources */ = {isa = PBXBuildFile; fileRef = 12198C861A0C716C0065A085 /* FMApiRequestShowList.m */; };
+		12198C8A1A0C72710065A085 /* FMApiResponseShowList.m in Sources */ = {isa = PBXBuildFile; fileRef = 12198C891A0C72710065A085 /* FMApiResponseShowList.m */; };
 		121E569B19A5E7E800BCF0F3 /* FMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 121E569919A5E7E800BCF0F3 /* FMLoginViewController.m */; };
 		121E569C19A5E7E800BCF0F3 /* FMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 121E569A19A5E7E800BCF0F3 /* FMLoginViewController.xib */; };
 		121E56A019A5E80500BCF0F3 /* FMOffilineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 121E569E19A5E80500BCF0F3 /* FMOffilineViewController.m */; };
@@ -59,6 +61,9 @@
 		12B56F2A19AB2501007B4397 /* DOUMPMediaLibraryAssetLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56F1619AB2501007B4397 /* DOUMPMediaLibraryAssetLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F2B19AB2501007B4397 /* DOUSimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56F1819AB2501007B4397 /* DOUSimpleHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F2C19AB2501007B4397 /* NSData+DOUMappedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56F1A19AB2501007B4397 /* NSData+DOUMappedFile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		12B9285F1A0C91EA001CECDB /* FMApiRequestShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9285E1A0C91EA001CECDB /* FMApiRequestShow.m */; };
+		12B928621A0C9250001CECDB /* FMShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B928611A0C9250001CECDB /* FMShow.m */; };
+		12B928651A0C9679001CECDB /* FMApiResponseShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B928641A0C9679001CECDB /* FMApiResponseShow.m */; };
 		12C9713C19AED837007EF9C8 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712A19AED837007EF9C8 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12C9713D19AED837007EF9C8 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712C19AED837007EF9C8 /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12C9713E19AED837007EF9C8 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C9712E19AED837007EF9C8 /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -145,6 +150,10 @@
 		12127498199B5A6700DF005E /* FMTabbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMTabbarView.m; sourceTree = "<group>"; };
 		1212749A199B80CB00DF005E /* FMPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMPlayerView.h; sourceTree = "<group>"; };
 		1212749B199B80CB00DF005E /* FMPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMPlayerView.m; sourceTree = "<group>"; };
+		12198C851A0C716C0065A085 /* FMApiRequestShowList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestShowList.h; path = request/FMApiRequestShowList.h; sourceTree = "<group>"; };
+		12198C861A0C716C0065A085 /* FMApiRequestShowList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestShowList.m; path = request/FMApiRequestShowList.m; sourceTree = "<group>"; };
+		12198C881A0C72710065A085 /* FMApiResponseShowList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponseShowList.h; path = response/FMApiResponseShowList.h; sourceTree = "<group>"; };
+		12198C891A0C72710065A085 /* FMApiResponseShowList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponseShowList.m; path = response/FMApiResponseShowList.m; sourceTree = "<group>"; };
 		121E569819A5E7E800BCF0F3 /* FMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMLoginViewController.h; path = ui/FMLoginViewController.h; sourceTree = "<group>"; };
 		121E569919A5E7E800BCF0F3 /* FMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMLoginViewController.m; path = ui/FMLoginViewController.m; sourceTree = "<group>"; };
 		121E569A19A5E7E800BCF0F3 /* FMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMLoginViewController.xib; path = ui/FMLoginViewController.xib; sourceTree = "<group>"; };
@@ -242,6 +251,12 @@
 		12B56F1819AB2501007B4397 /* DOUSimpleHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOUSimpleHTTPRequest.m; sourceTree = "<group>"; };
 		12B56F1919AB2501007B4397 /* NSData+DOUMappedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DOUMappedFile.h"; sourceTree = "<group>"; };
 		12B56F1A19AB2501007B4397 /* NSData+DOUMappedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DOUMappedFile.m"; sourceTree = "<group>"; };
+		12B9285D1A0C91EA001CECDB /* FMApiRequestShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiRequestShow.h; path = request/FMApiRequestShow.h; sourceTree = "<group>"; };
+		12B9285E1A0C91EA001CECDB /* FMApiRequestShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiRequestShow.m; path = request/FMApiRequestShow.m; sourceTree = "<group>"; };
+		12B928601A0C9250001CECDB /* FMShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMShow.h; path = entities/FMShow.h; sourceTree = "<group>"; };
+		12B928611A0C9250001CECDB /* FMShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMShow.m; path = entities/FMShow.m; sourceTree = "<group>"; };
+		12B928631A0C9679001CECDB /* FMApiResponseShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMApiResponseShow.h; path = response/FMApiResponseShow.h; sourceTree = "<group>"; };
+		12B928641A0C9679001CECDB /* FMApiResponseShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMApiResponseShow.m; path = response/FMApiResponseShow.m; sourceTree = "<group>"; };
 		12C3D629197D2B58007CD6D6 /* FMRequestType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMRequestType.h; sourceTree = "<group>"; };
 		12C9712919AED837007EF9C8 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		12C9712A19AED837007EF9C8 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -650,6 +665,10 @@
 				30C9EB91193301AB00AFFA38 /* FMApiRequestUser.m */,
 				30C9EB93193301C900AFFA38 /* FMApiRequestChannel.h */,
 				30C9EB94193301C900AFFA38 /* FMApiRequestChannel.m */,
+				12198C851A0C716C0065A085 /* FMApiRequestShowList.h */,
+				12198C861A0C716C0065A085 /* FMApiRequestShowList.m */,
+				12B9285D1A0C91EA001CECDB /* FMApiRequestShow.h */,
+				12B9285E1A0C91EA001CECDB /* FMApiRequestShow.m */,
 			);
 			name = request;
 			sourceTree = "<group>";
@@ -665,6 +684,10 @@
 				30C9EB881932FFED00AFFA38 /* FMApiResponseUser.m */,
 				30C9EB8A1933000800AFFA38 /* FMApiResponseChannel.h */,
 				30C9EB8B1933000800AFFA38 /* FMApiResponseChannel.m */,
+				12198C881A0C72710065A085 /* FMApiResponseShowList.h */,
+				12198C891A0C72710065A085 /* FMApiResponseShowList.m */,
+				12B928631A0C9679001CECDB /* FMApiResponseShow.h */,
+				12B928641A0C9679001CECDB /* FMApiResponseShow.m */,
 			);
 			name = response;
 			sourceTree = "<group>";
@@ -682,6 +705,8 @@
 				30C9EBA1193303C500AFFA38 /* FMChannel.m */,
 				3083FC1F1955AE39006D6FAA /* FMUserCenter.h */,
 				3083FC201955AE39006D6FAA /* FMUserCenter.m */,
+				12B928601A0C9250001CECDB /* FMShow.h */,
+				12B928611A0C9250001CECDB /* FMShow.m */,
 			);
 			name = entities;
 			sourceTree = "<group>";
@@ -971,6 +996,7 @@
 				122BA9511A08C0F9004740EE /* DBManager.m in Sources */,
 				30C9EB891932FFED00AFFA38 /* FMApiResponseUser.m in Sources */,
 				3083FC211955AE39006D6FAA /* FMUserCenter.m in Sources */,
+				12B9285F1A0C91EA001CECDB /* FMApiRequestShow.m in Sources */,
 				30C9EB9F193303B400AFFA38 /* FMSong.m in Sources */,
 				12B56F2419AB2501007B4397 /* DOUAudioRenderer.m in Sources */,
 				12B56F2219AB2501007B4397 /* DOUAudioLPCM.m in Sources */,
@@ -980,8 +1006,10 @@
 				30B82F1D19BC65BB00114D04 /* FMPlayerCircleProgressView.m in Sources */,
 				12AF4C8F19A6E5DE004BDB0D /* FMTopBarView.m in Sources */,
 				128B45CE19B02455002CDA7F /* FMDouStreamAdaptor.m in Sources */,
+				12B928621A0C9250001CECDB /* FMShow.m in Sources */,
 				121E56AF19A5EE2F00BCF0F3 /* FMLocalSongsViewController.m in Sources */,
 				12B56F1C19AB2501007B4397 /* DOUAudioAnalyzer.m in Sources */,
+				12B928651A0C9679001CECDB /* FMApiResponseShow.m in Sources */,
 				12C9714319AED837007EF9C8 /* AFURLResponseSerialization.m in Sources */,
 				30C9EBA2193303C500AFFA38 /* FMChannel.m in Sources */,
 				12B56F1E19AB2501007B4397 /* DOUAudioEventLoop.m in Sources */,
@@ -993,12 +1021,14 @@
 				122BA9561A08C0FA004740EE /* FMResultSet.m in Sources */,
 				30C9EB95193301C900AFFA38 /* FMApiRequestChannel.m in Sources */,
 				30B8CD5E19371E7A002AD29A /* FMApiRequestSongInfo.m in Sources */,
+				12198C871A0C716C0065A085 /* FMApiRequestShowList.m in Sources */,
 				121E56A019A5E80500BCF0F3 /* FMOffilineViewController.m in Sources */,
 				12C9713C19AED837007EF9C8 /* AFHTTPRequestOperation.m in Sources */,
 				12B56F2619AB2501007B4397 /* DOUAudioStreamer+Options.m in Sources */,
 				122BA9521A08C0F9004740EE /* FMDatabase.m in Sources */,
 				12C9714219AED837007EF9C8 /* AFURLRequestSerialization.m in Sources */,
 				12127499199B5A6700DF005E /* FMTabbarView.m in Sources */,
+				12198C8A1A0C72710065A085 /* FMApiResponseShowList.m in Sources */,
 				12B56F2C19AB2501007B4397 /* NSData+DOUMappedFile.m in Sources */,
 				12E96B2B1A0B225100A9C4A0 /* FMRequestService.m in Sources */,
 				128B460119B07053002CDA7F /* FMTack.m in Sources */,

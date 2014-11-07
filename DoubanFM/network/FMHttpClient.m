@@ -59,6 +59,20 @@
     return YES;
 }
 
+- (BOOL)doGet:(NSString *)urlStr parameters:(NSDictionary *)values
+{
+    [[AFHTTPRequestOperationManager manager] GET:urlStr
+                                      parameters:values
+                                         success:^(AFHTTPRequestOperation *op,id respObj){
+                                             [_delegate client:self didFinishLoadingData:op.responseData];
+                                         }
+                                         failure:^(AFHTTPRequestOperation *op, NSError *error){
+                                             [_delegate client:self didFailWithError:error];
+                                         }];
+ 
+    return YES;
+}
+
 - (BOOL)sendRequest:(NSString *) urlStr type:(NSString *)requestType parameters:(NSDictionary *)values
 {
     NSURL *url = [NSURL URLWithString:urlStr];
