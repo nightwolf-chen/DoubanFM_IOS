@@ -12,6 +12,7 @@
 #import "FMMacros.h"
 #import "FMPlayerManager.h"
 #import "FMDatabaseManager.h"
+#import "FMChannelUpdator.h"
 
 typedef enum FMDiscoverControllerButton{
     FMDiscoverControllerButtonHZ,
@@ -51,6 +52,16 @@ typedef enum FMDiscoverControllerButton{
         self.tabBarItem.title = @"发现音乐";
         
         _imageCaches = [[NSCache alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadChannels)
+                                                     name:kFMChannelUpdatorDidUpdateChannels
+                                                   object:self];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadChannels)
+                                                     name:kFMChannelUpdatorDidUpdateShows
+                                                   object:self];
     }
     return self;
 }
@@ -89,6 +100,7 @@ typedef enum FMDiscoverControllerButton{
     
     self.channels = _classicChannles;
 }
+
 
 - (void)didReceiveMemoryWarning
 {

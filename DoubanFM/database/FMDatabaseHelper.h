@@ -12,5 +12,6 @@
 
 - (NSArray *)getChannels;
 - (NSArray *)getShows;
+- (NSArray *)getShowList;
 
 @end

@@ -10,6 +10,8 @@
 
 @interface FMEntity : NSObject
 
++ (NSString *)sqlCreateTable;
+
 - (void)syncWithDatabase;
 
 - (void)deleteFromDatabase;

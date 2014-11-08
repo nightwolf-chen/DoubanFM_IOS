@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DoubanFM/player/FMPlayerManager.m"
-            timestampString = "431866483.133268"
+            filePath = "DoubanFM/engine/FMChannelUpdator.m"
+            timestampString = "437114748.870743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-operateSongWithType:"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-updateShows"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

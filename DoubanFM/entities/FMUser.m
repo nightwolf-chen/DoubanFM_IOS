@@ -10,6 +10,16 @@
 #import "FMDatabaseManager.h"
 #import "FMDB.h"
 
+static NSString *const kSQLCreateTableUsers = @" create table if not exists  fm_users ( \
+username text primary key, \
+password text, \
+token text, \
+expire text, \
+userid text \
+);";
+
+
+
 static NSString *const kSQLInsertTemplate = @"insert into fm_users values(?,?,?,?,?,?)";
 
 static NSString *const kSQLUpdateTemplate = @"update fm_users set \
@@ -34,6 +44,11 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_users where usernam
     [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
         [db executeUpdate:kSQLDeleteTemplate,_username];
     }];
+}
+
++ (NSString *)sqlCreateTable
+{
+    return kSQLCreateTableUsers;
 }
 
 @end

@@ -725,10 +725,10 @@
 				30C9EB9E193303B400AFFA38 /* FMSong.m */,
 				30C9EBA0193303C500AFFA38 /* FMChannel.h */,
 				30C9EBA1193303C500AFFA38 /* FMChannel.m */,
-				3083FC1F1955AE39006D6FAA /* FMUserCenter.h */,
-				3083FC201955AE39006D6FAA /* FMUserCenter.m */,
 				12B928601A0C9250001CECDB /* FMShow.h */,
 				12B928611A0C9250001CECDB /* FMShow.m */,
+				3083FC1F1955AE39006D6FAA /* FMUserCenter.h */,
+				3083FC201955AE39006D6FAA /* FMUserCenter.m */,
 			);
 			name = entities;
 			sourceTree = "<group>";

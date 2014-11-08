@@ -10,46 +10,11 @@
 
 static NSString *const kDatabaseName = @"FMDatabaseFile.sqlite";
 
-static NSString *const kSQLCreateTableSongs = @" create table if not exists fm_songs ( \
-song_title text , \
-album_page_url text, \
-album_title text, \
-picture_url text, \
-ssid text, \
-artist text, \
-song_url text, \
-company text, \
-subtype text, \
-sid text, \
-aid text, \
-sha256 text, \
-like int, \
-length int, \
-rating_average real, \
-song_type int, \
-current_channel int, \
-primary key(song_title,artist,song_type,current_channel) \
-);";
+@interface FMDatabaseManager ()
 
-static NSString *const kSQLCreateTableChannels = @" create table if not exists fm_channels( \
-channel_id int primary key , \
-song_number int, \
-name_en text, \
-name_cn text, \
-category_id text, \
-category_name text, \
-addr_en text, \
-cover_img_url text, \
-introduction text \
-);";
+@property (nonatomic,retain) NSArray *entityClasses;
 
-static NSString *const kSQLCreateTableUsers = @" create table if not exists  fm_users ( \
-username text primary key, \
-password text, \
-token text, \
-expire text, \
-userid text \
-);";
+@end
 
 @implementation FMDatabaseManager
 
@@ -69,12 +34,15 @@ userid text \
     if (self = [super init]) {
         
         _databaseQueue = [[FMDatabaseQueue alloc ] initWithPath:[self databaseFilePath]];
-        _helper = [[FMDatabaseHelper alloc] init]
-        ;
+        _helper = [[FMDatabaseHelper alloc] init];
+        
+        _entityClasses = @[[FMSong class],[FMUser class],[FMShow class],[FMChannel class]];
+        [_entityClasses retain];
+        
         [_databaseQueue inDatabase:^(FMDatabase *db){
-            [db executeUpdate:kSQLCreateTableSongs];
-            [db executeUpdate:kSQLCreateTableChannels];
-            [db executeUpdate:kSQLCreateTableUsers];
+            for(Class clazz in _entityClasses){
+                [db executeUpdate:[clazz sqlCreateTable]];
+            }
         }];
     }
     

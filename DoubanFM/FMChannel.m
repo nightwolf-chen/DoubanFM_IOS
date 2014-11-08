@@ -9,6 +9,20 @@
 #import "FMChannel.h"
 #import "FMDatabaseManager.h"
 
+static NSString *const kSQLCreateTableChannels = @" create table if not exists fm_channels( \
+channel_id int primary key , \
+song_number int, \
+name_en text, \
+name_cn text, \
+category_id text, \
+category_name text, \
+addr_en text, \
+cover_img_url text, \
+introduction text \
+);";
+
+
+
 static NSString *const kSQLInsertTemplate = @"insert into fm_channels values(?,?,?,?,?,?,?,?,?)";
 
 static NSString *const kSQLUpdateTemplate = @"update fm_channels set  \
@@ -36,4 +50,8 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_channels where chan
     }];
 }
 
++ (NSString *)sqlCreateTable
+{
+    return kSQLCreateTableChannels;
+}
 @end

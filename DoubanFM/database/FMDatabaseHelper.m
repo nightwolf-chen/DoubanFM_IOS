@@ -68,4 +68,24 @@
  
 }
 
+- (NSArray *)getShowList
+{
+    NSMutableArray *tmpArray = [NSMutableArray array];
+    
+    FMDatabase *db = [[FMDatabaseManager sharedManager] database];
+    [db open];
+    FMResultSet *rs = [db executeQuery:@"select * from fm_shows"];
+    
+    while([rs next]){
+        FMShow *show = [[[FMShow alloc] init] autorelease];
+        show.showid = [rs stringForColumn:@"show_id"];
+        show.showName = [rs stringForColumn:@"show_name"];
+        
+        [tmpArray addObject:show];
+    }
+    [db close];
+    return tmpArray;
+ 
+}
+
 @end

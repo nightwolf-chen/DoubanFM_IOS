@@ -8,6 +8,7 @@
 
 #import "FMChannelUpdator.h"
 #import "FMRequestService.h"
+#import "FMDatabaseManager.h"
 
 NSString *const kFMChannelUpdatorDidUpdateChannels = @"kFMChannelUpdatorDidUpdateChannels";
 NSString *const kFMChannelUpdatorDidUpdateShows = @"kFMChannelUpdatorDidUpdateShows";
@@ -49,10 +50,18 @@ NSString *const kFMChannelUpdatorFailed = @"kFMChannelUpdatorFailed";
 
 - (void)updateShows
 {
+    FMDatabaseHelper *dbHelper = [FMDatabaseManager sharedManager].helper;
+    
+    NSArray *showList = [dbHelper getShowList];
+    if (showList.count > 0) {
+        return;
+    }
+    
     [[FMRequestService sharedService] sendShowListRequestWithSuccess:^(FMApiResponse *response){
         
         FMApiResponseShowList *showListResp = (FMApiResponseShowList *)response;
         for(FMShow *show in showListResp.categorys){
+            [show syncWithDatabase];
             [self p_updateShow:show];
         }
         

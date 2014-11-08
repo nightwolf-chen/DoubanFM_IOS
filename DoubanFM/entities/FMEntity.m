@@ -20,4 +20,9 @@
 {
     NSLog(@"Implement this method to delete this object from database.");
 }
+
++ (NSString *)sqlCreateTable
+{
+    return @"";
+}
 @end

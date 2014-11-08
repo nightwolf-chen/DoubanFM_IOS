@@ -9,6 +9,29 @@
 #import "FMSong.h"
 #import "FMDatabaseManager.h"
 
+static NSString *const kSQLCreateTableSongs = @" create table if not exists fm_songs ( \
+song_title text , \
+album_page_url text, \
+album_title text, \
+picture_url text, \
+ssid text, \
+artist text, \
+song_url text, \
+company text, \
+subtype text, \
+sid text, \
+aid text, \
+sha256 text, \
+like int, \
+length int, \
+rating_average real, \
+song_type int, \
+current_channel int, \
+primary key(song_title,artist,song_type,current_channel) \
+);";
+
+
+
 static NSString *const kSQLInsertTemplate = @"insert into fm_songs values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 static NSString *const kSQLUpdateTemplate = @"update fm_songs set  \
@@ -43,6 +66,11 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_songs where  song_t
     [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
         [db executeUpdate:kSQLDeleteTemplate,_songTitle,_artist,@(_songType),@(_currentChannel)];
     }];
+}
+
++ (NSString *)sqlCreateTable
+{
+    return kSQLCreateTableSongs;
 }
 
 @end

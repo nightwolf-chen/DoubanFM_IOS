@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "FMDB.h"
 #import "FMDatabaseHelper.h"
+#import "FMUser.h"
+#import "FMChannel.h"
+#import "FMShow.h"
+#import "FMSong.h"
 
 @interface FMDatabaseManager : NSObject
 
