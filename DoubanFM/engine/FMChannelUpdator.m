@@ -77,9 +77,17 @@ NSString *const kFMChannelUpdatorFailed = @"kFMChannelUpdatorFailed";
 {
     [[FMRequestService sharedService] sendFectchChannelRequestWithSuccess:^(FMApiResponse *resp){
         FMApiResponseChannel *channelResp = (FMApiResponseChannel *)resp;
+        int index = 0;
         for(FMChannel *channel in channelResp.channels){
-            [channel syncWithDatabase];
+            [channel syncWithDatabase:^(BOOL is){
+                if (index == channelResp.channels.count - 1) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorDidUpdateChannels
+                                                                        object:self];
+                }
+            }];
+            index++;
         }
+        
     } error:^(NSError *error){
         [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorFailed object:self];
         NSLog(@"Update showlist error!");
@@ -90,17 +98,20 @@ NSString *const kFMChannelUpdatorFailed = @"kFMChannelUpdatorFailed";
 - (void)p_updateShow:(FMShow *)show
 {
     [[FMRequestService sharedService] sendShowRequestWithSuccess:^(FMApiResponse *response){
+        
+        self.showCount = _showCount-1;
+        
         FMApiResponseShow *showResp = (FMApiResponseShow *)response;
+        int index = 0;
         for(FMChannel *channel in showResp.channels){
             channel.categoryId = show.showid;
             channel.categoryName = show.showName;
-            [channel syncWithDatabase];
-//            NSLog(@"Saving channle:%@ to database.",channel.nameCN);
-        }
-        
-        self.showCount = _showCount-1;
-        if (_showCount <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorDidUpdateShows object:self];
+            [channel syncWithDatabase:^(BOOL is){
+                if (index == showResp.channels.count-1 && _showCount <= 0) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorDidUpdateShows object:self];
+                }
+            }];
+            index++;
         }
         
     } error:^(NSError *error){

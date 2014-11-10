@@ -8,12 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+@class FMDatabase;
+
 @interface FMEntity : NSObject
 
 + (NSString *)sqlCreateTable;
 
 - (void)syncWithDatabase;
 
+- (void)syncWithDatabase:(void (^)(BOOL)) completeBlock;
+
 - (void)deleteFromDatabase;
+
+- (void)deleteFromDatabase:(void (^)(BOOL)) completeBlock;
+
+- (void (^)(FMDatabase *))syncBlock;
+- (void (^)(FMDatabase *))deleteBlock;
 
 @end

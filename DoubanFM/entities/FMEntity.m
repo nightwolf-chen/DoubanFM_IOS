@@ -13,12 +13,49 @@
 
 - (void)syncWithDatabase
 {
-    NSLog(@"Implement this method to sync data with database.");
+    void (^block)(FMDatabase *) = [self syncBlock];
+    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:block];
+    Block_release(block);
 }
 
 - (void)deleteFromDatabase
 {
-    NSLog(@"Implement this method to delete this object from database.");
+    void (^block)(FMDatabase *) = [self deleteBlock];
+    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:[self deleteBlock]];
+    Block_release(block);
+}
+
+- (void)syncWithDatabase:(void (^)(BOOL))completeBlock
+{
+    void (^block)(FMDatabase *) = [self syncBlock];
+    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
+        block(db);
+        completeBlock(YES);
+    }];
+    Block_release(block);
+}
+
+- (void)deleteFromDatabase:(void (^)(BOOL))completeBlock
+{
+    void (^block)(FMDatabase *) = [self deleteBlock];
+    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
+        block(db);
+        completeBlock(YES);
+    }];
+    
+    Block_release(block);
+}
+
+- (void (^)(FMDatabase *))deleteBlock
+{
+    NSAssert(NO, @"Needs an implementation");
+    return NULL;
+}
+
+- (void (^)(FMDatabase *))syncBlock
+{
+    NSAssert(NO, @"Needs an implementation");
+    return NULL;
 }
 
 + (NSString *)sqlCreateTable

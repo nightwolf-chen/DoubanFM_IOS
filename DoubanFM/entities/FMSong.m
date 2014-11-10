@@ -45,9 +45,18 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_songs where  song_t
 @implementation FMSong
 
 
-- (void)syncWithDatabase
+- (void (^)(FMDatabase *))deleteBlock
 {
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
+        [db executeUpdate:kSQLDeleteTemplate,_songTitle,_artist,@(_songType),@(_currentChannel)];
+    };
+    
+    return Block_copy(block);
+}
+
+- (void (^)(FMDatabase *))syncBlock
+{
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
         if(![db executeUpdate:kSQLInsertTemplate,_songTitle,_albumPageUrl,_albumTitle,
              _pictureUrl,_ssid,_artist,_songUrl,_company,_subtype,_sid,_aid,_sha256,@(_like),
              @(_length),@(_ratingAverage),@(_songType),@(_currentChannel)]){
@@ -58,14 +67,10 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_songs where  song_t
              @(_length),@(_ratingAverage),@(_songType),@(_currentChannel),_songTitle,_artist,@(_songType),@(_currentChannel)];
             
         }
-    }];
-}
 
-- (void)deleteFromDatabase
-{
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
-        [db executeUpdate:kSQLDeleteTemplate,_songTitle,_artist,@(_songType),@(_currentChannel)];
-    }];
+    };
+    
+    return Block_copy(block);
 }
 
 + (NSString *)sqlCreateTable

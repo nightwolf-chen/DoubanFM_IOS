@@ -56,12 +56,12 @@ typedef enum FMDiscoverControllerButton{
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(loadChannels)
                                                      name:kFMChannelUpdatorDidUpdateChannels
-                                                   object:self];
+                                                   object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(loadChannels)
                                                      name:kFMChannelUpdatorDidUpdateShows
-                                                   object:self];
+                                                   object:nil];
     }
     return self;
 }
@@ -165,6 +165,7 @@ typedef enum FMDiscoverControllerButton{
     _channels = [channels retain];
     
     [_contentView.tableView reloadData];
+    [_contentView.tableView setContentOffset:CGPointMake(0, 0)];
 }
 
 @end

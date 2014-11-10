@@ -27,19 +27,23 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_shows where show_id
     return kSQLCreateTableShows;
 }
 
-- (void)syncWithDatabase
+- (void (^)(FMDatabase *))deleteBlock
 {
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
+        [db executeUpdate:kSQLDeleteTemplate,_showid];
+    };
+    
+   return Block_copy(block);
+}
+
+- (void (^)(FMDatabase *))syncBlock
+{
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
         if(![db executeUpdate:kSQLInsertTemplate,_showid,_showName]){
             [db executeUpdate:kSQLUpdateTemplate,_showid,_showName,_showid];
         }
-    }];
-}
-
-- (void)deleteFromDatabase
-{
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
-        [db executeUpdate:kSQLDeleteTemplate,_showid];
-    }];
+    };
+    
+     return Block_copy(block);
 }
 @end

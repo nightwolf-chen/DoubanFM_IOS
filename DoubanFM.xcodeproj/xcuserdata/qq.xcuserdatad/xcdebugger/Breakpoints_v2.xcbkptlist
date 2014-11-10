@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DoubanFM/engine/FMChannelUpdator.m"
-            timestampString = "437039720.848604"
+            timestampString = "437309298.274364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "@implementation FMChannelUpdator"
             landmarkType = "3">
          </BreakpointContent>

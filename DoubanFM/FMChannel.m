@@ -33,21 +33,24 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_channels where chan
 
 @implementation FMChannel
 
-
-- (void)syncWithDatabase
+- (void (^)(FMDatabase *))deleteBlock
 {
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
+        [db executeUpdate:kSQLDeleteTemplate,@(_channelId)];
+    };
+    
+    return Block_copy(block);
+}
+
+- (void (^)(FMDatabase *))syncBlock
+{
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
         if(![db executeUpdate:kSQLInsertTemplate,@(_channelId),@(_songNumber),_nameEn,_nameCN,_categoryId,_categoryName,_addr_en,_coverImgUrl,_introduction]){
             [db executeUpdate:kSQLUpdateTemplate,_songNumber,_nameEn,_nameCN,_categoryId,_categoryName,_addr_en,_coverImgUrl,_introduction,@(_channelId)];
         }
-    }];
-}
-
-- (void)deleteFromDatabase
-{
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
-        [db executeUpdate:kSQLDeleteTemplate,@(_channelId)];
-    }];
+    };
+    
+    return Block_copy(block);
 }
 
 + (NSString *)sqlCreateTable

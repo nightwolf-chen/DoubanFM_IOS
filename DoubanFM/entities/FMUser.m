@@ -30,20 +30,25 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_users where usernam
 
 @implementation FMUser
 
-- (void)syncWithDatabase
+
+- (void (^)(FMDatabase *))deleteBlock
 {
-   [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
-        if(![db executeUpdate:kSQLInsertTemplate,_username,_password,_email,_token,_expire,_userid]){
-            [db executeUpdate:kSQLUpdateTemplate,_password,_email,_token,_expire,_userid,_username];
-        }
-    }];
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
+        [db executeUpdate:kSQLDeleteTemplate,_username];
+    };
+    
+     return Block_copy(block);
 }
 
-- (void)deleteFromDatabase
+- (void (^)(FMDatabase *))syncBlock
 {
-    [[FMDatabaseManager sharedManager].databaseQueue inDatabase:^(FMDatabase *db){
-        [db executeUpdate:kSQLDeleteTemplate,_username];
-    }];
+    void (^block)(FMDatabase *) = ^(FMDatabase *db){
+            if(![db executeUpdate:kSQLInsertTemplate,_username,_password,_email,_token,_expire,_userid]){
+            [db executeUpdate:kSQLUpdateTemplate,_password,_email,_token,_expire,_userid,_username];
+        }
+    };
+    
+    return Block_copy(block);
 }
 
 + (NSString *)sqlCreateTable
