@@ -80,6 +80,7 @@
 		12D9C7CE19DA90CC0002FF4B /* DFMDatabaseCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D9C7CD19DA90CC0002FF4B /* DFMDatabaseCD.m */; };
 		12D9C7D019DA97BE0002FF4B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D9C7CF19DA97BE0002FF4B /* CoreData.framework */; };
 		12E96B2B1A0B225100A9C4A0 /* FMRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */; };
+		12ED298F1A1098A700374DA2 /* FMImagePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ED298E1A1098A700374DA2 /* FMImagePool.m */; };
 		30395753194D9BFC00D76121 /* FMAVPlayerAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 30395752194D9BFC00D76121 /* FMAVPlayerAdapter.m */; };
 		30395758194D9E6E00D76121 /* FMPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30395756194D9E6E00D76121 /* FMPlayerViewController.m */; };
 		30395759194D9E6E00D76121 /* FMPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30395757194D9E6E00D76121 /* FMPlayerViewController.xib */; };
@@ -292,6 +293,8 @@
 		12D9C7CF19DA97BE0002FF4B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		12E96B291A0B225100A9C4A0 /* FMRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMRequestService.h; path = request/FMRequestService.h; sourceTree = "<group>"; };
 		12E96B2A1A0B225100A9C4A0 /* FMRequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMRequestService.m; path = request/FMRequestService.m; sourceTree = "<group>"; };
+		12ED298D1A1098A700374DA2 /* FMImagePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMImagePool.h; sourceTree = "<group>"; };
+		12ED298E1A1098A700374DA2 /* FMImagePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMImagePool.m; sourceTree = "<group>"; };
 		30395751194D9BFC00D76121 /* FMAVPlayerAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMAVPlayerAdapter.h; path = player/FMAVPlayerAdapter.h; sourceTree = "<group>"; };
 		30395752194D9BFC00D76121 /* FMAVPlayerAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMAVPlayerAdapter.m; path = player/FMAVPlayerAdapter.m; sourceTree = "<group>"; };
 		30395755194D9E6E00D76121 /* FMPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMPlayerViewController.h; path = ui/FMPlayerViewController.h; sourceTree = "<group>"; };
@@ -568,6 +571,8 @@
 				12B928681A0CA004001CECDB /* FMUpdateManager.m */,
 				12B9286A1A0CA22A001CECDB /* FMChannelUpdator.h */,
 				12B9286B1A0CA22A001CECDB /* FMChannelUpdator.m */,
+				12ED298D1A1098A700374DA2 /* FMImagePool.h */,
+				12ED298E1A1098A700374DA2 /* FMImagePool.m */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -997,6 +1002,7 @@
 				12AF4C9519A7252E004BDB0D /* FMDynamicPlayViewController.m in Sources */,
 				30C9EB9C1933038300AFFA38 /* FMUser.m in Sources */,
 				30E80E2F1931D7A9001E334B /* FMHttpClient.m in Sources */,
+				12ED298F1A1098A700374DA2 /* FMImagePool.m in Sources */,
 				12B56F2319AB2501007B4397 /* DOUAudioPlaybackItem.m in Sources */,
 				12B56F2019AB2501007B4397 /* DOUAudioFileProvider.m in Sources */,
 				121E569B19A5E7E800BCF0F3 /* FMLoginViewController.m in Sources */,

@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "FMPlayer.h"
 
+extern NSString *const FMPlayerManagerChannelChanged;
+
+extern NSString *const FMPlayerManagerChannelChangedKeyChannel;
+
 @class FMChannel;
 
 @interface FMPlayerManager : NSObject<FMPlayerDelegate>

@@ -13,6 +13,7 @@
 #import "FMPlayerManager.h"
 #import "FMDatabaseManager.h"
 #import "FMChannelUpdator.h"
+#import "FMImagePool.h"
 
 typedef enum FMDiscoverControllerButton{
     FMDiscoverControllerButtonHZ,
@@ -25,7 +26,6 @@ typedef enum FMDiscoverControllerButton{
 @property (nonatomic,retain) NSArray *channels;
 @property (nonatomic,retain) NSArray *showChannels;
 @property (nonatomic,retain) NSArray *classicChannles;
-@property (nonatomic,retain) NSCache *imageCaches;
 
 @end
 
@@ -50,8 +50,6 @@ typedef enum FMDiscoverControllerButton{
         [_contentView.showButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         self.tabBarItem.title = @"发现音乐";
-        
-        _imageCaches = [[NSCache alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(loadChannels)
@@ -122,19 +120,24 @@ typedef enum FMDiscoverControllerButton{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if(!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier] autorelease];
     }
     
     FMChannel *channelForCell = _channels[indexPath.row];
     cell.textLabel.text = channelForCell.nameCN;
     
-    UIImage *cellImage = [_imageCaches objectForKey:channelForCell.coverImgUrl];
-    if (!cellImage) {
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:channelForCell.coverImgUrl]];
-        cellImage = [UIImage imageWithData:imgData];
-        [_imageCaches setObject:cellImage forKey:channelForCell.coverImgUrl];
+    if (!channelForCell.coverImgUrl) {
+        cell.imageView.image = nil;
+    }else{
+    
+        [[FMImagePool sharedPool] imageByURL:channelForCell.coverImgUrl completion:^(UIImage *image,BOOL cached){
+            cell.imageView.image = image;
+            if (!cached) {
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+        
     }
-    cell.imageView.image = cellImage;
     
     return cell;
 }

@@ -17,6 +17,8 @@
 #import "DOUStreamPlayer/DOUAudioStreamer.h"
 #import "FMRequestService.h"
 
+NSString *const FMPlayerManagerChannelChanged = @"FMPlayerManagerChannelChanged";
+NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChannelChangedKeyChannel";
 
 @implementation FMPlayerManager
 
@@ -86,8 +88,6 @@
                                                     FMApiResponseSong *songResp = (FMApiResponseSong *)response;
                                                     _activePlayer.songs = songResp.songs;
                                                     
-//                                                    [songResp.songs[0] syncWithDatabase];
-                                                    
                                                     for(FMSong *song in songResp.songs){
                                                         [song syncWithDatabase];
                                                     }
@@ -129,7 +129,13 @@
     }
     
     [self.activePlayer stop];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:FMPlayerManagerChannelChanged
+                                                        object:self
+                                                      userInfo:@{FMPlayerManagerChannelChangedKeyChannel:_currentChannel}];
+    
     [self loadSongsFromServer:type];
+    
 }
 
 - (FMApiRequestSongInfo *)requestInfoForCurrentSongWithType:(SongRequestType)type;

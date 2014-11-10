@@ -12,6 +12,8 @@
 #import "FMPlayerManager.h"
 #import "FMSong.h"
 #import "FMPlayerCircleProgressView.h"
+#import "FMImagePool.h"
+#import "FMChannel.h"
 
 static NSString *const kKVOPathCurrentSong = @"currentSong";
 
@@ -21,6 +23,7 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
 @property (nonatomic,assign) UILabel *songNameLabel;
 @property (nonatomic,assign) UILabel *artistLabel;
 @property (nonatomic,assign) UIButton *playButton;
+@property (nonatomic,assign) UIButton *channelButton;
 
 @property (nonatomic,assign) FMPlayerCircleProgressView *progreesView;
 
@@ -100,6 +103,7 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
     self.artistLabel = (UILabel *)[self.view viewWithTag:FMPlayerViewTagLabelArtist];
     self.playButton = (UIButton *)[self.view viewWithTag:FMPlayerViewTagButtonPlay];
     self.progreesView = (FMPlayerCircleProgressView *)[self.view viewWithTag:FMPlayerViewTagProgressView];
+    self.channelButton = (UIButton *)[self.view viewWithTag:FMPlayerViewTagButtonChannel];
 }
 
 - (void)buttonClicked:(id)sender
@@ -169,20 +173,15 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
         FMSong *song = change[@"new"];
         
         if ([song isKindOfClass:FMSong.class]) {
-        
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:song.pictureUrl]];
-                UIImage *image = [UIImage imageWithData:data];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_playButton setBackgroundImage:image forState:UIControlStateNormal];
-                    [_playButton setBackgroundImage:image forState:UIControlStateSelected];
-                    _songNameLabel.text = song.songTitle;
-                    _artistLabel.text = song.artist;
-                });
-                
-            });
+            
+            [[FMImagePool sharedPool] imageByURL:song.pictureUrl completion:^(UIImage *image,BOOL cached){
+                [_playButton setBackgroundImage:image forState:UIControlStateNormal];
+                [_playButton setBackgroundImage:image forState:UIControlStateSelected];
+                _songNameLabel.text = song.songTitle;
+                _artistLabel.text = song.artist;
+                [_channelButton setTitle:[FMPlayerManager sharedInstance].currentChannel.nameCN forState:UIControlStateNormal];
+                [_channelButton setTitle:[FMPlayerManager sharedInstance].currentChannel.nameCN forState:UIControlStateSelected];
+            }];
             
         }
     }

@@ -36,9 +36,9 @@
             [tmpArray addObject:aShow];
         }];
         
+        _categorys = [tmpArray retain];
     }
     
-    _categorys = [tmpArray retain];
     [content release];
     
     return self;
