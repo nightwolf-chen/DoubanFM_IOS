@@ -15,6 +15,8 @@
 #import "FMChannelUpdator.h"
 #import "FMImagePool.h"
 
+static const NSInteger kDefaultSection = 0;
+
 typedef enum FMDiscoverControllerButton{
     FMDiscoverControllerButtonHZ,
     FMDiscoverControllerButtonShow
@@ -133,7 +135,9 @@ typedef enum FMDiscoverControllerButton{
         [[FMImagePool sharedPool] imageByURL:channelForCell.coverImgUrl completion:^(UIImage *image,BOOL cached){
             cell.imageView.image = image;
             if (!cached) {
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                if (indexPath.row < [tableView numberOfRowsInSection:kDefaultSection]) {
+                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
             }
         }];
         
