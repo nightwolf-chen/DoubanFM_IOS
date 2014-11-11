@@ -13,7 +13,7 @@
 @interface FMApiRequestSong : FMApiRequest
 
 - (id)init:(FMApiRequestSongInfo *)info
-completion:(void (^)(FMApiResponse *)) completeBlock
-  errBlock:(void (^)(NSError *)) errBlock;
+completion:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock
+  errBlock:(void (^)(NSError *))errBlock;
 
 @end

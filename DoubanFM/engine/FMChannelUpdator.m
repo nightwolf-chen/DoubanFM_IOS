@@ -9,6 +9,7 @@
 #import "FMChannelUpdator.h"
 #import "FMRequestService.h"
 #import "FMDatabaseManager.h"
+#import "NSNotificationCenter+DoubanFM.h"
 
 NSString *const kFMChannelUpdatorDidUpdateChannels = @"kFMChannelUpdatorDidUpdateChannels";
 NSString *const kFMChannelUpdatorDidUpdateShows = @"kFMChannelUpdatorDidUpdateShows";
@@ -16,7 +17,7 @@ NSString *const kFMChannelUpdatorFailed = @"kFMChannelUpdatorFailed";
 
 @interface FMChannelUpdator ()
 
-@property (nonatomic,assign) NSInteger showCount;
+@property (nonatomic,retain) NSOperationQueue *operationQueue;
 
 @end
 
@@ -36,7 +37,7 @@ NSString *const kFMChannelUpdatorFailed = @"kFMChannelUpdatorFailed";
 - (id)_init
 {
     if (self = [super init]) {
-        
+        _operationQueue = [[NSOperationQueue alloc] init];
     }
     
     return self;
@@ -48,82 +49,71 @@ NSString *const kFMChannelUpdatorFailed = @"kFMChannelUpdatorFailed";
     [self updateClassicalChannels];
 }
 
+- (void)updateClassicalChannels
+{
+    [_operationQueue addOperationWithBlock:^{
+        [self p_updateClassicalChannels];
+    }];
+}
+
 - (void)updateShows
+{
+    [self p_updateShows];
+}
+
+- (void)p_updateShows
 {
     FMDatabaseHelper *dbHelper = [FMDatabaseManager sharedManager].helper;
     
     NSArray *showList = [dbHelper getShowList];
-    if (showList.count > 0) {
-        return;
-    }
     
-    [[FMRequestService sharedService] sendShowListRequestWithSuccess:^(FMApiResponse *response){
+    if (showList.count > 0) {return;}
+    
+    [[FMRequestService sharedService] sendShowListRequestWithSuccess:^(FMApiResponse *response,FMApiRequest *req){
         
         FMApiResponseShowList *showListResp = (FMApiResponseShowList *)response;
-        for(FMShow *show in showListResp.categorys){
+        for(FMShow *show in showListResp.categorys) {
             [show syncWithDatabase];
-            [self p_updateShow:show];
         }
         
-        self.showCount = showListResp.categorys.count;
+        [[FMRequestService sharedService] sendShowRequestWithSuccess:^(FMApiResponse *resp,FMApiRequest *req){
+            FMApiResponseShow *showResp = (FMApiResponseShow *)resp;
+            FMApiRequestShow *showReq = (FMApiRequestShow *)req;
+            for(FMChannel *channel in showResp.channels){
+                channel.categoryId = showReq.showRequested.showid;
+                channel.categoryName = showReq.showRequested.showName;
+                [channel syncWithDatabase];
+            }
+        }error:^(NSError *err){
+            NSLog(@"update shows error!");
+        }shows:showListResp.categorys completion:^{
+            [[NSNotificationCenter defaultCenter] postOnMainNotificationName:kFMChannelUpdatorDidUpdateShows object:self];
+        }];
         
     }error:^(NSError *error){
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorFailed object:self];
+        [[NSNotificationCenter defaultCenter] postOnMainNotificationName:kFMChannelUpdatorFailed object:self];
         NSLog(@"Update showlist error!");
     }];
 }
 
-- (void)updateClassicalChannels
+
+
+- (void)p_updateClassicalChannels
 {
-    [[FMRequestService sharedService] sendFectchChannelRequestWithSuccess:^(FMApiResponse *resp){
+    [[FMRequestService sharedService] sendFectchChannelRequestWithSuccess:^(FMApiResponse *resp,FMApiRequest *req){
+        
         FMApiResponseChannel *channelResp = (FMApiResponseChannel *)resp;
-        int index = 0;
         for(FMChannel *channel in channelResp.channels){
-            [channel syncWithDatabase:^(BOOL is){
-                if (index == channelResp.channels.count - 1) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorDidUpdateChannels
-                                                                        object:self];
-                }
-            }];
-            index++;
+            [channel syncWithDatabase];
         }
+        [[NSNotificationCenter defaultCenter] postOnMainNotificationName:kFMChannelUpdatorDidUpdateChannels
+                                                                   object:self];
         
     } error:^(NSError *error){
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorFailed object:self];
-        NSLog(@"Update showlist error!");
+        [[NSNotificationCenter defaultCenter] postOnMainNotificationName:kFMChannelUpdatorFailed object:self];
+        NSLog(@"Update classical channels error!");
     }];
+ 
 }
 
-
-- (void)p_updateShow:(FMShow *)show
-{
-    [[FMRequestService sharedService] sendShowRequestWithSuccess:^(FMApiResponse *response){
-        
-        self.showCount = _showCount-1;
-        
-        FMApiResponseShow *showResp = (FMApiResponseShow *)response;
-        int index = 0;
-        for(FMChannel *channel in showResp.channels){
-            channel.categoryId = show.showid;
-            channel.categoryName = show.showName;
-            [channel syncWithDatabase:^(BOOL is){
-                if (index == showResp.channels.count-1 && _showCount <= 0) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorDidUpdateShows object:self];
-                }
-            }];
-            index++;
-        }
-        
-    } error:^(NSError *error){
-        NSLog(@"Update show:%@ error!",show);
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFMChannelUpdatorFailed object:self];
-    } show:show];
-}
-
-- (void)setShowCount:(NSInteger)showCount
-{
-    @synchronized(self){
-        _showCount = showCount;
-    }
-}
 @end

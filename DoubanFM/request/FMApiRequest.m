@@ -28,7 +28,7 @@
     return nil;
 }
 
-- (id)initWithComplete:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock
+- (id)initWithComplete:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock errBlock:(void (^)(NSError *))errBlock
 {
     self = [super init];
     
@@ -74,7 +74,7 @@
 - (void)client:(FMHttpClient *)client didFinishLoadingData:(NSData *)data
 {
     FMApiResponse *response = [self parseData:data];
-    _completeBlock(response);
+    _completeBlock(response,self);
     
     self.isFinished = YES;
 }

@@ -16,7 +16,7 @@
 
 @implementation FMApiRequestSong
 
-- (id)init:(FMApiRequestSongInfo *)info completion:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock
+- (id)init:(FMApiRequestSongInfo *)info completion:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock errBlock:(void (^)(NSError *))errBlock
 {
     self = [super initWithComplete:completeBlock errBlock:errBlock];
     

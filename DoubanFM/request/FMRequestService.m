@@ -39,7 +39,7 @@ static void *kKVOContext = &kKVOContext;
 }
 
 - (void)sendUserAuthRequest:(FMUser *)user
-                    success:(void (^)(FMApiResponse *))successBlock
+                    success:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                       error:(void (^)(NSError *))errorBlock
 {
     FMApiRequest *request = [[[FMApiRequestUser alloc] init:user
@@ -48,7 +48,7 @@ static void *kKVOContext = &kKVOContext;
     [self p_sendRequest:request];
 }
 
-- (void)sendFectchChannelRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+- (void)sendFectchChannelRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                                       error:(void (^)(NSError *))errorBlock
 {
     FMApiRequest *request = [[[FMApiRequestChannel alloc] initWithComplete:successBlock
@@ -57,7 +57,7 @@ static void *kKVOContext = &kKVOContext;
 }
 
 - (void)sendSongOperation:(FMApiRequestSongInfo *)info
-                    success:(void (^)(FMApiResponse *))successBlock
+                    success:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                       error:(void (^)(NSError *))errorBlock
 {
     FMApiRequest *request = [[[FMApiRequestSong alloc] init:info
@@ -66,7 +66,7 @@ static void *kKVOContext = &kKVOContext;
     [self p_sendRequest:request];
 }
 
-- (void)sendShowListRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+- (void)sendShowListRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                                       error:(void (^)(NSError *))errorBlock
 {
     FMApiRequest *request = [[FMApiRequestShowList alloc] initWithComplete:successBlock
@@ -74,7 +74,7 @@ static void *kKVOContext = &kKVOContext;
     [self p_sendRequest:request];
 }
 
-- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                              error:(void (^)(NSError *))errorBlock
                               show:(FMShow *)show
 {
@@ -82,6 +82,37 @@ static void *kKVOContext = &kKVOContext;
                                                                   errBlock:errorBlock
                                                                   show:show];
     [self p_sendRequest:request];
+}
+
+- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
+                             error:(void (^)(NSError *))errorBlock
+                             shows:(NSArray *)shows
+                        completion:(void (^)(void))completeBlock;
+{
+    dispatch_group_t group = dispatch_group_create();
+    
+    [shows enumerateObjectsUsingBlock:^(id obj ,NSUInteger idx, BOOL *stop){
+        
+        void (^wrapSucBlock)(FMApiResponse *,FMApiRequest *request) = ^(FMApiResponse *resp,FMApiRequest *request){
+            successBlock(resp,request);
+            dispatch_group_leave(group);
+        };
+        
+        void (^wrapErrBlock)(NSError *) = ^(NSError *err){
+            errorBlock(err);
+            dispatch_group_leave(group);
+        };
+        
+        dispatch_group_enter(group);
+        FMApiRequest *request = [[FMApiRequestShow alloc] initWithComplete:wrapSucBlock
+                                                                  errBlock:wrapErrBlock
+                                                                      show:obj];
+        [self p_sendRequest:request];
+        
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), completeBlock);
+   
 }
 
 

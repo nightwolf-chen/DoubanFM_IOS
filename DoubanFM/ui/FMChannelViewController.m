@@ -40,7 +40,7 @@ static NSString *cellIdentifier = @"channelCell";
         [self.view addSubview:_tableView];
         _channels = [[NSMutableArray alloc] init];
 
-        void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
+        void (^completeBlock)(FMApiResponse *,FMApiRequest *) = ^(FMApiResponse *response,FMApiRequest *request){
             FMApiResponseChannel *channelRespones = (FMApiResponseChannel *)response;
             _channels = [[NSMutableArray alloc] initWithArray:channelRespones.channels];
             [_tableView reloadData];

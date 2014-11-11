@@ -14,7 +14,7 @@
 
 @implementation FMApiRequestUser
 
-- (id)init:(FMUser *)user completion:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock
+- (id)init:(FMUser *)user completion:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock errBlock:(void (^)(NSError *))errBlock
 {
     self = [super initWithComplete:completeBlock errBlock:errBlock];
     

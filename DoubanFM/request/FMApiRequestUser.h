@@ -16,7 +16,7 @@
 @property (nonatomic,assign,readonly) BOOL isLogin;
 
 - (id)init:(FMUser *)user
-completion:(void (^)(FMApiResponse *)) completeBlock
+completion:(void (^)(FMApiResponse *,FMApiRequest *)) completeBlock
   errBlock:(void (^)(NSError *)) errBlock;
 
 @end

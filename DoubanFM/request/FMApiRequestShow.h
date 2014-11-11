@@ -12,6 +12,10 @@
 
 @interface FMApiRequestShow : FMApiRequest
 
-- (id)initWithComplete:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock show:(FMShow *)show;
+@property (nonatomic,copy) FMShow *showRequested;
+
+//- (id)initWithComplete:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock show:(FMShow *)show;
+
+- (id)initWithComplete:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock errBlock:(void (^)(NSError *))errBlock show:(FMShow *)show;
 
 @end

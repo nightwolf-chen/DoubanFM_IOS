@@ -11,15 +11,9 @@
 #import "FMHttpClient.h"
 #import "FMApiResponseShow.h"
 
-@interface FMApiRequestShow ()
-
-@property (nonatomic,copy) FMShow *showRequested;
-
-@end
-
 @implementation FMApiRequestShow
 
-- (id)initWithComplete:(void (^)(FMApiResponse *))completeBlock errBlock:(void (^)(NSError *))errBlock show:(FMShow *)show
+- (id)initWithComplete:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock errBlock:(void (^)(NSError *))errBlock show:(FMShow *)show
 {
     if (self = [super initWithComplete:completeBlock errBlock:errBlock]) {
         _showRequested = [show retain];
@@ -27,6 +21,8 @@
     
     return self;
 }
+
+
 
 - (NSString *)getRequestURL
 {

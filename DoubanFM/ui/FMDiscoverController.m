@@ -29,6 +29,8 @@ typedef enum FMDiscoverControllerButton{
 @property (nonatomic,retain) NSArray *showChannels;
 @property (nonatomic,retain) NSArray *classicChannles;
 
+@property (nonatomic,assign) FMDiscoverControllerButton activeTab;
+
 @end
 
 @implementation FMDiscoverController
@@ -54,12 +56,12 @@ typedef enum FMDiscoverControllerButton{
         self.tabBarItem.title = @"发现音乐";
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(loadChannels)
+                                                 selector:@selector(loadClassicalChannels)
                                                      name:kFMChannelUpdatorDidUpdateChannels
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(loadChannels)
+                                                 selector:@selector(loadShows)
                                                      name:kFMChannelUpdatorDidUpdateShows
                                                    object:nil];
     }
@@ -69,36 +71,63 @@ typedef enum FMDiscoverControllerButton{
 - (void)buttonClicked:(id)sender
 {
     UIButton *button = sender;
-    
-    switch (button.tag) {
+    [self activateTab:button.tag];
+}
+
+- (void)activateTab:(FMDiscoverControllerButton)buttonTag
+{
+    switch (buttonTag) {
         case FMDiscoverControllerButtonShow:
         {
             self.channels = _showChannels;
+            self.activeTab = FMDiscoverControllerButtonShow;
         }
             break;
             
         case FMDiscoverControllerButtonHZ:
         {
             self.channels = _classicChannles;
+            self.activeTab = FMDiscoverControllerButtonHZ;
         }
             break;
     }
+ 
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadChannels];
+    [self loadInitialData];
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)loadChannels
+- (void)loadInitialData
+{
+    [self loadClassicalChannels];
+    [self loadShows];
+    
+    [self activateTab:FMDiscoverControllerButtonHZ];
+}
+
+- (void)loadClassicalChannels
 {
     FMDatabaseHelper *dbHelper = [FMDatabaseManager sharedManager].helper;
     self.classicChannles = [dbHelper getChannels];
+    
+    if (self.activeTab == FMDiscoverControllerButtonHZ) {
+        [self activateTab:FMDiscoverControllerButtonHZ];
+    }
+    
+}
+
+- (void)loadShows
+{
+    FMDatabaseHelper *dbHelper = [FMDatabaseManager sharedManager].helper;
     self.showChannels = [dbHelper getShows];
     
-    self.channels = _classicChannles;
+    if (self.activeTab == FMDiscoverControllerButtonShow) {
+        [self activateTab:FMDiscoverControllerButtonShow];
+    }
 }
 
 

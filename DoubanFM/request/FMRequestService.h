@@ -32,20 +32,25 @@
 + (instancetype)sharedService;
 
 - (void)sendUserAuthRequest:(FMUser *)user
-                    success:(void (^)(FMApiResponse *))successBlock
+                    success:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                       error:(void (^)(NSError *))errorBlock;
 
-- (void)sendFectchChannelRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+- (void)sendFectchChannelRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                                       error:(void (^)(NSError *))errorBlock;
 
 - (void)sendSongOperation:(FMApiRequestSongInfo *)info
-                  success:(void (^)(FMApiResponse *))successBlock
+                  success:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                     error:(void (^)(NSError *))errorBlock;
 
-- (void)sendShowListRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+- (void)sendShowListRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                                  error:(void (^)(NSError *))errorBlock;
 
-- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *))successBlock
+- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
                              error:(void (^)(NSError *))errorBlock
                               show:(FMShow *)show;
+
+- (void)sendShowRequestWithSuccess:(void (^)(FMApiResponse *,FMApiRequest *))successBlock
+                             error:(void (^)(NSError *))errorBlock
+                             shows:(NSArray *)shows
+                        completion:(void (^)(void))completeBlock;
 @end

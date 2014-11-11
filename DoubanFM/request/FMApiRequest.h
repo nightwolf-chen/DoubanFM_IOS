@@ -20,13 +20,14 @@
 @property (nonatomic,copy,readonly) NSString *protocool;
 @property (nonatomic,retain,readonly) FMHttpClient *httpClient;
 @property (nonatomic,assign) FMRequestType requestType;
-@property (nonatomic,copy) void (^completeBlock)(FMApiResponse *response);
+@property (nonatomic,copy) void (^completeBlock)(FMApiResponse *response,FMApiRequest *request);
 @property (nonatomic,copy) void (^errBlock)(NSError *error);
 
 @property (nonatomic,assign) BOOL isFinished;
 
-- (id)initWithComplete:(void (^)(FMApiResponse *)) completeBlock
+- (id)initWithComplete:(void (^)(FMApiResponse *,FMApiRequest *))completeBlock
               errBlock:(void (^)(NSError *)) errBlock;
+
 
 - (FMApiResponse *)parseData:(NSData *)data;
 

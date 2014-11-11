@@ -84,7 +84,7 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
                                                                 channel:_currentChannel] autorelease];
     
     [[FMRequestService sharedService] sendSongOperation:info
-                                                success:^(FMApiResponse *response){
+                                                success:^(FMApiResponse *response,FMApiRequest *req){
                                                     FMApiResponseSong *songResp = (FMApiResponseSong *)response;
                                                     _activePlayer.songs = songResp.songs;
                                                     
@@ -107,7 +107,7 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
     FMApiRequestSongInfo *info = [self requestInfoForCurrentSongWithType:type];
     
     [[FMRequestService sharedService] sendSongOperation:info
-                                                success:^(FMApiResponse *response){
+                                                success:^(FMApiResponse *response,FMApiRequest *req){
                                                     NSLog(@"-Song operation %d did success-",type);
                                                 }
                                                   error:^(NSError *error){
