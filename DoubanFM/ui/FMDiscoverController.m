@@ -172,6 +172,8 @@ typedef enum FMDiscoverControllerButton{
         
     }
     
+    [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
+    
     return cell;
 }
 

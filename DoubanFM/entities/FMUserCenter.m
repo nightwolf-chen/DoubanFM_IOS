@@ -7,6 +7,7 @@
 //
 
 #import "FMUserCenter.h"
+#import "FMUser.h"
 
 static FMUserCenter * _instance;
 
@@ -40,5 +41,16 @@ static FMUserCenter * _instance;
     }
     
     return self;
+}
+
+- (void)setUser:(FMUser *)user
+{
+    if (_user) {
+        [_user release];
+    }
+    
+    _user = [user retain];
+    
+    [_user syncWithDatabase];
 }
 @end

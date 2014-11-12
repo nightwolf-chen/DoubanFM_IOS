@@ -72,29 +72,29 @@
     user.email = self.emailTextField.text;
     user.password = self.passwordTextField.text;
    
-    void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
-        FMApiResponseUser *userResp = (FMApiResponseUser *)response;
-        if (userResp.isSuccess) {
-            [[FMUserCenter sharedCenter] setIsLogin:userResp.isSuccess];
-            [[FMUserCenter sharedCenter] setUser:userResp.user];
-            [[NSNotificationCenter defaultCenter] postNotificationName:FMUSerLoginSuccessNotification
-                                                                object:self];
-        }else{
-            [[NSNotificationCenter defaultCenter] postNotificationName:FMUserLoginFailedNotification
-                                                                object:self];
-            self.loginInfoLabel.text = @"登录失败请重试";
-        }
-    };
+//    void (^completeBlock)(FMApiResponse *) = ^(FMApiResponse *response){
+//        FMApiResponseUser *userResp = (FMApiResponseUser *)response;
+//        if (userResp.isSuccess) {
+//            [[FMUserCenter sharedCenter] setIsLogin:userResp.isSuccess];
+//            [[FMUserCenter sharedCenter] setUser:userResp.user];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:FMUSerLoginSuccessNotification
+//                                                                object:self];
+//        }else{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:FMUserLoginFailedNotification
+//                                                                object:self];
+//            self.loginInfoLabel.text = @"登录失败请重试";
+//        }
+//    };
+//    
+//    void (^erroBlock)(NSError *) = ^(NSError *err){
+//        NSLog(@"erroR!");
+//    };
     
-    void (^erroBlock)(NSError *) = ^(NSError *err){
-        NSLog(@"erroR!");
-    };
-    
-    FMApiRequest *request = [[FMApiRequestUser alloc] init:user
-                                                completion:completeBlock
-                                                  errBlock:erroBlock];
-    [request sendRequest];
-    
+//    FMApiRequest *request = [[FMApiRequestUser alloc] init:user
+//                                                completion:completeBlock
+//                                                  errBlock:erroBlock];
+//    [request sendRequest];
+//    
     [user release];
     
 }

@@ -126,16 +126,18 @@ static CGFloat const kCircleWidth = 5.0f;
 
 - (void)addLabels
 {
-    CGRect nameRect = CGRectMake(SCREEN_SIZE.width / 2.0 - 50, 290, 100, 30);
+    CGRect nameRect = CGRectMake(SCREEN_SIZE.width / 2.0 - 100, 290, 200, 30);
     UILabel *songnameLabel = [[UILabel alloc] initWithFrame:nameRect];
+    songnameLabel.textAlignment = NSTextAlignmentCenter;
     songnameLabel.tag = FMPlayerViewTagLabelSong;
     songnameLabel.text = @"Hello world";
     [self addSubview:songnameLabel];
     [_alphaChangingViews addObject:songnameLabel];
     [songnameLabel release];
     
-    CGRect artistRect = CGRectMake(SCREEN_SIZE.width /2.0 -  30, 330, 60, 15);
+    CGRect artistRect = CGRectMake(SCREEN_SIZE.width /2.0 -  75, 330, 150, 15);
     UILabel *artistLabel = [[UILabel alloc] initWithFrame:artistRect];
+    artistLabel.textAlignment = NSTextAlignmentCenter;
     artistLabel.tag = FMPlayerViewTagLabelArtist;
     artistLabel.text = @"once";
     [self addSubview:artistLabel];

@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMLoginViewController : UIViewController
+@interface FMLoginViewController : UIViewController<UITextFieldDelegate>
 
-- (void)hideViewWithAnimation;
-
-- (void)showViewWithAnimaition;
+@property (retain, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (retain, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @end

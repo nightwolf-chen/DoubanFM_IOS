@@ -9,6 +9,9 @@
 #import "FMLoginViewController.h"
 #import "FMPresentedViewTopbar.h"
 #import "FMTopBarView.h"
+#import "SVProgressHUD.h"
+#import "FMRequestService.h"
+#import "FMUserCenter.h"
 
 @interface FMLoginViewController ()
 
@@ -50,29 +53,69 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showViewWithAnimaition
-{
-    self.view.frame = _hiddenFrame;
-    
-    [APP_DELEGATE.window addSubview:self.view];
-    
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         self.view.frame = _normalFrame;
-                     }
-                     completion:nil];
+- (IBAction)loginButtonClicked:(id)sender {
+    [self startLogin];
 }
 
-- (void)hideViewWithAnimation
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         self.view.frame = _hiddenFrame;
-                     }
-                     completion:^(BOOL is){
-                        [self.view removeFromSuperview];
-                     }];
-    
+    [self startLogin];
+    return YES;
 }
 
+- (void)startLogin
+{
+    if (![self invalidateInput]) {
+        return;
+    }
+    
+    [SVProgressHUD show];
+    FMUser *user = [[FMUser alloc] init];
+    
+    user.email = _usernameTextField.text;
+    user.password = _passwordTextField.text;
+    
+    [self hideKeyborad];
+    
+    [[FMRequestService sharedService] sendUserAuthRequest:user success:^(FMApiResponse *resp,FMApiRequest *req){
+        FMApiResponseUser *userResp = (FMApiResponseUser *)resp;
+        if (userResp.isSuccess) {
+            [FMUserCenter sharedCenter].user = userResp.user;
+            [FMUserCenter sharedCenter].isLogin = YES;
+            [SVProgressHUD dismiss];
+            [self dismissViewControllerAnimated:YES completion:^{}];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"登录失败请重试"];
+        }
+    } error:^(NSError *err){
+        [SVProgressHUD showErrorWithStatus:@"登录失败请重试"];
+    }];
+}
+
+- (BOOL)invalidateInput
+{
+    if (_usernameTextField.text == nil
+        || [_usernameTextField.text isEqualToString:@""]
+        || _passwordTextField.text == nil
+        || [_passwordTextField.text isEqualToString:@""]) {
+        
+        [SVProgressHUD showErrorWithStatus:@"请填写用户名和密码"];
+        return NO;
+        
+    }
+    
+    return YES;
+}
+
+- (void)hideKeyborad
+{
+    [_passwordTextField resignFirstResponder];
+    [_usernameTextField resignFirstResponder];
+}
+
+- (void)dealloc {
+    [_usernameTextField release];
+    [_passwordTextField release];
+    [super dealloc];
+}
 @end

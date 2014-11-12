@@ -43,6 +43,8 @@
 		12AF4C9919A736AF004BDB0D /* FMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AF4C9719A736AF004BDB0D /* FMSearchViewController.m */; };
 		12AF4C9A19A736AF004BDB0D /* FMSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12AF4C9819A736AF004BDB0D /* FMSearchViewController.xib */; };
 		12AF4C9D19A74149004BDB0D /* FMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AF4C9C19A74149004BDB0D /* FMTabBarController.m */; };
+		12AFD81A1A130B6500E07233 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 12AFD8171A130B6500E07233 /* SVProgressHUD.bundle */; };
+		12AFD81B1A130B6500E07233 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AFD8191A130B6500E07233 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F1B19AB2501007B4397 /* DOUAudioAnalyzer+Default.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56EF419AB2501007B4397 /* DOUAudioAnalyzer+Default.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F1C19AB2501007B4397 /* DOUAudioAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56EF619AB2501007B4397 /* DOUAudioAnalyzer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F1D19AB2501007B4397 /* DOUAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56EFA19AB2501007B4397 /* DOUAudioDecoder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -216,6 +218,10 @@
 		12AF4C9819A736AF004BDB0D /* FMSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMSearchViewController.xib; path = ui/FMSearchViewController.xib; sourceTree = "<group>"; };
 		12AF4C9B19A74149004BDB0D /* FMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMTabBarController.h; path = ui/FMTabBarController.h; sourceTree = "<group>"; };
 		12AF4C9C19A74149004BDB0D /* FMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMTabBarController.m; path = ui/FMTabBarController.m; sourceTree = "<group>"; };
+		12AFD8161A130B6500E07233 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		12AFD8171A130B6500E07233 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		12AFD8181A130B6500E07233 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		12AFD8191A130B6500E07233 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		12B56EF319AB2501007B4397 /* DOUAudioAnalyzer+Default.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DOUAudioAnalyzer+Default.h"; sourceTree = "<group>"; };
 		12B56EF419AB2501007B4397 /* DOUAudioAnalyzer+Default.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DOUAudioAnalyzer+Default.m"; sourceTree = "<group>"; };
 		12B56EF519AB2501007B4397 /* DOUAudioAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOUAudioAnalyzer.h; sourceTree = "<group>"; };
@@ -508,6 +514,26 @@
 			name = math;
 			sourceTree = "<group>";
 		};
+		12AFD8141A130B6500E07233 /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				12AFD8151A130B6500E07233 /* SVProgressHUD */,
+			);
+			name = controls;
+			path = ui/controls;
+			sourceTree = "<group>";
+		};
+		12AFD8151A130B6500E07233 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				12AFD8161A130B6500E07233 /* SVProgressHUD-Prefix.pch */,
+				12AFD8171A130B6500E07233 /* SVProgressHUD.bundle */,
+				12AFD8181A130B6500E07233 /* SVProgressHUD.h */,
+				12AFD8191A130B6500E07233 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		12B56EF219AB2501007B4397 /* DOUStreamPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,6 +653,7 @@
 		30395754194D9E1C00D76121 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				12AFD8141A130B6500E07233 /* controls */,
 				121E569719A5E7A200BCF0F3 /* view controllers */,
 				12127496199B5A4500DF005E /* view */,
 				30395755194D9E6E00D76121 /* FMPlayerViewController.h */,
@@ -961,6 +988,7 @@
 				30395759194D9E6E00D76121 /* FMPlayerViewController.xib in Resources */,
 				121E56A619A5E81F00BCF0F3 /* FMFavoriteViewController.xib in Resources */,
 				30758DB319A83B3B00C4CD75 /* FMMyMusicController.xib in Resources */,
+				12AFD81A1A130B6500E07233 /* SVProgressHUD.bundle in Resources */,
 				30B82F2E19BD59A300114D04 /* song_trash_selected.png in Resources */,
 				30E80E0B1931D5BE001E334B /* Images.xcassets in Resources */,
 				303C5AB91952C34A00932C66 /* FMChannelViewController.xib in Resources */,
@@ -1042,6 +1070,7 @@
 				12AF4C8F19A6E5DE004BDB0D /* FMTopBarView.m in Sources */,
 				128B45CE19B02455002CDA7F /* FMDouStreamAdaptor.m in Sources */,
 				12B928621A0C9250001CECDB /* FMShow.m in Sources */,
+				12AFD81B1A130B6500E07233 /* SVProgressHUD.m in Sources */,
 				121E56AF19A5EE2F00BCF0F3 /* FMLocalSongsViewController.m in Sources */,
 				12B56F1C19AB2501007B4397 /* DOUAudioAnalyzer.m in Sources */,
 				12B928651A0C9679001CECDB /* FMApiResponseShow.m in Sources */,

@@ -13,6 +13,7 @@
 static NSString *const kSQLCreateTableUsers = @" create table if not exists  fm_users ( \
 username text primary key, \
 password text, \
+email text, \
 token text, \
 expire text, \
 userid text \
