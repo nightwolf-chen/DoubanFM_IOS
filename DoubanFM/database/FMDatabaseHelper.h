@@ -13,5 +13,6 @@
 - (NSArray *)getChannels;
 - (NSArray *)getShows;
 - (NSArray *)getShowList;
+- (NSArray *)getUsers;
 
 @end

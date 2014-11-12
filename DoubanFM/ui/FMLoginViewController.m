@@ -80,8 +80,7 @@
     [[FMRequestService sharedService] sendUserAuthRequest:user success:^(FMApiResponse *resp,FMApiRequest *req){
         FMApiResponseUser *userResp = (FMApiResponseUser *)resp;
         if (userResp.isSuccess) {
-            [FMUserCenter sharedCenter].user = userResp.user;
-            [FMUserCenter sharedCenter].isLogin = YES;
+            [[FMUserCenter sharedCenter] login:userResp.user];
             [SVProgressHUD dismiss];
             [self dismissViewControllerAnimated:YES completion:^{}];
         }else{

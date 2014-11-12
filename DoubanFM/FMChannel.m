@@ -31,6 +31,9 @@ addr_en=?,cover_img_url=?,introduction=? where channel_id=?";
 
 static NSString *const kSQLDeleteTemplate = @"delete from fm_channels where channel_id=?";
 
+static NSString *const kChannelName = @"kChannelName";
+static NSString *const kChannelId = @"kChannelId";
+
 @implementation FMChannel
 
 - (void (^)(FMDatabase *))deleteBlock
@@ -56,5 +59,36 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_channels where chan
 + (NSString *)sqlCreateTable
 {
     return kSQLCreateTableChannels;
+}
+
+#pragma mark NSCoding 
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:_nameCN forKey:kChannelName];
+    [aCoder encodeInteger:_channelId forKey:kChannelId];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        _channelId = [aDecoder decodeIntegerForKey:kChannelId];
+        _nameCN = [[aDecoder decodeObjectForKey:kChannelName] retain];
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    [_nameEn release];
+    [_nameCN release];
+    [_categoryId release];
+    [_categoryName release];
+    [_addr_en release];
+    [_coverImgUrl release];
+    [_introduction release];
+    
+    [super dealloc];
 }
 @end

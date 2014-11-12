@@ -9,6 +9,7 @@
 #import "FMDatabaseHelper.h"
 #import "FMDatabaseManager.h"
 #import "FMChannel.h"
+#import "FMUser.h"
 
 @implementation FMDatabaseHelper
 
@@ -82,6 +83,40 @@
         show.showName = [rs stringForColumn:@"show_name"];
         
         [tmpArray addObject:show];
+    }
+    [db close];
+    return tmpArray;
+ 
+}
+
+/*
+create table if not exists  fm_users (
+                                      username text primary key,
+                                      password text,
+                                      email text,
+                                      token text,
+                                      expire text,
+                                      userid text)
+*/
+
+- (NSArray *)getUsers
+{
+    NSMutableArray *tmpArray = [NSMutableArray array];
+    
+    FMDatabase *db = [[FMDatabaseManager sharedManager] database];
+    [db open];
+    FMResultSet *rs = [db executeQuery:@"select * from fm_users"];
+    
+    while([rs next]){
+        FMUser *user = [[[FMUser alloc] init] autorelease];
+        user.username = [rs stringForColumn:@"username"];
+        user.password = [rs stringForColumn:@"password"];
+        user.email = [rs stringForColumn:@"email"];
+        user.token = [rs stringForColumn:@"token"];
+        user.expire = [rs stringForColumn:@"expire"];
+        user.userid = [rs stringForColumn:@"userid"];
+        
+        [tmpArray addObject:user];
     }
     [db close];
     return tmpArray;

@@ -10,7 +10,7 @@
 
 @class FMDatabase;
 
-@interface FMEntity : NSObject
+@interface FMEntity : NSObject<NSCoding>
 
 + (NSString *)sqlCreateTable;
 

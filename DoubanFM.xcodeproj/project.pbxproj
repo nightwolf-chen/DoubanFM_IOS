@@ -45,6 +45,7 @@
 		12AF4C9D19A74149004BDB0D /* FMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AF4C9C19A74149004BDB0D /* FMTabBarController.m */; };
 		12AFD81A1A130B6500E07233 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 12AFD8171A130B6500E07233 /* SVProgressHUD.bundle */; };
 		12AFD81B1A130B6500E07233 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AFD8191A130B6500E07233 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		12AFD81E1A13483200E07233 /* FMSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AFD81D1A13483200E07233 /* FMSettings.m */; };
 		12B56F1B19AB2501007B4397 /* DOUAudioAnalyzer+Default.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56EF419AB2501007B4397 /* DOUAudioAnalyzer+Default.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F1C19AB2501007B4397 /* DOUAudioAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56EF619AB2501007B4397 /* DOUAudioAnalyzer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		12B56F1D19AB2501007B4397 /* DOUAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B56EFA19AB2501007B4397 /* DOUAudioDecoder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -222,6 +223,8 @@
 		12AFD8171A130B6500E07233 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		12AFD8181A130B6500E07233 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		12AFD8191A130B6500E07233 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		12AFD81C1A13483200E07233 /* FMSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSettings.h; sourceTree = "<group>"; };
+		12AFD81D1A13483200E07233 /* FMSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSettings.m; sourceTree = "<group>"; };
 		12B56EF319AB2501007B4397 /* DOUAudioAnalyzer+Default.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DOUAudioAnalyzer+Default.h"; sourceTree = "<group>"; };
 		12B56EF419AB2501007B4397 /* DOUAudioAnalyzer+Default.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DOUAudioAnalyzer+Default.m"; sourceTree = "<group>"; };
 		12B56EF519AB2501007B4397 /* DOUAudioAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOUAudioAnalyzer.h; sourceTree = "<group>"; };
@@ -330,8 +333,8 @@
 		3083FC1A1955A8E7006D6FAA /* FMUserCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMUserCenterController.h; path = ui/FMUserCenterController.h; sourceTree = "<group>"; };
 		3083FC1B1955A8E7006D6FAA /* FMUserCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMUserCenterController.m; path = ui/FMUserCenterController.m; sourceTree = "<group>"; };
 		3083FC1C1955A8E7006D6FAA /* FMUserCenterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMUserCenterController.xib; path = ui/FMUserCenterController.xib; sourceTree = "<group>"; };
-		3083FC1F1955AE39006D6FAA /* FMUserCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMUserCenter.h; path = entities/FMUserCenter.h; sourceTree = "<group>"; };
-		3083FC201955AE39006D6FAA /* FMUserCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMUserCenter.m; path = entities/FMUserCenter.m; sourceTree = "<group>"; };
+		3083FC1F1955AE39006D6FAA /* FMUserCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMUserCenter.h; path = ../entities/FMUserCenter.h; sourceTree = "<group>"; };
+		3083FC201955AE39006D6FAA /* FMUserCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMUserCenter.m; path = ../entities/FMUserCenter.m; sourceTree = "<group>"; };
 		308E2C71199F2010009CE6D0 /* FMPlayerPlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMPlayerPlayButton.h; path = ui/FMPlayerPlayButton.h; sourceTree = "<group>"; };
 		308E2C72199F2010009CE6D0 /* FMPlayerPlayButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMPlayerPlayButton.m; path = ui/FMPlayerPlayButton.m; sourceTree = "<group>"; };
 		308E2C7419A0D42B009CE6D0 /* FMDiscoverMusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDiscoverMusicView.h; path = ui/FMDiscoverMusicView.h; sourceTree = "<group>"; };
@@ -596,12 +599,16 @@
 		12B928661A0C9FED001CECDB /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				3083FC1F1955AE39006D6FAA /* FMUserCenter.h */,
+				3083FC201955AE39006D6FAA /* FMUserCenter.m */,
 				12B928671A0CA004001CECDB /* FMUpdateManager.h */,
 				12B928681A0CA004001CECDB /* FMUpdateManager.m */,
 				12B9286A1A0CA22A001CECDB /* FMChannelUpdator.h */,
 				12B9286B1A0CA22A001CECDB /* FMChannelUpdator.m */,
 				12ED298D1A1098A700374DA2 /* FMImagePool.h */,
 				12ED298E1A1098A700374DA2 /* FMImagePool.m */,
+				12AFD81C1A13483200E07233 /* FMSettings.h */,
+				12AFD81D1A13483200E07233 /* FMSettings.m */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -762,8 +769,6 @@
 				30C9EBA1193303C500AFFA38 /* FMChannel.m */,
 				12B928601A0C9250001CECDB /* FMShow.h */,
 				12B928611A0C9250001CECDB /* FMShow.m */,
-				3083FC1F1955AE39006D6FAA /* FMUserCenter.h */,
-				3083FC201955AE39006D6FAA /* FMUserCenter.m */,
 			);
 			name = entities;
 			sourceTree = "<group>";
@@ -1097,6 +1102,7 @@
 				12198C8A1A0C72710065A085 /* FMApiResponseShowList.m in Sources */,
 				12B56F2C19AB2501007B4397 /* NSData+DOUMappedFile.m in Sources */,
 				12E96B2B1A0B225100A9C4A0 /* FMRequestService.m in Sources */,
+				12AFD81E1A13483200E07233 /* FMSettings.m in Sources */,
 				12E7BE341A11CF5800464CA0 /* NSNotificationCenter+DoubanFM.m in Sources */,
 				128B460119B07053002CDA7F /* FMTack.m in Sources */,
 				30C9EB92193301AB00AFFA38 /* FMApiRequestUser.m in Sources */,

@@ -15,6 +15,7 @@
 #import "FMSettingsViewController.h"
 #import "FMLocalSongsViewController.h"
 #import "FMUserCenter.h"
+#import "FMUser.h"
 
 typedef enum FMMusicViewCellType{
     FMMusicViewCellTypeUserInfo = 0,
@@ -29,6 +30,12 @@ typedef enum FMMusicViewCellType{
 {
     NSArray *_controllerClasses;
 }
+
+@property (retain, nonatomic) IBOutlet UIView *userInfoView;
+@property (retain, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *userHeadImageView;
+@property (retain, nonatomic) IBOutlet UIButton *logoutButton;
+
 @end
 
 static const int kCellHeight[] = {200,60,60,60,60};
@@ -38,6 +45,10 @@ static const int kCellHeight[] = {200,60,60,60,60};
 - (void)dealloc
 {
     [_controllerClasses release];
+    [_userInfoView release];
+    [_userNameLabel release];
+    [_userHeadImageView release];
+    [_logoutButton release];
     [super dealloc];
 }
 
@@ -74,6 +85,25 @@ static const int kCellHeight[] = {200,60,60,60,60};
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setupUserInfoView];
+}
+
+- (void)setupUserInfoView
+{
+    if ([FMUserCenter sharedCenter].isLogin) {
+        FMUser *currentUser = [FMUserCenter sharedCenter].user;
+        _userNameLabel.text = currentUser.username;
+        _logoutButton.hidden = NO;
+    }else{
+        _userNameLabel.text = @"未登录 请点击登录";
+        _logoutButton.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,6 +154,7 @@ static const int kCellHeight[] = {200,60,60,60,60};
         {
             cell.backgroundColor = [UIColor blackColor];
             [cell setAccessoryType:UITableViewCellAccessoryNone];
+            [cell.contentView addSubview:_userInfoView];
         }
             break;
             
@@ -171,5 +202,9 @@ static const int kCellHeight[] = {200,60,60,60,60};
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self handleTableViewSelected:(FMMusicViewCellType)indexPath.row];
+}
+- (IBAction)exitButtonClicked:(id)sender {
+    [[FMUserCenter sharedCenter] logout];
+    [self setupUserInfoView];
 }
 @end

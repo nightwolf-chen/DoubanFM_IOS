@@ -57,4 +57,15 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_users where usernam
     return kSQLCreateTableUsers;
 }
 
+- (void)dealloc
+{
+    [_userid release];
+    [_username release];
+    [_email release];
+    [_token release];
+    [_expire release];
+    [_password release];
+    [super dealloc];
+}
+
 @end

@@ -12,9 +12,12 @@
 
 @interface FMUserCenter : NSObject
 
-@property (retain ,nonatomic) FMUser *user;
-@property (assign ,nonatomic) BOOL isLogin;
+@property (readonly ,nonatomic) FMUser *user;
+@property (readonly ,nonatomic) BOOL isLogin;
 
 + (FMUserCenter *)sharedCenter;
+
+- (void)login:(FMUser *)user;
+- (void)logout;
 
 @end

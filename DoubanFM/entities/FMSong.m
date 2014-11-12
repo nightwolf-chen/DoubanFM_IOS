@@ -78,4 +78,22 @@ static NSString *const kSQLDeleteTemplate = @"delete from fm_songs where  song_t
     return kSQLCreateTableSongs;
 }
 
+- (void)dealloc
+{
+    [_albumPageUrl release];
+    [_albumTitle release];
+    [_pictureUrl release];
+    [_ssid release];
+    [_artist release];
+    [_songUrl release];
+    [_company release];
+    [_songTitle release];
+    [_subtype release];
+    [_sid release];
+    [_aid release];
+    [_sha256 release];
+    
+    [super dealloc];
+}
+
 @end

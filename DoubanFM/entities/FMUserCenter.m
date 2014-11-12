@@ -8,8 +8,16 @@
 
 #import "FMUserCenter.h"
 #import "FMUser.h"
+#import "FMDatabaseManager.h"
 
 static FMUserCenter * _instance;
+
+@interface FMUserCenter ()
+
+@property (retain ,nonatomic) FMUser *user;
+@property (assign ,nonatomic) BOOL isLogin;
+
+@end
 
 @implementation FMUserCenter
 
@@ -38,19 +46,31 @@ static FMUserCenter * _instance;
     if (self) {
         _user = nil;
         _isLogin = NO;
+        
+        FMDatabaseHelper *helper = [FMDatabaseManager sharedManager].helper;
+        NSArray *users = [helper getUsers];
+        
+        if (users.count > 0) {
+            [self login:users[0]];
+        }
     }
     
     return self;
 }
 
-- (void)setUser:(FMUser *)user
+- (void)login:(FMUser *)user
 {
-    if (_user) {
-        [_user release];
-    }
+    self.user = user;
+    self.isLogin = YES;
     
-    _user = [user retain];
-    
-    [_user syncWithDatabase];
+    [self.user syncWithDatabase];
 }
+
+- (void)logout
+{
+    [self.user deleteFromDatabase];
+    self.user = nil;
+    self.isLogin = NO;
+}
+
 @end

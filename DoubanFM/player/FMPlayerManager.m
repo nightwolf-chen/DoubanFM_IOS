@@ -16,6 +16,8 @@
 #import "FMApiResponse.h"
 #import "DOUStreamPlayer/DOUAudioStreamer.h"
 #import "FMRequestService.h"
+#import "FMSettings.h"
+#import "FMUserCenter.h"
 
 NSString *const FMPlayerManagerChannelChanged = @"FMPlayerManagerChannelChanged";
 NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChannelChangedKeyChannel";
@@ -36,13 +38,7 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
 
 + (FMChannel *)defaultChannel
 {
-    FMChannel *channel = [[FMChannel alloc] init];
-    channel.channelId = 0;
-    channel.nameCN = @"华语";
-    
-    [channel syncWithDatabase];
-    
-    return [channel autorelease];
+    return [[FMSettings settings] currentChannel];
 }
 
 - (id)init
@@ -79,9 +75,7 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
 
 - (void)loadSongsFromServer:(SongRequestType)type
 {
-    FMApiRequestSongInfo *info = [[[FMApiRequestSongInfo alloc] initWith:type
-                                                                   song:nil
-                                                                channel:_currentChannel] autorelease];
+    FMApiRequestSongInfo *info = [self requestInfoForCurrentSongWithType:type];
     
     [[FMRequestService sharedService] sendSongOperation:info
                                                 success:^(FMApiResponse *response,FMApiRequest *req){
@@ -121,6 +115,8 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
     
     _currentChannel = [currentChannel retain];
     
+    [[FMSettings settings] setCurrentChannel:_currentChannel];
+    
     SongRequestType type;
     if ([_activePlayer unplayedSongNumber] > 0) {
         type = SongRequestTypePLAYING;
@@ -143,6 +139,10 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
     FMApiRequestSongInfo *info = [[FMApiRequestSongInfo alloc] initWith:type
                                                                    song:_activePlayer.currentSong
                                                                 channel:_currentChannel];
+    
+    if ([FMUserCenter sharedCenter].isLogin) {
+        info.user = [FMUserCenter sharedCenter].user;
+    }
     
     return [info autorelease];
 }
