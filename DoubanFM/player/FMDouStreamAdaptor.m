@@ -126,7 +126,6 @@ static void *kKVOContext = &kKVOContext;
 #pragma mark - User acts.
 - (void)skip
 {
-    //TODO:additional things to perform
     if (self->_delegateFlags.didSkipSong) {
         [self.delegate player:self didEndSong:self.currentSong];
     }

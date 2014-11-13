@@ -74,7 +74,7 @@ static NSString *const kKVOPathCurrentSong = @"currentSong";
 {
     float y = [FMTabbarView tabbarViewHight];
     FMPlayerView *playerView = [[FMPlayerView alloc] initWithFrame:CGRectMake(0,y,SCREEN_SIZE.width,SCREEN_SIZE.height-y)];
-    playerView.backgroundColor = [UIColor lightGrayColor];
+    playerView.backgroundColor = [UIColor colorWithRed:221.f/255.f green:244.f/255.f blue:240.f/255.f alpha:1];
     return [playerView autorelease];
 }
 

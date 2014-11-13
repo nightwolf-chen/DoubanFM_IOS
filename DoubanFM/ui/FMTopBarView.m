@@ -43,7 +43,7 @@ static const float kTabbarHight = 61;
         float bgWidth = screenSize.width;
         
         UIView *backgroundView = self;
-        backgroundView.backgroundColor = [UIColor yellowColor];
+        backgroundView.backgroundColor = [UIColor colorWithRed:112.f/255.f green:196.f/255.f blue:241.f/255.f alpha:1];
         backgroundView.frame = CGRectMake(0, 0, bgWidth,bgHeight);
         
         float blacklineHight = 1;

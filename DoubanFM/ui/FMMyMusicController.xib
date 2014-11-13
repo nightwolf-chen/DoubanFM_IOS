@@ -44,7 +44,7 @@
                     <rect key="frame" x="110" y="20" width="100" height="100"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.67835124881920539" green="1" blue="0.49779933591168879" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="327" y="-573"/>
         </view>

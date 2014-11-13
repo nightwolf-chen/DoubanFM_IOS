@@ -18,6 +18,7 @@
 #import "FMRequestService.h"
 #import "FMSettings.h"
 #import "FMUserCenter.h"
+#import "SVProgressHUD.h"
 
 NSString *const FMPlayerManagerChannelChanged = @"FMPlayerManagerChannelChanged";
 NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChannelChangedKeyChannel";
@@ -77,6 +78,8 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
 {
     FMApiRequestSongInfo *info = [self requestInfoForCurrentSongWithType:type];
     
+    [SVProgressHUD show];
+    
     [[FMRequestService sharedService] sendSongOperation:info
                                                 success:^(FMApiResponse *response,FMApiRequest *req){
                                                     FMApiResponseSong *songResp = (FMApiResponseSong *)response;
@@ -88,10 +91,12 @@ NSString *const FMPlayerManagerChannelChangedKeyChannel = @"FMPlayerManagerChann
                                                     
                                                     _activePlayer.currentChannel = _currentChannel;
                                                     [_activePlayer play];
+                                                    [SVProgressHUD dismiss];
                                                 }
                                                   error:^(NSError *error){
                                                       [self handleRequestError];
-                                                  }];
+                                                      [SVProgressHUD showErrorWithStatus:@"加载歌曲失败"];
+                                              }];
     
     
 }
