@@ -124,12 +124,12 @@
 
 - (void)dealloc
 {
-    [super dealloc];
-    
     if (_data) {
         [_data release];
         _data = nil;
     }
+    
+    [super dealloc];
 }
 
 #pragma mark - helper
